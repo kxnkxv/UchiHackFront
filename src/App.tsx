@@ -1,11 +1,12 @@
-import {Button} from 'antd';
-import React, {FC} from 'react';
+import {FC} from 'react';
+import Routes from "./router/Routes"
+import CustomLayout from "./components/CustomLayout/CustomLayout";
 
 const App: FC = () => {
   return (
-    <div>
-      <Button>Test</Button>
-    </div>
+    <CustomLayout>
+      <Routes/>
+    </CustomLayout>
   );
 };
 
