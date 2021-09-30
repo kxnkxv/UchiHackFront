@@ -4,7 +4,8 @@ import {AppstoreOutlined, MailOutlined, SettingOutlined, UserOutlined} from '@an
 import User from "../../store/user/user";
 import {observer} from "mobx-react-lite";
 import {Link} from 'react-router-dom';
-import {ALL_QUESTIONS, ALL_THEMES, AUTH, NEW_QUESTION, QUESTION, REGISTRATION} from "../../constants/routes";
+import {ALL_QUESTIONS, ALL_THEMES, AUTH, NEW_QUESTION, REGISTRATION} from "../../constants/routes";
+import {questionsThemes} from "../../constants/questionsThemes";
 
 const {SubMenu} = Menu;
 
@@ -24,39 +25,23 @@ const HeaderNav: FC = observer(() => {
           justifyContent: "space-around"
         }}
       >
-        <Menu.Item key="NEW_QUESTION" icon={<AppstoreOutlined/>}>
+        <Menu.Item key={NEW_QUESTION} icon={<AppstoreOutlined/>}>
           Задать вопрос
           <Link to={NEW_QUESTION}/>
         </Menu.Item>
-        <Menu.Item key="QUESTION" icon={<AppstoreOutlined/>}>
-          Конкретный вопрос
-          <Link to={QUESTION}/>
-        </Menu.Item>
-        <Menu.Item key="ALL_QUESTIONS" icon={<AppstoreOutlined/>}>
+        <Menu.Item key={ALL_QUESTIONS} icon={<AppstoreOutlined/>}>
           Все вопросы
           <Link to={ALL_QUESTIONS}/>
         </Menu.Item>
-        <SubMenu key="ALL_THEMES" icon={<SettingOutlined/>} title="Все разделы">
-          <Menu.Item key="math">
-            Математика
-            <Link to="/allmath"/>
-          </Menu.Item>
-          <Menu.Item key="russian">
-            Русский
-          </Menu.Item>
-          <Menu.Item key="art">
-            Исскуство
-          </Menu.Item>
-          <Menu.Item key="physic">
-            Физика
-          </Menu.Item>
-          <Menu.Item key="informatics">
-            Информатика
-          </Menu.Item>
-          <Menu.Item key="physic">
-            Остальные разделы
-            <Link to={ALL_THEMES}/>
-          </Menu.Item>
+        <SubMenu key={ALL_THEMES} icon={<SettingOutlined/>} title="Все разделы">
+          {
+            Object.keys(questionsThemes).map((key) => (
+              <Menu.Item key={key}>
+                {questionsThemes[key]}
+                <Link to={`${ALL_THEMES}/${key}`} />
+              </Menu.Item>
+            ))
+          }
         </SubMenu>
         {
           User

@@ -1,9 +1,15 @@
-import React from 'react';
+import React, {FC} from 'react';
+import {RouteComponentProps} from "react-router-dom";
 
-const Question = () => {
+interface RouteParams {
+  questionId: string;
+}
+
+const Question: FC<RouteComponentProps<RouteParams>> = ({match}) => {
+  const {questionId} = match.params;
   return (
     <div>
-
+      {questionId}
     </div>
   );
 };
