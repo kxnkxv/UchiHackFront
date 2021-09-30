@@ -4,7 +4,7 @@ import {Question} from "../../../../types/Question";
 
 import {Answer, Container, Description, DescriptionLink, Footer, Header, Title} from './styled';
 import {questionsThemes} from "../../../../constants/questionsThemes";
-import {Button} from 'antd';
+import {Button, Tag} from 'antd';
 
 interface OwnProps {
   question: Question;
@@ -38,7 +38,7 @@ const ThemeItem: FC<OwnProps> = ({question, isQuestionPage}) => {
         {urgently && <Title urgently>Срочное</Title>}
         <Title>{coast} баллов</Title>
         {isQuestionPage
-          ? <button>{status}</button>
+          ? <Tag>{status}</Tag>
           : <Answer to={`${QUESTION}/${id}`}>Ответить</Answer>
         }
       </Footer>
