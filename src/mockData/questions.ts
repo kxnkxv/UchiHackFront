@@ -1,6 +1,7 @@
 import {Question} from "../types/Question";
 import {users} from "./users";
 import {User} from "../types/User";
+import moment from "moment";
 
 export const questionsList: Question[] = [
   {
@@ -9,7 +10,7 @@ export const questionsList: Question[] = [
     description: 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip',
     theme: 'russian',
     subTheme: '',
-    createdAt: Date.now(),
+    createdAt: moment(),
     user: users.find(({id}) => id === '111') as User,
     coast: 0,
     status: 'не решено',
@@ -22,7 +23,7 @@ export const questionsList: Question[] = [
     description: 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip',
     theme: 'art',
     subTheme: '',
-    createdAt: Date.now(),
+    createdAt: moment(),
     user: users.find(({id}) => id === '222') as User,
     coast: 0,
     status: 'не решено',
@@ -35,7 +36,7 @@ export const questionsList: Question[] = [
     description: 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip',
     theme: 'physic',
     subTheme: '',
-    createdAt: Date.now(),
+    createdAt: moment(),
     user: users.find(({id}) => id === '333') as User,
     coast: 0,
     status: 'не решено',
@@ -48,7 +49,7 @@ export const questionsList: Question[] = [
     description: 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip',
     theme: 'informatics',
     subTheme: '',
-    createdAt: Date.now(),
+    createdAt: moment(),
     user: users.find(({id}) => id === '444') as User,
     coast: 0,
     status: 'не решено',
@@ -61,7 +62,7 @@ export const questionsList: Question[] = [
     description: 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip',
     theme: 'literature',
     subTheme: '',
-    createdAt: Date.now(),
+    createdAt: moment(),
     user: users.find(({id}) => id === '555') as User,
     coast: 0,
     status: 'не решено',
@@ -74,7 +75,7 @@ export const questionsList: Question[] = [
     description: 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip',
     theme: 'math',
     subTheme: '',
-    createdAt: Date.now(),
+    createdAt: moment(),
     user: users.find(({id}) => id === '666') as User,
     coast: 0,
     status: 'не решено',

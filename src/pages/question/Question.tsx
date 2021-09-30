@@ -6,9 +6,9 @@ import {questionsList} from "../../mockData/questions";
 import {answers} from "../../mockData/answers";
 import {CommentType} from "../../types/AnswerType";
 
-import {
-  Container
-} from './styled';
+import {Container} from './styled';
+import {Button} from 'antd';
+import NotFound from "../NotFound/NotFound";
 
 interface RouteParams {
   questionId: string;
@@ -22,11 +22,11 @@ const Question: FC<RouteComponentProps<RouteParams>> = ({match}) => {
       <ThemeItem isQuestionPage question={questionItem} />
       <div>
         <h2>Ваш ответ</h2>
-        <TextArea />
-        <button>отправить</button>
+        <TextArea/>
+        <Button>Отправить</Button>
       </div>
       <div>
-        <h3>7 ответов</h3>
+        <h3>Ответов - {answers.length}</h3>
         <div>
           {
             answers.map(({user, id, createdAt, comments, message}) => (
@@ -34,13 +34,13 @@ const Question: FC<RouteComponentProps<RouteParams>> = ({match}) => {
                 <span>{user.firstName}</span>
                 <br/>
                 <span>{message}</span>
-                <TextArea placeholder='добавить комментарий' />
+                <TextArea placeholder='Добавить комментарий'/>
                 <div>
                   {
                     comments.map(({user, id, createdAt, message}: CommentType) => (
                       <div key={id}>
                         <span>{user.firstName}</span>
-                        <span>добавлено {createdAt} минут назад</span>
+                        <span> Добавлено {createdAt.fromNow()}</span>
                         <br/>
                         <span>{message}</span>
                       </div>
@@ -54,7 +54,7 @@ const Question: FC<RouteComponentProps<RouteParams>> = ({match}) => {
         </div>
       </div>
     </Container>
-  ) : <span>нет такого вопроса</span>;
+  ) : <NotFound/>;
 };
 
 export default Question;

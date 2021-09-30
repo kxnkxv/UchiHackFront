@@ -3,13 +3,11 @@ import {Menu} from 'antd';
 import {AppstoreOutlined} from '@ant-design/icons';
 import {observer} from "mobx-react-lite";
 import {Link} from 'react-router-dom';
-import {ALL_THEMES, AUTH} from "../../constants/routes";
+import {ALL_THEMES} from "../../constants/routes";
 import {questionsThemes} from "../../constants/questionsThemes";
 
-const {SubMenu} = Menu;
-
 const SideBar: FC = observer(() => {
-    const [current, setCurrent] = useState("AUTH")
+  const [current, setCurrent] = useState("/")
 
     const handleClick = (event: { key: SetStateAction<string>; }) => {
       setCurrent(event.key)
@@ -24,9 +22,9 @@ const SideBar: FC = observer(() => {
           width: "auto"
         }}
       >
-        <Menu.Item key='/' icon={<AppstoreOutlined/>}>
+        <Menu.Item key="/" icon={<AppstoreOutlined/>}>
           Все вопросы
-          <Link to='/'/>
+          <Link to="/"/>
         </Menu.Item>
         {
           Object.keys(questionsThemes).map((key) => (

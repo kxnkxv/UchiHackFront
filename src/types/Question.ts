@@ -1,4 +1,5 @@
 import {User} from "./User";
+import {Moment} from "moment";
 
 export interface Question {
   id: string;
@@ -6,7 +7,7 @@ export interface Question {
   description: string;
   theme: string;
   subTheme: string;
-  createdAt: number;
+  createdAt: Moment;
   user: User;
   coast: number;
   status: string;
