@@ -3,8 +3,8 @@ import {Redirect, Route, Switch,} from "react-router-dom";
 import {observer} from "mobx-react";
 import {AUTH, REGISTRATION} from "../constants/routes";
 import Auth from '../store/auth'
-import Registration from '../pages/registration/Registration';
-import Authorization from "./../pages/authorization/Authorization"
+import Registration from "../pages/Registration/Registration"
+import Authorization from "../pages/Authorization/Authorization"
 import PrivateRoutes from "./PrivateRoutes";
 
 const Routes: FC = () => {

@@ -2,9 +2,9 @@ import {FC} from 'react';
 import {Redirect, Route, Switch,} from "react-router-dom";
 import {ALL_THEMES, NEW_QUESTION, PROFILE, QUESTION} from "../constants/routes";
 import Themes from '../pages/Themes/Themes';
-import NewQuestion from '../pages/new/NewQuestion';
-import UserProfile from '../pages/profile/UserProfile';
-import Question from '../pages/question/Question';
+import NewQuestion from '../pages/NewQuestion/NewQuestion';
+import UserProfile from '../pages/Profile/UserProfile';
+import Question from '../pages/Question/Question';
 import CustomLayout from "../components/CustomLayout/CustomLayout";
 
 const PrivateRoutes: FC = () => {

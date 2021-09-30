@@ -6,7 +6,6 @@ import {questionsList} from "../../mockData/questions";
 import {answers} from "../../mockData/answers";
 import {CommentType} from "../../types/AnswerType";
 
-import {Container} from './styled';
 import {Button} from 'antd';
 import NotFound from "../NotFound/NotFound";
 
@@ -18,7 +17,7 @@ const Question: FC<RouteComponentProps<RouteParams>> = ({match}) => {
   const {questionId} = match.params;
   const questionItem = questionsList.find(({id}) => id === questionId);
   return questionItem ? (
-    <Container>
+    <>
       <ThemeItem isQuestionPage question={questionItem}/>
       <div>
         <h2>Ваш ответ</h2>
@@ -53,7 +52,7 @@ const Question: FC<RouteComponentProps<RouteParams>> = ({match}) => {
           }
         </div>
       </div>
-    </Container>
+    </>
   ) : <NotFound/>;
 };
 

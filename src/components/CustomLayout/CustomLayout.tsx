@@ -2,6 +2,7 @@ import {FC} from 'react';
 import {Col, Layout, Row} from 'antd';
 import HeaderNav from '../HeaderNav/HeaderNav';
 import SideBar from '../SideBar/SideBar';
+import css from "./CustomLayout.module.scss"
 
 const {Footer, Content} = Layout;
 
@@ -34,7 +35,7 @@ const CustomLayout: FC = ({children}) => {
           <SideBar/>
         </Col>
         <Col span={21}>
-          <Content>{children}</Content>
+          <Content className={css.content}>{children}</Content>
         </Col>
       </Row>
       <Row
