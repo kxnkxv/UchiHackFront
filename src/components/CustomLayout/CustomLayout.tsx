@@ -16,12 +16,7 @@ const CustomLayout: FC = ({children}) => {
         </Col>
       </RowWrap>
       <RowWrap>
-        <Col span={3}>
-          <Sider theme="light">
-            Sider
-          </Sider>
-        </Col>
-        <Col span={21}>
+        <Col span={24}>
           <Content>{children}</Content>
         </Col>
       </RowWrap>

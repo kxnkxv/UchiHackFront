@@ -4,7 +4,7 @@ import {AppstoreOutlined, MailOutlined, SettingOutlined, UserOutlined} from '@an
 import User from "../../store/user/user";
 import {observer} from "mobx-react-lite";
 import {Link} from 'react-router-dom';
-import {ALL_QUESTIONS, AUTH, NEW_QUESTION, QUESTION, REGISTRATION} from "../../constants/routes";
+import {ALL_QUESTIONS, ALL_THEMES, AUTH, NEW_QUESTION, QUESTION, REGISTRATION} from "../../constants/routes";
 
 const {SubMenu} = Menu;
 
@@ -32,27 +32,30 @@ const HeaderNav: FC = observer(() => {
           Конкретный вопрос
           <Link to={QUESTION}/>
         </Menu.Item>
-        <SubMenu key="ALL_QUESTIONS" icon={<SettingOutlined/>} title="Все вопросы">
-          <Menu.Item key="all">
-            Все вопросы
-            <Link to={ALL_QUESTIONS}/>
-          </Menu.Item>
+        <Menu.Item key="ALL_QUESTIONS" icon={<AppstoreOutlined/>}>
+          Все вопросы
+          <Link to={ALL_QUESTIONS}/>
+        </Menu.Item>
+        <SubMenu key="ALL_THEMES" icon={<SettingOutlined/>} title="Все разделы">
           <Menu.Item key="math">
-            math
+            Математика
             <Link to="/allmath"/>
           </Menu.Item>
           <Menu.Item key="russian">
-            russian
+            Русский
           </Menu.Item>
           <Menu.Item key="art">
-            art
+            Исскуство
           </Menu.Item>
           <Menu.Item key="physic">
-            physic
+            Физика
+          </Menu.Item>
+          <Menu.Item key="informatics">
+            Информатика
           </Menu.Item>
           <Menu.Item key="physic">
-            Все теги
-            <Link to="/tags"/>
+            Остальные разделы
+            <Link to={ALL_THEMES}/>
           </Menu.Item>
         </SubMenu>
         {

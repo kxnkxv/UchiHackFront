@@ -1,6 +1,6 @@
 import {FC} from 'react';
 import {Route, Switch,} from "react-router-dom";
-import {ALL_QUESTIONS, AUTH, NEW_QUESTION, PROFILE, QUESTION, REGISTRATION} from "../constants/routes";
+import {ALL_QUESTIONS, ALL_THEMES, AUTH, NEW_QUESTION, PROFILE, QUESTION, REGISTRATION} from "../constants/routes";
 
 const Routes: FC = () => {
   return (
@@ -25,6 +25,12 @@ const Routes: FC = () => {
       </Route>
       <Route exact path={ALL_QUESTIONS}>
         <p>Все вопросы</p>
+      </Route>
+      <Route exact path={ALL_THEMES}>
+        <p>Все разделы</p>
+      </Route>
+      <Route exact path="/allmath">
+        <p>Все вопросы по математике</p>
       </Route>
     </Switch>
   );
