@@ -51,9 +51,3 @@ export const Footer = styled.div`
   display: flex;
   margin: 30px 0 0 0;
 `;
-
-export const Answer = styled(Link)`
-  border: 1px solid #000;
-  margin: 0 0 0 auto;
-  padding: 5px 20px;
-`;

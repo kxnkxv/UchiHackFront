@@ -2,9 +2,10 @@ import React, {FC} from 'react';
 import {QUESTION} from "../../../../constants/routes";
 import {Question} from "../../../../types/Question";
 
-import {Answer, Container, Description, DescriptionLink, Footer, Header, Title} from './styled';
+import {Container, Description, DescriptionLink, Footer, Header, Title} from './styled';
 import {questionsThemes} from "../../../../constants/questionsThemes";
 import {Button, Tag} from 'antd';
+import {Link} from 'react-router-dom';
 
 interface OwnProps {
   question: Question;
@@ -39,7 +40,7 @@ const ThemeItem: FC<OwnProps> = ({question, isQuestionPage}) => {
         <Title>{coast} баллов</Title>
         {isQuestionPage
           ? <Tag>{status}</Tag>
-          : <Answer to={`${QUESTION}/${id}`}>Ответить</Answer>
+          : <Link to={`${QUESTION}/${id}`} style={{margin: "0 0 0 auto"}}><Button>Ответить</Button></Link>
         }
       </Footer>
     </Container>
