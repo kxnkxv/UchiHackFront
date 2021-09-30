@@ -1,31 +1,25 @@
 import {FC} from 'react';
-import {Route, Switch,} from "react-router-dom";
-import {ALL_QUESTIONS, ALL_THEMES, AUTH, NEW_QUESTION, PROFILE, REGISTRATION} from "../constants/routes";
-import AllQuestions from '../pages/AllQuestions/AllQuestions';
-import AllThemes from '../pages/AllThemes/AllThemes';
-import NewQuestion from '../pages/new/NewQuestion';
-import UserProfile from '../pages/profile/UserProfile';
-import Question from '../pages/question/Question';
+import {Redirect, Route, Switch,} from "react-router-dom";
+import {observer} from "mobx-react";
+import { AUTH, REGISTRATION} from "../constants/routes";
+import Auth from '../store/auth'
 import Registration from '../pages/registration/Registration';
 import Authorization from "./../pages/authorization/Authorization"
-import Theme from "../pages/theme/Theme";
+import PrivateRoutes from "./PrivateRoutes";
 
 const Routes: FC = () => {
-  return (
+
+  return Auth.isUserAuth ? <PrivateRoutes /> : (
     <Switch>
       <Route exact path="/">
         <p>Лендинг</p>
+        <button onClick={() => Auth.setIsUserAuth(true)}>войти</button>
       </Route>
-      <Route exact path={AUTH} component={Authorization}/>
-      <Route exact path={REGISTRATION} component={Registration}/>
-      <Route exact path={NEW_QUESTION} component={NewQuestion}/>
-      <Route exact path={`${PROFILE}/:userId`} component={UserProfile}/>
-      <Route exact path={ALL_QUESTIONS} component={AllQuestions}/>
-      <Route exact path={`${ALL_QUESTIONS}/:questionId`} component={Question}/>
-      <Route exact path={ALL_THEMES} component={AllThemes}/>
-      <Route exact path={`${ALL_THEMES}/:themeId`} component={Theme}/>
+      <Route exact path={AUTH} component={Authorization} />
+      <Route exact path={REGISTRATION} component={Registration} />
+      <Redirect to={AUTH} />
     </Switch>
   );
 };
 
-export default Routes;
+export default observer(Routes);
