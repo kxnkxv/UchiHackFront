@@ -1,6 +1,14 @@
 import {FC} from 'react';
 import {Route, Switch,} from "react-router-dom";
 import {ALL_QUESTIONS, ALL_THEMES, AUTH, NEW_QUESTION, PROFILE, QUESTION, REGISTRATION} from "../constants/routes";
+import AllQuestions from '../pages/AllQuestions/AllQuestions';
+import AllThemeQuestions from '../pages/AllThemeQuestions/AllThemeQuestions';
+import AllThemes from '../pages/AllThemes/AllThemes';
+import NewQuestion from '../pages/new/NewQuestion';
+import UserProfile from '../pages/profile/UserProfile';
+import Question from '../pages/question/Question';
+import Registration from '../pages/registration/Registration';
+import Authorization from "./../pages/authorization/Authorization"
 
 const Routes: FC = () => {
   return (
@@ -9,28 +17,29 @@ const Routes: FC = () => {
         <p>Лендинг</p>
       </Route>
       <Route exact path={AUTH}>
-        <p>Авторизация</p>
+        <Authorization/>
       </Route>
       <Route exact path={REGISTRATION}>
-        <p>Регистрация</p>
+        <Registration/>
       </Route>
       <Route exact path={NEW_QUESTION}>
-        <p>Новый вопрос</p>
+        <NewQuestion/>
       </Route>
       <Route exact path={PROFILE}>
-        <p>Профиль пользователя</p>
+        <UserProfile/>
       </Route>
       <Route exact path={QUESTION}>
-        <p>Конкретный вопрос</p>
+        <Question/>
       </Route>
       <Route exact path={ALL_QUESTIONS}>
-        <p>Все вопросы</p>
+        <AllQuestions/>
       </Route>
       <Route exact path={ALL_THEMES}>
-        <p>Все разделы</p>
+        <AllThemes/>
       </Route>
       <Route exact path="/allmath">
-        <p>Все вопросы по математике</p>
+        {/* @ts-ignore */}
+        <AllThemeQuestions theme="math"/>
       </Route>
     </Switch>
   );

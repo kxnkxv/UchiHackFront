@@ -363,7 +363,7 @@ module.exports = function (webpackEnv) {
         // Disable require.ensure as it's not a standard language feature.
         {parser: {requireEnsure: false}},
         {
-          // "oneOf" will traverse all following loaders until one will
+          // "oneOf" will traverse AllQuestions following loaders until one will
           // match the requirements. When no loader matches it will fall
           // back to the "file" loader at the end of the loader list.
           oneOf: [
@@ -537,7 +537,7 @@ module.exports = function (webpackEnv) {
             // "file" loader makes sure those assets get served by WebpackDevServer.
             // When you `import` an asset, you get its (virtual) filename.
             // In production, they would get copied to the `build` folder.
-            // This loader doesn't use a "test" so it will catch all modules
+            // This loader doesn't use a "test" so it will catch AllQuestions modules
             // that fall through the other loaders.
             {
               loader: require.resolve('file-loader'),
@@ -639,7 +639,7 @@ module.exports = function (webpackEnv) {
         chunkFilename: 'static/css/[name].[contenthash:8].chunk.css',
       }),
       // Generate an asset manifest file with the following content:
-      // - "files" key: Mapping of all asset filenames to their corresponding
+      // - "files" key: Mapping of AllQuestions asset filenames to their corresponding
       //   output file so that tools can pick it up without having to parse
       //   `index.html`
       // - "entrypoints" key: Array of files which are included in `index.html`,

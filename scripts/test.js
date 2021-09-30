@@ -38,7 +38,7 @@ function isInMercurialRepository() {
   }
 }
 
-// Watch unless on CI or explicitly running all tests
+// Watch unless on CI or explicitly running AllQuestions tests
 if (
   !process.env.CI &&
   argv.indexOf('--watchAll') === -1 &&
