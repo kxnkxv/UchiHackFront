@@ -1,32 +1,57 @@
 import {FC} from 'react';
-import {Col, Layout, Menu} from 'antd';
-import RowWrap from '../RowWrap/RowWrap';
+import {Col, Layout, Row} from 'antd';
 import HeaderNav from '../HeaderNav/HeaderNav';
+import SideBar from '../SideBar/SideBar';
 
-const {SubMenu} = Menu;
-const {Header, Footer, Sider, Content} = Layout;
+const {Footer, Content} = Layout;
 
 
 const CustomLayout: FC = ({children}) => {
   return (
     <>
-      <RowWrap>
+      <Row
+        gutter={[25, 25]}
+        justify="space-around"
+        align="middle"
+        style={{
+          padding: 0,
+          margin: 0
+        }}
+      >
         <Col span={24}>
           <HeaderNav/>
         </Col>
-      </RowWrap>
-      <RowWrap>
-        <Col span={24}>
+      </Row>
+      <Row
+        gutter={[25, 25]}
+        justify="center"
+        align="middle"
+        style={{
+          padding: 0,
+          margin: 0
+        }}
+      >
+        <Col span={3}>
+          <SideBar/>
+        </Col>
+        <Col span={21}>
           <Content>{children}</Content>
         </Col>
-      </RowWrap>
-      <RowWrap>
+      </Row>
+      <Row
+        justify="space-around"
+        align="middle"
+        style={{
+          padding: 0,
+          margin: 0
+        }}
+      >
         <Col span={24}>
           <Footer>
             made with love by hahathon in 2021
           </Footer>
         </Col>
-      </RowWrap>
+      </Row>
     </>
   );
 };

@@ -1,70 +1,65 @@
-import {FC, SetStateAction, useState} from 'react';
-import {Avatar, Menu} from 'antd';
-import {AppstoreOutlined, MailOutlined, SettingOutlined, UserOutlined} from '@ant-design/icons';
+import {FC} from 'react';
+import {Avatar, Button, Col, Image, Row} from 'antd';
+import {UserOutlined} from '@ant-design/icons';
 import User from "../../store/user/user";
 import {observer} from "mobx-react-lite";
 import {Link} from 'react-router-dom';
-import {ALL_QUESTIONS, ALL_THEMES, AUTH, NEW_QUESTION, REGISTRATION} from "../../constants/routes";
-import {questionsThemes} from "../../constants/questionsThemes";
-
-const {SubMenu} = Menu;
+import {AUTH, NEW_QUESTION, PROFILE, REGISTRATION} from "../../constants/routes";
+import Complete from '../Complete/Complete';
+import logo from "./../../img/logo.png"
 
 const HeaderNav: FC = observer(() => {
-    const [current, setCurrent] = useState("AUTH")
-
-    const handleClick = (event: { key: SetStateAction<string>; }) => {
-      setCurrent(event.key)
-    }
-
-    return (
-      <Menu
-        onClick={handleClick}
-        selectedKeys={[current]}
-        mode="horizontal"
+  return (
+    <>
+      <Row
+        gutter={[25, 25]}
+        align="middle"
         style={{
-          justifyContent: "space-around"
+          padding: 0,
+          margin: 0
         }}
       >
-        <Menu.Item key={NEW_QUESTION} icon={<AppstoreOutlined/>}>
-          Задать вопрос
-          <Link to={NEW_QUESTION}/>
-        </Menu.Item>
-        <Menu.Item key={ALL_QUESTIONS} icon={<AppstoreOutlined/>}>
-          Все вопросы
-          <Link to={ALL_QUESTIONS}/>
-        </Menu.Item>
-        <SubMenu key={ALL_THEMES} icon={<SettingOutlined/>} title="Все разделы">
+        <Col>
+          <Link to="/">
+            <Image src={logo} height={50} preview={false}/>
+          </Link>
+        </Col>
+        <Col>
+          <Complete/>
+        </Col>
+        <Col>
+          <Link to={NEW_QUESTION}>
+            <Button>Задать вопрос</Button>
+          </Link>
+        </Col>
+        <Col>
           {
-            Object.keys(questionsThemes).map((key) => (
-              <Menu.Item key={key}>
-                {questionsThemes[key]}
-                <Link to={`${ALL_THEMES}/${key}`} />
-              </Menu.Item>
-            ))
+            User
+              ? <Link to={`${PROFILE}/${User.user.id}`}>
+                {
+                  User.user.avatar
+                    ? <Avatar src={User.user.avatar}/>
+                    : <Avatar icon={<UserOutlined/>}/>
+                }
+
+              </Link>
+              : <>
+                <Link to={AUTH}>
+                  <Button>
+                    Авторизация
+                  </Button>
+                </Link>
+                <Link to={REGISTRATION}>
+                  <Button>
+                    Регистрация
+                  </Button>
+                </Link>
+              </>
           }
-        </SubMenu>
-        {
-          User
-            ? <Menu.Item key="PROFILE">
-              {
-                User.user.avatar
-                  ? <Avatar src={User.user.avatar}/>
-                  : <Avatar icon={<UserOutlined/>}/>
-              }
-            </Menu.Item>
-            : <>
-              <Menu.Item key="AUTH" icon={<MailOutlined/>}>
-                Авторизация
-                <Link to={AUTH}/>
-              </Menu.Item>
-              <Menu.Item key="REGISTRATION" icon={<AppstoreOutlined/>}>
-                Регистрация
-                <Link to={REGISTRATION}/>
-              </Menu.Item>
-            </>
-        }
-      </Menu>
-    );
+        </Col>
+      </Row>
+    </>
+  );
   }
 )
 
