@@ -1,6 +1,7 @@
 import {AnswerType} from "../types/AnswerType";
 import {users} from "./users";
 import {User} from "../types/User";
+import moment from "moment";
 
 export const answers: AnswerType[] = [
   {
@@ -8,7 +9,7 @@ export const answers: AnswerType[] = [
     user: users.find(({id}) => id === '111') as User,
     isRightAnswer: false,
     message: 'Это же гуглится по первой ссылке :/',
-    createdAt: Date.now(),
+    createdAt: moment(),
     comments: []
   },
   {
@@ -16,11 +17,11 @@ export const answers: AnswerType[] = [
     user: users.find(({id}) => id === '222') as User,
     isRightAnswer: true,
     message: 'Это же гуглится по первой ссылке :/',
-    createdAt: Date.now(),
+    createdAt: moment(),
     comments: [{
       user: users.find(({id}) => id === '555') as User,
       id: '555',
-      createdAt: Date.now(),
+      createdAt: moment(),
       message: 'Плохой ответ'
     }]
   },
@@ -29,7 +30,7 @@ export const answers: AnswerType[] = [
     user: users.find(({id}) => id === '333') as User,
     isRightAnswer: false,
     message: 'Это же гуглится по первой ссылке :/',
-    createdAt: Date.now(),
+    createdAt: moment(),
     comments: []
   },
   {
@@ -37,7 +38,7 @@ export const answers: AnswerType[] = [
     user: users.find(({id}) => id === '444') as User,
     isRightAnswer: false,
     message: 'Это же гуглится по первой ссылке :/',
-    createdAt: Date.now(),
+    createdAt: moment(),
     comments: []
   },
 ]
