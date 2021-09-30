@@ -16,14 +16,14 @@ const Routes: FC = () => {
       <Route exact path="/">
         <p>Лендинг</p>
       </Route>
-      <Route exact path={AUTH} component={Authorization} />
-      <Route exact path={REGISTRATION} component={Registration} />
+      <Route exact path={AUTH} component={Authorization}/>
+      <Route exact path={REGISTRATION} component={Registration}/>
       <Route exact path={NEW_QUESTION} component={NewQuestion}/>
       <Route exact path={`${PROFILE}/:userId`} component={UserProfile}/>
       <Route exact path={ALL_QUESTIONS} component={AllQuestions}/>
-      <Route exact path={`${ALL_QUESTIONS}/:questionId`} component={Question} />
-      <Route exact path={ALL_THEMES} component={AllThemes} />
-      <Route exact path={`${ALL_THEMES}/:themeId`} component={Theme} />
+      <Route exact path={`${ALL_QUESTIONS}/:questionId`} component={Question}/>
+      <Route exact path={ALL_THEMES} component={AllThemes}/>
+      <Route exact path={`${ALL_THEMES}/:themeId`} component={Theme}/>
     </Switch>
   );
 };
