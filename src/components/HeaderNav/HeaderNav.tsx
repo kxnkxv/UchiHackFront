@@ -16,7 +16,8 @@ const HeaderNav: FC = observer(() => {
         align="middle"
         style={{
           padding: 0,
-          margin: 0
+          margin: 0,
+          paddingTop: 5
         }}
       >
         <Col>
