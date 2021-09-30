@@ -25,7 +25,6 @@ const CustomLayout: FC = ({children}) => {
       <Row
         gutter={[25, 25]}
         justify="center"
-        align="middle"
         style={{
           padding: 0,
           margin: 0
