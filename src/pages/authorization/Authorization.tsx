@@ -1,11 +1,12 @@
 import React from 'react';
 import Auth from "../../store/auth";
+import {Button} from "antd";
 
 const Authorization = () => {
   return (
     <div>
       Authorization
-      <button onClick={() => Auth.setIsUserAuth(true)}>войти</button>
+      <Button onClick={() => Auth.setIsUserAuth(true)}>войти</Button>
     </div>
   );
 };
