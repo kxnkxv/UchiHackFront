@@ -16,7 +16,14 @@ const HeaderNav: FC = observer(() => {
     }
 
     return (
-      <Menu onClick={handleClick} selectedKeys={[current]} mode="horizontal">
+      <Menu
+        onClick={handleClick}
+        selectedKeys={[current]}
+        mode="horizontal"
+        style={{
+          justifyContent: "space-around"
+        }}
+      >
         <Menu.Item key="NEW_QUESTION" icon={<AppstoreOutlined/>}>
           Задать вопрос
           <Link to={NEW_QUESTION}/>
