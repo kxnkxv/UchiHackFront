@@ -17,9 +17,9 @@ const PrivateRoutes: FC = () => {
         <Route path='/'>
           <button onClick={() => Auth.setIsUserAuth(false)}>выйти</button>
         </Route>
-        <Route exact path={NEW_QUESTION} component={NewQuestion} />
-        <Route exact path={PROFILE} component={UserProfile} />
-        <Route exact path={ALL_QUESTIONS} component={AllQuestions} />
+        <Route exact path={NEW_QUESTION} component={NewQuestion}/>
+        <Route exact path={`${PROFILE}/:userId`} component={UserProfile}/>
+        <Route exact path={ALL_QUESTIONS} component={AllQuestions}/>
         <Route exact path={`${ALL_QUESTIONS}/:questionId`} component={Question} />
         <Route exact path={ALL_THEMES} component={AllThemes} />
         <Route exact path={`${ALL_THEMES}/:themeId`} component={Theme} />
