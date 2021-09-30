@@ -2,9 +2,7 @@ import React, {FC} from 'react';
 import {RouteComponentProps} from "react-router-dom";
 import {questionsList} from "../../mockData/questions";
 
-import {
-  Container,
-} from './styled';
+import {Container,} from './styled';
 import ThemeItem from "./components/ThemeItem/ThemeItem";
 
 interface RouteParams {
@@ -16,7 +14,7 @@ const Themes: FC<RouteComponentProps<RouteParams>> = ({match}) => {
   return (
     <Container>
       {questionsList.map((question) => (!themeId || themeId === question.theme) && (
-        <ThemeItem question={question} />
+        <ThemeItem question={question}/>
       ))}
     </Container>
   );

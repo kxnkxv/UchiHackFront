@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import {Link} from "react-router-dom";
 
-interface Props{
+interface Props {
   bold?: boolean;
   urgently?: boolean;
 }
@@ -38,7 +38,7 @@ export const DescriptionLink = styled(Link)`
   display: block;
   margin: 30px 0 0 0;
 
-  ${Description}{
+  ${Description} {
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 2;

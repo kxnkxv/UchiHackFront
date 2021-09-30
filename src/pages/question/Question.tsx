@@ -19,7 +19,7 @@ const Question: FC<RouteComponentProps<RouteParams>> = ({match}) => {
   const questionItem = questionsList.find(({id}) => id === questionId);
   return questionItem ? (
     <Container>
-      <ThemeItem isQuestionPage question={questionItem} />
+      <ThemeItem isQuestionPage question={questionItem}/>
       <div>
         <h2>Ваш ответ</h2>
         <TextArea/>

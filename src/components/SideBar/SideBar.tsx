@@ -7,7 +7,7 @@ import {ALL_THEMES} from "../../constants/routes";
 import {questionsThemes} from "../../constants/questionsThemes";
 
 const SideBar: FC = observer(() => {
-  const [current, setCurrent] = useState("/")
+    const [current, setCurrent] = useState("/")
 
     const handleClick = (event: { key: SetStateAction<string>; }) => {
       setCurrent(event.key)
