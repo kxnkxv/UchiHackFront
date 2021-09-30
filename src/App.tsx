@@ -1,12 +1,9 @@
 import {FC} from 'react';
-import Routes from "./router/Routes"
-import CustomLayout from "./components/CustomLayout/CustomLayout";
+import Routes from "./router/Routes";
 
 const App: FC = () => {
   return (
-    <CustomLayout>
-      <Routes/>
-    </CustomLayout>
+    <Routes/>
   );
 };
 
