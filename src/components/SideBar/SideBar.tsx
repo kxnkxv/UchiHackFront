@@ -3,7 +3,7 @@ import {Menu} from 'antd';
 import {AppstoreOutlined} from '@ant-design/icons';
 import {observer} from "mobx-react-lite";
 import {Link} from 'react-router-dom';
-import {ALL_QUESTIONS, ALL_THEMES, AUTH} from "../../constants/routes";
+import {ALL_THEMES, AUTH} from "../../constants/routes";
 import {questionsThemes} from "../../constants/questionsThemes";
 
 const {SubMenu} = Menu;
@@ -24,9 +24,9 @@ const SideBar: FC = observer(() => {
           width: "auto"
         }}
       >
-        <Menu.Item key={ALL_QUESTIONS} icon={<AppstoreOutlined/>}>
+        <Menu.Item key='/' icon={<AppstoreOutlined/>}>
           Все вопросы
-          <Link to={ALL_QUESTIONS}/>
+          <Link to='/'/>
         </Menu.Item>
         {
           Object.keys(questionsThemes).map((key) => (

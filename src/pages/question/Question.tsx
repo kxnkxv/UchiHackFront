@@ -9,7 +9,7 @@ const Question: FC<RouteComponentProps<RouteParams>> = ({match}) => {
   const {questionId} = match.params;
   return (
     <div>
-      {questionId}
+      Вопрос - {questionId}
     </div>
   );
 };
