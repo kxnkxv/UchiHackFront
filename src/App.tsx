@@ -1,4 +1,4 @@
-import { Button } from 'antd';
+import {Button} from 'antd';
 import React, {FC} from 'react';
 
 const App: FC = () => {
