@@ -59,7 +59,7 @@ const Authorization = () => {
               },
             ]}
           >
-            <Input prefix={<MailOutlined/>} type="email" placeholder="Username"/>
+            <Input prefix={<MailOutlined/>} placeholder="Электронная почта"/>
           </Form.Item>
           <Form.Item
             name="password"
