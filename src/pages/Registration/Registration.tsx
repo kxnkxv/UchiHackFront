@@ -1,12 +1,17 @@
-import {Button, Card, Col, Form, Image, Input, Row, Space, Typography} from 'antd';
+import {Button, Card, Col, Form, Image, Input, Row, Typography} from 'antd';
 import Auth from "../../store/auth";
 import css from "./Registration.module.scss"
 import logo from "./../../img/logo.png"
-import {AUTH} from "../../constants/routes";
+import {AUTH} from '../../constants/routes';
+import {MailOutlined} from '@ant-design/icons';
 
-const Registration = () => {
+const Authorization = () => {
+
+  const [form] = Form.useForm();
+
   const onFinish = (values: any) => {
     console.log('Success:', values);
+    Auth.setIsUserAuth(true)
   };
 
   const onFinishFailed = (errorInfo: any) => {
@@ -36,35 +41,80 @@ const Registration = () => {
         </Row>
         <br/>
         <Form
-          name="Authorization"
-          initialValues={{email: "demo@demo.com", password: "demo"}}
+          name="registration"
           onFinish={onFinish}
           onFinishFailed={onFinishFailed}
-          autoComplete="off"
+          form={form}
+          initialValues={{
+            email: "demo@demo.com",
+            password: "demo",
+            confirm: "demo"
+          }}
         >
           <Form.Item
-            label="Email"
             name="email"
-            rules={[{required: true, message: 'Please input your username!'}]}
+            rules={[
+              {
+                required: true,
+                message: 'Пожалуйста введите свой email!'
+              },
+              {
+                type: 'email',
+                message: 'Введите email правильно!',
+              },
+            ]}
           >
-            <Input/>
+            <Input prefix={<MailOutlined/>} type="email" placeholder="Username"/>
           </Form.Item>
-
           <Form.Item
-            label="Password"
             name="password"
-            rules={[{required: true, message: 'Please input your password!'}]}
+            rules={[
+              {
+                required: true,
+                message: 'Пожалуйста введите пароль!',
+              },
+            ]}
+            hasFeedback
           >
             <Input.Password/>
           </Form.Item>
 
+          <Form.Item
+            name="confirm"
+            dependencies={['password']}
+            hasFeedback
+            rules={[
+              {
+                required: true,
+                message: 'Пожалуйста подтвердите пароль!',
+              },
+              ({getFieldValue}) => ({
+                validator(_, value) {
+                  if (!value || getFieldValue('password') === value) {
+                    return Promise.resolve();
+                  }
+                  return Promise.reject(new Error('Пароли не совпадают!'));
+                },
+              }),
+            ]}
+          >
+            <Input.Password/>
+          </Form.Item>
           <Form.Item>
-            <Space>
-              <Button type="primary" htmlType="submit" onClick={() => Auth.setIsUserAuth(true)}>
-                Зарегистрироваться
-              </Button>
-              <Typography.Link href={AUTH}>Авторизоваться</Typography.Link>
-            </Space>
+            <Row
+              align="middle"
+              justify="space-between"
+              gutter={[25, 25]}
+            >
+              <Col>
+                <Button type="primary" htmlType="submit" className="login-form-button">
+                  Зарегистрироваться
+                </Button>
+              </Col>
+              <Col>
+                У меня уже есть аккаунт! <a href={AUTH}>Авторизоваться</a>
+              </Col>
+            </Row>
           </Form.Item>
         </Form>
       </Card>
@@ -72,4 +122,4 @@ const Registration = () => {
   );
 };
 
-export default Registration;
+export default Authorization;

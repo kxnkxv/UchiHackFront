@@ -8,6 +8,7 @@ import {LockOutlined, MailOutlined} from '@ant-design/icons';
 const Authorization = () => {
   const onFinish = (values: any) => {
     console.log('Success:', values);
+    Auth.setIsUserAuth(true)
   };
 
   const onFinishFailed = (errorInfo: any) => {
@@ -47,7 +48,16 @@ const Authorization = () => {
         >
           <Form.Item
             name="email"
-            rules={[{required: true, message: 'Пожалуйста введите свой email!'}]}
+            rules={[
+              {
+                required: true,
+                message: 'Пожалуйста введите свой email!'
+              },
+              {
+                type: 'email',
+                message: 'Введите email правильно!',
+              },
+            ]}
           >
             <Input prefix={<MailOutlined/>} type="email" placeholder="Username"/>
           </Form.Item>
@@ -88,8 +98,7 @@ const Authorization = () => {
               gutter={[25, 25]}
             >
               <Col>
-                <Button type="primary" htmlType="submit" className="login-form-button"
-                        onClick={() => Auth.setIsUserAuth(true)}>
+                <Button type="primary" htmlType="submit" className="login-form-button">
                   Войти
                 </Button>
               </Col>
