@@ -1,8 +1,8 @@
 import styled from "styled-components";
-import {Button, } from "antd";
+import {Button,} from "antd";
 import TextArea from "antd/es/input/TextArea";
 
-interface Props{
+interface Props {
   toRight?: boolean;
 }
 

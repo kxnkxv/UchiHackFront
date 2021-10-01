@@ -1,5 +1,5 @@
 import React, {FC} from 'react';
-import { RouteComponentProps} from "react-router-dom";
+import {RouteComponentProps} from "react-router-dom";
 import {questionsList} from "../../mockData/questions";
 import {answers} from "../../mockData/answers";
 import {QuestionType} from "../../types/QuestionType";
@@ -9,19 +9,19 @@ import {questionsThemes} from "../../constants/questionsThemes";
 import UserInfo from "../../components/UserInfo";
 
 import {
+  AddAnswer,
+  Coast,
   Container,
   Description,
-  Header,
-  Title,
   Footer,
-  QuestionWrap,
+  Header,
   PublicChat,
   QuestionTitle,
-  AddAnswer,
+  QuestionWrap,
   Status,
-  Submit,
   StyledTextArea,
-  Coast
+  Submit,
+  Title
 } from "./styled";
 
 interface RouteParams {
@@ -31,7 +31,7 @@ interface RouteParams {
 const Question: FC<RouteComponentProps<RouteParams>> = ({match}) => {
   const {questionId} = match.params;
   const questionItem = questionsList.find(({id}) => id === questionId);
-  const { title, theme, description, user, time, coast, status, createdAt, urgently } = questionItem as QuestionType;
+  const {title, theme, description, user, time, coast, status, createdAt, urgently} = questionItem as QuestionType;
   return questionItem ? (
     <Container>
       <QuestionWrap>
@@ -45,7 +45,7 @@ const Question: FC<RouteComponentProps<RouteParams>> = ({match}) => {
         </QuestionTitle>
         <Description>{description}</Description>
         <Footer>
-          <UserInfo data={user} />
+          <UserInfo data={user}/>
           <Title>{time} минут</Title>
           {urgently && <Title>Срочное</Title>}
           <Coast>{coast} баллов</Coast>
@@ -54,7 +54,7 @@ const Question: FC<RouteComponentProps<RouteParams>> = ({match}) => {
       </QuestionWrap>
       <AddAnswer>
         <h2>Ваш ответ</h2>
-        <StyledTextArea placeholder='Текстовое поле для ответа' />
+        <StyledTextArea placeholder='Текстовое поле для ответа'/>
         <Submit>Отправить</Submit>
       </AddAnswer>
       <div>
@@ -62,7 +62,7 @@ const Question: FC<RouteComponentProps<RouteParams>> = ({match}) => {
         <div>
           {
             answers.map((answer) => (
-              <Answer key={answer.id} data={answer} />
+              <Answer key={answer.id} data={answer}/>
             ))
           }
         </div>

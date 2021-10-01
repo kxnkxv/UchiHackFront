@@ -4,13 +4,7 @@ import {questionsList} from "../../mockData/questions";
 import ThemeItem from "./components/ThemeItem/ThemeItem";
 import {Row} from "antd";
 
-import {
-  Container,
-  Heading,
-  Count,
-  List,
-
-} from './styled';
+import {Container, Count, Heading, List,} from './styled';
 
 interface RouteParams {
   themeId: string;

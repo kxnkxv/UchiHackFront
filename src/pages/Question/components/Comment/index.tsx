@@ -3,10 +3,7 @@ import React, {FC} from "react";
 import {Row} from "antd";
 import UserInfo from "../../../../components/UserInfo";
 
-import {
-  Container,
-  Message
-} from './styled';
+import {Container, Message} from './styled';
 
 interface OwnProps {
   data: CommentType;
@@ -17,7 +14,7 @@ const Comment: FC<OwnProps> = ({data}) => {
   return (
     <Container>
       <Row justify='space-between'>
-        <UserInfo data={user} />
+        <UserInfo data={user}/>
         <span> Добавлено {createdAt.fromNow()}</span>
       </Row>
       <Message>{message}</Message>

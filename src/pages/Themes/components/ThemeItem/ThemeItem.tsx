@@ -2,16 +2,7 @@ import React, {FC} from 'react';
 import {QUESTION} from "../../../../constants/routes";
 import {QuestionType} from "../../../../types/QuestionType";
 
-import {
-  Container,
-  Description,
-  Footer,
-  Header,
-  Title,
-  ToAnswer,
-  AnswersCount,
-  Coast,
-} from './styled';
+import {AnswersCount, Coast, Container, Description, Footer, Header, Title, ToAnswer,} from './styled';
 import {questionsThemes} from "../../../../constants/questionsThemes";
 
 interface OwnProps {
