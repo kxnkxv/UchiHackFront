@@ -1,4 +1,4 @@
-import "./dist/css/style.css"
+import "./assets/css/style.css"
 import logo from "./../../img/logo.png"
 import {AUTH, REGISTRATION} from "../../constants/routes";
 
