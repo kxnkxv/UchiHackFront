@@ -16,12 +16,6 @@ const RightBlock = ({
                       t,
                       id,
                     }: ContentBlockProps) => {
-  const scrollTo = (id: string) => {
-    const element = document.getElementById(id) as HTMLDivElement;
-    element.scrollIntoView({
-      behavior: "smooth",
-    });
-  };
   return (
     <RightBlockContainer>
       <Fade direction="right">
@@ -33,7 +27,7 @@ const RightBlock = ({
               <ButtonWrapper>
                 {typeof button === "object" &&
                 button.map((item: any, id: number) => {
-                  if (item.title == "Регистрация") {
+                  if (item.title === "Регистрация") {
                     return (
                       <Link to={REGISTRATION}>
                         <Button
@@ -46,7 +40,7 @@ const RightBlock = ({
                       </Link>
 
                     );
-                  } else if (item.title == "Авторизация") {
+                  } else if (item.title === "Авторизация") {
                     return (
                       <Link to={AUTH}>
                         <Button

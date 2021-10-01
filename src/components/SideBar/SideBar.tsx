@@ -19,7 +19,8 @@ const SideBar: FC = observer(() => {
         selectedKeys={[current]}
         mode="vertical"
         style={{
-          width: "auto"
+          width: "100%",
+          height: "100%"
         }}
       >
         <Menu.Item key="/" icon={<AppstoreOutlined/>}>

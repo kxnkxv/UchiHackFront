@@ -27,7 +27,8 @@ const CustomLayout: FC = ({children}) => {
         justify="center"
         style={{
           padding: 0,
-          margin: 0
+          margin: 0,
+          height: "100vh"
         }}
       >
         <Col
