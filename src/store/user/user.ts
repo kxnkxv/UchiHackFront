@@ -2,7 +2,7 @@ import { makeAutoObservable } from "mobx";
 
 class User {
   user = {
-    id: 1,
+    id: "1",
     firstName: "Артем",
     lastName: "Коньков",
     patronymic: "Вадимович",
