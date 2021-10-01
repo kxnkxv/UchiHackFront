@@ -2,7 +2,7 @@ import {Button, Card, Checkbox, Col, Form, Image, Input, Row, Typography} from '
 import Auth from "../../store/auth";
 import css from "./Authorization.module.scss"
 import logo from "./../../img/logo.png"
-import {REGISTRATION} from '../../constants/routes';
+import {REGISTRATION, RESTORE_PASSWORD} from '../../constants/routes';
 import {LockOutlined, MailOutlined} from '@ant-design/icons';
 
 const Authorization = () => {
@@ -83,7 +83,7 @@ const Authorization = () => {
                 </Form.Item>
               </Col>
               <Col>
-                <a href="">
+                <a href={RESTORE_PASSWORD}>
                   Кажется, я забыл пароль
                 </a>
               </Col>
@@ -98,7 +98,7 @@ const Authorization = () => {
               gutter={[25, 25]}
             >
               <Col>
-                <Button type="primary" htmlType="submit" className="login-form-button">
+                <Button type="primary" htmlType="submit">
                   Войти
                 </Button>
               </Col>

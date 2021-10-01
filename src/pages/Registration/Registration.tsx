@@ -106,7 +106,7 @@ const Authorization = () => {
               gutter={[25, 25]}
             >
               <Col>
-                <Button type="primary" htmlType="submit" className="login-form-button">
+                <Button type="primary" htmlType="submit">
                   Зарегистрироваться
                 </Button>
               </Col>
