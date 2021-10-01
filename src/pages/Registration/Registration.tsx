@@ -78,7 +78,6 @@ const Authorization = () => {
           >
             <Input.Password/>
           </Form.Item>
-
           <Form.Item
             name="confirm"
             dependencies={['password']}
