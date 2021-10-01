@@ -17,8 +17,6 @@ const UserProfile = () => {
   };
 
   return (
-    <div>
-      <AvatarUpload/>
       <Form
         layout="horizontal"
         initialValues={{
@@ -32,6 +30,11 @@ const UserProfile = () => {
         onFinish={onFinish}
         onFinishFailed={onFinishFailed}
       >
+        <Form.Item
+          label="Изображение профиля"
+        >
+          <AvatarUpload/>
+        </Form.Item>
         <Form.Item
           label="Фамилия Имя Отчество"
           style={{
@@ -114,11 +117,8 @@ const UserProfile = () => {
               <Button type="primary" htmlType="submit">Сохранить</Button>
             </Form.Item>
           </Col>
-
         </Row>
       </Form>
-
-    </div>
   );
 };
 
