@@ -32,7 +32,9 @@ const UserProfile = () => {
         onFinish={onFinish}
         onFinishFailed={onFinishFailed}
       >
-        <Form.Item>
+        <Form.Item
+          label="Фамилия Имя Отчество"
+        >
           <Row
             align="middle"
             justify="space-between"
