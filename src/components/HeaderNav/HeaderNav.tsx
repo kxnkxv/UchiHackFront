@@ -22,6 +22,7 @@ const HeaderNav: FC = observer(() => {
           }}
         >
           <Col
+            span={12}
             style={{
               paddingLeft: 0,
               marginLeft: 0
@@ -35,12 +36,12 @@ const HeaderNav: FC = observer(() => {
                 margin: 0
               }}
             >
-              <Col>
+              <Col span={5}>
                 <Link to="/">
                   <Image src={logo} height={50} width={50} preview={false}/>
                 </Link>
               </Col>
-              <Col>
+              <Col span={19}>
                 <Complete/>
               </Col>
             </Row>
