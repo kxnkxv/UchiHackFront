@@ -1,5 +1,8 @@
-import {Button, Card, Checkbox, Form, Input} from 'antd';
+import {Button, Card, Checkbox, Col, Form, Image, Input, Row, Space, Typography} from 'antd';
 import Auth from "../../store/auth";
+import css from "./Authorization.module.scss"
+import logo from "./../../img/logo.png"
+import {REGISTRATION} from '../../constants/routes';
 
 const Authorization = () => {
   const onFinish = (values: any) => {
@@ -11,42 +14,62 @@ const Authorization = () => {
   };
 
   return (
-    <Card>
-      <Form
-        name="Authorization"
-        initialValues={{remember: true}}
-        onFinish={onFinish}
-        onFinishFailed={onFinishFailed}
-        autoComplete="off"
-      >
-        <Form.Item
-          label="Email"
-          name="email"
-          rules={[{required: true, message: 'Please input your username!'}]}
+    <div className={css.wrapper}>
+      <Card className={css.card}>
+        <Row
+          align="middle"
+          justify="center"
+          gutter={[25, 25]}
         >
-          <Input/>
-        </Form.Item>
-
-        <Form.Item
-          label="Password"
-          name="password"
-          rules={[{required: true, message: 'Please input your password!'}]}
+          <Col>
+            <Image src={logo} preview={false} height={50} width={50}/>
+          </Col>
+        </Row>
+        <Row
+          align="middle"
+          justify="center"
+          gutter={[25, 25]}
         >
-          <Input.Password/>
-        </Form.Item>
+          <Col>
+            <Typography.Title>Авторизация</Typography.Title>
+          </Col>
+        </Row>
+        <br/>
+        <Form
+          name="Authorization"
+          initialValues={{email: "demo@demo.com", password: "demo"}}
+          onFinish={onFinish}
+          onFinishFailed={onFinishFailed}
+          autoComplete="off"
+        >
+          <Form.Item
+            label="Email"
+            name="email"
+            rules={[{required: true, message: 'Please input your username!'}]}
+          >
+            <Input/>
+          </Form.Item>
 
-        <Form.Item name="remember" valuePropName="checked" wrapperCol={{offset: 8, span: 16}}>
-          <Checkbox>Remember me</Checkbox>
-        </Form.Item>
+          <Form.Item
+            label="Password"
+            name="password"
+            rules={[{required: true, message: 'Please input your password!'}]}
+          >
+            <Input.Password/>
+          </Form.Item>
 
-        <Form.Item wrapperCol={{offset: 8, span: 16}}>
-          <Button type="primary" htmlType="submit" onClick={() => Auth.setIsUserAuth(true)}>
-            Войти
-          </Button>
-        </Form.Item>
-      </Form>
-    </Card>
-
+          <Form.Item>
+            <Space>
+              <Checkbox>Remember me</Checkbox>
+              <Button type="primary" htmlType="submit" onClick={() => Auth.setIsUserAuth(true)}>
+                Войти
+              </Button>
+              <Typography.Link href={REGISTRATION}>Зарегистрироваться</Typography.Link>
+            </Space>
+          </Form.Item>
+        </Form>
+      </Card>
+    </div>
   );
 };
 
