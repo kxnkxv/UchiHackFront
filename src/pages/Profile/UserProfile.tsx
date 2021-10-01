@@ -26,7 +26,7 @@ const UserProfile = () => {
           lastName: User.user.lastName,
           firstName: User.user.firstName,
           patronymic: User.user.patronymic,
-          class: User.user.class,
+          education: User.user.education,
           emailNotify: User.user.emailNotify,
         }}
         onFinish={onFinish}
@@ -34,6 +34,9 @@ const UserProfile = () => {
       >
         <Form.Item
           label="Фамилия Имя Отчество"
+          style={{
+            marginBottom: 0
+          }}
         >
           <Row
             align="middle"
@@ -73,7 +76,7 @@ const UserProfile = () => {
         >
           <Input prefix={<MailOutlined/>} placeholder="Электронная почта"/>
         </Form.Item>
-        <Form.Item label="Класс" name="class">
+        <Form.Item label="Уровень образования" name="education">
           <Select>
             <Select.Option value="1">Первый класс</Select.Option>
             <Select.Option value="2">Второй класс</Select.Option>

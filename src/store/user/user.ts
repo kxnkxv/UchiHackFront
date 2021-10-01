@@ -12,7 +12,7 @@ class User {
     answers: 0,
     questions: 0,
     role: '',
-    class: "uni",
+    education: "uni",
     emailNotify: true,
   }
 
