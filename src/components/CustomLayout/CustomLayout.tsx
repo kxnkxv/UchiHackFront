@@ -28,7 +28,7 @@ const CustomLayout: FC = ({children}) => {
         style={{
           padding: 0,
           margin: 0,
-          height: "100vh"
+          minHeight: "calc(100vh - 131px)"
         }}
       >
         <Col
