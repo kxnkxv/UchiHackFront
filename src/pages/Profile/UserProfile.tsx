@@ -22,11 +22,39 @@ const UserProfile = () => {
       <Form
         layout="horizontal"
         initialValues={{
-          email: User.user.email
+          email: User.user.email,
+          lastName: User.user.lastName,
+          firstName: User.user.firstName,
+          patronymic: User.user.patronymic,
+          class: User.user.class,
+          emailNotify: User.user.emailNotify,
         }}
         onFinish={onFinish}
         onFinishFailed={onFinishFailed}
       >
+        <Form.Item>
+          <Row
+            align="middle"
+            justify="space-between"
+            gutter={[25, 25]}
+          >
+            <Col span={8}>
+              <Form.Item name="lastName">
+                <Input placeholder="Фамилия"/>
+              </Form.Item>
+            </Col>
+            <Col span={8}>
+              <Form.Item name="firstName">
+                <Input placeholder="Имя"/>
+              </Form.Item>
+            </Col>
+            <Col span={8}>
+              <Form.Item name="patronymic">
+                <Input placeholder="Отчество"/>
+              </Form.Item>
+            </Col>
+          </Row>
+        </Form.Item>
         <Form.Item
           label="Электронная почта"
           name="email"
