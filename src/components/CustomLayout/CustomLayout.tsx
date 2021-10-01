@@ -30,7 +30,13 @@ const CustomLayout: FC = ({children}) => {
           margin: 0
         }}
       >
-        <Col span={3}>
+        <Col
+          span={3}
+          style={{
+            paddingLeft: 0,
+            marginLeft: 0
+          }}
+        >
           <SideBar/>
         </Col>
         <Col span={21}>

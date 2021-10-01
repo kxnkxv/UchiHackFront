@@ -14,49 +14,77 @@ const HeaderNav: FC = observer(() => {
         <Row
           gutter={[25, 25]}
           align="middle"
+          justify={"space-between"}
           style={{
             padding: 0,
             margin: 0,
             paddingTop: 5
           }}
         >
-          <Col>
-            <Link to="/">
-              <Image src={logo} height={50} preview={false}/>
-            </Link>
-          </Col>
-          <Col>
-            <Complete/>
-          </Col>
-          <Col>
-            <Link to={NEW_QUESTION}>
-              <Button>Задать вопрос</Button>
-            </Link>
-          </Col>
-          <Col>
-            {
-              User
-                ? <Link to={`${PROFILE}/${User.user.id}`}>
-                  {
-                    User.user.avatar
-                      ? <Avatar src={User.user.avatar}/>
-                      : <Avatar icon={<UserOutlined/>}/>
-                  }
-
+          <Col
+            style={{
+              paddingLeft: 0,
+              marginLeft: 0
+            }}
+          >
+            <Row
+              gutter={[25, 25]}
+              align="middle"
+              style={{
+                padding: 0,
+                margin: 0
+              }}
+            >
+              <Col>
+                <Link to="/">
+                  <Image src={logo} height={50} width={50} preview={false}/>
                 </Link>
-                : <>
-                  <Link to={AUTH}>
-                    <Button>
-                      Авторизация
-                    </Button>
-                  </Link>
-                  <Link to={REGISTRATION}>
-                    <Button>
-                      Регистрация
-                    </Button>
-                  </Link>
-                </>
-            }
+              </Col>
+              <Col>
+                <Complete/>
+              </Col>
+            </Row>
+          </Col>
+          <Col>
+            <Row
+              gutter={[25, 25]}
+              align="middle"
+              style={{
+                padding: 0,
+                margin: 0
+              }}
+            >
+              <Col>
+                <Link to={NEW_QUESTION}>
+                  <Button>Задать вопрос</Button>
+                </Link>
+              </Col>
+              <Col>
+                {
+                  User
+                    ? <Link to={`${PROFILE}/${User.user.id}`}>
+                      {
+                        User.user.avatar
+                          ? <Avatar src={User.user.avatar}/>
+                          : <Avatar icon={<UserOutlined/>}/>
+                      }
+
+                    </Link>
+                    : <>
+                      <Link to={AUTH}>
+                        <Button>
+                          Авторизация
+                        </Button>
+                      </Link>
+                      <Link to={REGISTRATION}>
+                        <Button>
+                          Регистрация
+                        </Button>
+                      </Link>
+                    </>
+                }
+              </Col>
+            </Row>
           </Col>
         </Row>
       </>
