@@ -1,8 +1,9 @@
-import {Button, Card, Checkbox, Col, Form, Image, Input, Row, Space, Typography} from 'antd';
+import {Button, Card, Checkbox, Col, Form, Image, Input, Row, Typography} from 'antd';
 import Auth from "../../store/auth";
 import css from "./Authorization.module.scss"
 import logo from "./../../img/logo.png"
 import {REGISTRATION} from '../../constants/routes';
+import {LockOutlined, UserOutlined} from '@ant-design/icons';
 
 const Authorization = () => {
   const onFinish = (values: any) => {
@@ -36,36 +37,61 @@ const Authorization = () => {
         </Row>
         <br/>
         <Form
-          name="Authorization"
-          initialValues={{email: "demo@demo.com", password: "demo"}}
+          name="login"
           onFinish={onFinish}
-          onFinishFailed={onFinishFailed}
-          autoComplete="off"
         >
           <Form.Item
-            label="Email"
-            name="email"
-            rules={[{required: true, message: 'Please input your username!'}]}
+            name="username"
+            rules={[{required: true, message: 'Пожалуйста введите свой email!'}]}
           >
-            <Input/>
+            <Input prefix={<UserOutlined/>} placeholder="Username"/>
           </Form.Item>
-
           <Form.Item
-            label="Password"
             name="password"
-            rules={[{required: true, message: 'Please input your password!'}]}
+            rules={[{required: true, message: 'Пожалуйста введите пароль!'}]}
           >
-            <Input.Password/>
+            <Input
+              prefix={<LockOutlined/>}
+              type="password"
+              placeholder="Пароль"
+            />
+          </Form.Item>
+          <Form.Item>
+            <Row
+              align="middle"
+              justify="space-between"
+              gutter={[25, 25]}
+            >
+              <Col>
+                <Form.Item name="remember" valuePropName="checked" noStyle>
+                  <Checkbox>Запомнить меня</Checkbox>
+                </Form.Item>
+              </Col>
+              <Col>
+                <a href="">
+                  Кажется, я забыл пароль
+                </a>
+              </Col>
+            </Row>
+
           </Form.Item>
 
           <Form.Item>
-            <Space>
-              <Checkbox>Remember me</Checkbox>
-              <Button type="primary" htmlType="submit" onClick={() => Auth.setIsUserAuth(true)}>
-                Войти
-              </Button>
-              <Typography.Link href={REGISTRATION}>Зарегистрироваться</Typography.Link>
-            </Space>
+            <Row
+              align="middle"
+              justify="space-between"
+              gutter={[25, 25]}
+            >
+              <Col>
+                <Button type="primary" htmlType="submit" className="login-form-button"
+                        onClick={() => Auth.setIsUserAuth(true)}>
+                  Войти
+                </Button>
+              </Col>
+              <Col>
+                или <a href={REGISTRATION}>Зарегистрироваться сейчас</a>
+              </Col>
+            </Row>
           </Form.Item>
         </Form>
       </Card>
