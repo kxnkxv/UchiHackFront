@@ -13,6 +13,8 @@ import {
 } from "./styled";
 import { questionsThemes } from "../../../../constants/questionsThemes";
 import { Link } from "react-router-dom";
+import moment from "moment";
+import { Tooltip } from "antd";
 
 interface OwnProps {
   question: QuestionType;
@@ -26,7 +28,11 @@ const ThemeItem: FC<OwnProps> = ({ question }) => {
         <div>
           <Title>{questionsThemes[theme]}</Title>
         </div>
-        <Title>Добавлено {createdAt.fromNow()}</Title>
+        <Tooltip title={moment().format("YYYY-MM-DD HH:mm:ss")}>
+          <Title>
+            Добавлено <b>{createdAt.fromNow()}</b>
+          </Title>
+        </Tooltip>
       </Header>
       <Description to={`${QUESTION}/${id}`}>{description}</Description>
       <Footer>

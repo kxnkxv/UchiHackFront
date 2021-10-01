@@ -23,7 +23,8 @@ import {
   Submit,
   Title,
 } from "./styled";
-import { Card, Input } from "antd";
+import { Card, Input, Tooltip } from "antd";
+import moment from "moment";
 
 interface RouteParams {
   questionId: string;
@@ -50,9 +51,11 @@ const Question: FC<RouteComponentProps<RouteParams>> = ({ match }) => {
           <Title>
             <b>{questionsThemes[theme]}</b>
           </Title>
-          <Title>
-            Добавлено <b>{createdAt.fromNow()}</b>
-          </Title>
+          <Tooltip title={moment().format("YYYY-MM-DD HH:mm:ss")}>
+            <Title>
+              Добавлено <b>{createdAt.fromNow()}</b>
+            </Title>
+          </Tooltip>
           <PublicChat toRight>Общий чат</PublicChat>
         </Header>
         <QuestionTitle>{title}</QuestionTitle>

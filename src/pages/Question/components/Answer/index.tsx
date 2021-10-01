@@ -2,11 +2,12 @@ import { AnswerType, CommentType } from "../../../../types/AnswerType";
 import React, { FC } from "react";
 import CustomComment from "../CustomComment";
 import UserInfo from "../../../../components/UserInfo";
-import { Button, Input, Row } from "antd";
+import { Button, Input, Row, Tooltip } from "antd";
 
 import { Container, Message, MessageWrap, OpenComment } from "./styled";
 import { PublicChat, Status, Title } from "../../styled";
 import { CheckCircleOutlined, HeartOutlined } from "@ant-design/icons";
+import moment from "moment";
 
 interface OwnProps {
   data: AnswerType;
@@ -23,9 +24,11 @@ const Answer: FC<OwnProps> = ({ data }) => {
             Ответ является решением
           </Status>
         ) : null}
-        <Title>
-          Добавлено <b>{createdAt.fromNow()}</b>
-        </Title>
+        <Tooltip title={moment().format("YYYY-MM-DD HH:mm:ss")}>
+          <Title>
+            Добавлено <b>{createdAt.fromNow()}</b>
+          </Title>
+        </Tooltip>
         <PublicChat>Чат с участником</PublicChat>
       </Row>
       <MessageWrap>
