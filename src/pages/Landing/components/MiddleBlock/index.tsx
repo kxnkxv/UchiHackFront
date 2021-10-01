@@ -1,8 +1,8 @@
-import {Col, Row} from "antd";
-import {withTranslation} from "react-i18next";
-import {Slide} from "react-awesome-reveal";
-import {Button} from "../../common/Button";
-import {Content, ContentWrapper, MiddleBlockSection} from "./styles";
+import { Col, Row } from "antd";
+import { withTranslation } from "react-i18next";
+import { Slide } from "react-awesome-reveal";
+import { Button } from "../../common/Button";
+import { Content, ContentWrapper, MiddleBlockSection } from "./styles";
 
 interface MiddleBlockProps {
   title: string;
@@ -11,7 +11,7 @@ interface MiddleBlockProps {
   t: any;
 }
 
-const MiddleBlock = ({title, content, button, t}: MiddleBlockProps) => {
+const MiddleBlock = ({ title, content, button, t }: MiddleBlockProps) => {
   const scrollTo = (id: string) => {
     const element = document.getElementById(id) as HTMLDivElement;
     element.scrollIntoView({

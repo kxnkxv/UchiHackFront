@@ -1,12 +1,12 @@
-import {Button, Form, Input, Typography} from 'antd';
+import { Button, Form, Input, Typography } from "antd";
 
 const NewQuestion = () => {
   const onFinish = (values: any) => {
-    console.log('Success:', values);
+    console.log("Success:", values);
   };
 
   const onFinishFailed = (errorInfo: any) => {
-    console.log('Failed:', errorInfo);
+    console.log("Failed:", errorInfo);
   };
 
   return (
@@ -18,7 +18,7 @@ const NewQuestion = () => {
     >
       <Typography.Title>Создать вопрос</Typography.Title>
       <Form.Item>
-        <Input.TextArea/>
+        <Input.TextArea />
       </Form.Item>
       <Form.Item>
         <Button type="primary" htmlType="submit">

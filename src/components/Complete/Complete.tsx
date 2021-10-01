@@ -1,6 +1,6 @@
-import React, {useState} from 'react';
-import {AutoComplete, Input} from 'antd';
-import {SelectProps} from 'antd/es/select';
+import React, { useState } from "react";
+import { AutoComplete, Input } from "antd";
+import { SelectProps } from "antd/es/select";
 
 function getRandomInt(max: number, min: number = 0) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -8,8 +8,8 @@ function getRandomInt(max: number, min: number = 0) {
 
 const searchResult = (query: string) =>
   new Array(getRandomInt(5))
-    .join('.')
-    .split('.')
+    .join(".")
+    .split(".")
     .map((_, idx) => {
       const category = `${query}${idx}`;
       return {
@@ -17,12 +17,12 @@ const searchResult = (query: string) =>
         label: (
           <div
             style={{
-              display: 'flex',
-              justifyContent: 'space-between',
+              display: "flex",
+              justifyContent: "space-between",
             }}
           >
             <span>
-              Найдено {query} в{' '}
+              Найдено {query} в{" "}
               <a
                 href={`https://s.taobao.com/search?q=${query}`}
                 target="_blank"
@@ -38,19 +38,19 @@ const searchResult = (query: string) =>
     });
 
 const Complete: React.FC = () => {
-  const [options, setOptions] = useState<SelectProps<object>['options']>([]);
+  const [options, setOptions] = useState<SelectProps<object>["options"]>([]);
 
   const handleSearch = (value: string) => {
     setOptions(value ? searchResult(value) : []);
   };
 
   const onSelect = (value: string) => {
-    console.log('onSelect', value);
+    console.log("onSelect", value);
   };
 
   return (
     <AutoComplete
-      style={{width: "100%"}}
+      style={{ width: "100%" }}
       options={options}
       onSelect={onSelect}
       onSearch={handleSearch}
@@ -58,7 +58,7 @@ const Complete: React.FC = () => {
         option!.value.toUpperCase().indexOf(inputValue.toUpperCase()) !== -1
       }
     >
-      <Input.Search placeholder="Найти ответ на любой вопрос" enterButton/>
+      <Input.Search placeholder="Найти ответ на любой вопрос" enterButton />
     </AutoComplete>
   );
 };

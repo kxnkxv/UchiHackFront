@@ -1,12 +1,11 @@
-import {FC} from 'react';
-import {Col, Layout, Row} from 'antd';
-import HeaderNav from '../HeaderNav/HeaderNav';
-import SideBar from '../SideBar/SideBar';
+import { FC } from "react";
+import { Col, Layout, Row } from "antd";
+import HeaderNav from "../HeaderNav/HeaderNav";
+import SideBar from "../SideBar/SideBar";
 
-const {Footer, Content} = Layout;
+const { Footer, Content } = Layout;
 
-
-const CustomLayout: FC = ({children}) => {
+const CustomLayout: FC = ({ children }) => {
   return (
     <>
       <Row
@@ -15,11 +14,11 @@ const CustomLayout: FC = ({children}) => {
         align="middle"
         style={{
           padding: 0,
-          margin: 0
+          margin: 0,
         }}
       >
         <Col span={24}>
-          <HeaderNav/>
+          <HeaderNav />
         </Col>
       </Row>
       <Row
@@ -28,17 +27,17 @@ const CustomLayout: FC = ({children}) => {
         style={{
           padding: 0,
           margin: 0,
-          minHeight: "calc(100vh - 131px)"
+          minHeight: "calc(100vh - 131px)",
         }}
       >
         <Col
           span={3}
           style={{
             paddingLeft: 0,
-            marginLeft: 0
+            marginLeft: 0,
           }}
         >
-          <SideBar/>
+          <SideBar />
         </Col>
         <Col span={21}>
           <Content>{children}</Content>
@@ -49,13 +48,11 @@ const CustomLayout: FC = ({children}) => {
         align="middle"
         style={{
           padding: 0,
-          margin: 0
+          margin: 0,
         }}
       >
         <Col span={24}>
-          <Footer>
-            made with love by hahathon in 2021
-          </Footer>
+          <Footer>made with love by hahathon in 2021</Footer>
         </Col>
       </Row>
     </>

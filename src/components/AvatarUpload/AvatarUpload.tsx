@@ -1,28 +1,28 @@
-import React, {useState} from 'react';
-import {Upload} from 'antd';
-import ImgCrop from 'antd-img-crop';
-import User from "./../../store/user/user"
+import React, { useState } from "react";
+import { Upload } from "antd";
+import ImgCrop from "antd-img-crop";
+import User from "./../../store/user/user";
 
 const AvatarUpload = () => {
   const [fileList, setFileList] = useState([
     {
-      uid: '1',
-      name: 'avatar.png',
-      status: 'done',
+      uid: "1",
+      name: "avatar.png",
+      status: "done",
       url: User.user.avatar,
     },
   ]);
 
   // @ts-ignore
-  const onChange = ({fileList: newFileList}) => {
+  const onChange = ({ fileList: newFileList }) => {
     setFileList(newFileList);
   };
 
   // @ts-ignore
-  const onPreview = async file => {
+  const onPreview = async (file) => {
     let src = file.url;
     if (!src) {
-      src = await new Promise(resolve => {
+      src = await new Promise((resolve) => {
         const reader = new FileReader();
         reader.readAsDataURL(file.originFileObj);
         reader.onload = () => resolve(reader.result);
@@ -45,7 +45,7 @@ const AvatarUpload = () => {
         onChange={onChange}
         onPreview={onPreview}
       >
-        {fileList.length < 5 && '+ Upload'}
+        {fileList.length < 5 && "+ Upload"}
       </Upload>
     </ImgCrop>
   );

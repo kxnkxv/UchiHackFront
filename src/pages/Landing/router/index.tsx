@@ -1,15 +1,15 @@
-import {lazy, Suspense} from "react";
-import {Route, Switch} from "react-router-dom";
+import { lazy, Suspense } from "react";
+import { Route, Switch } from "react-router-dom";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
 import routes from "./config";
-import {Styles} from "../styles/styles";
+import { Styles } from "../styles/styles";
 
 const Router = () => {
   return (
     <Suspense fallback={null}>
-      <Styles/>
-      <Header/>
+      <Styles />
+      <Header />
       <Switch>
         {routes.map((routeItem) => {
           return (
@@ -22,7 +22,7 @@ const Router = () => {
           );
         })}
       </Switch>
-      <Footer/>
+      <Footer />
     </Suspense>
   );
 };

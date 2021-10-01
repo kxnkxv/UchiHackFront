@@ -1,5 +1,5 @@
-import {UserType} from "./UserType";
-import {Moment} from "moment";
+import { UserType } from "./UserType";
+import { Moment } from "moment";
 
 export interface AnswerType {
   user: UserType;

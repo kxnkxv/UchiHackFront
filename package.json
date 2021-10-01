@@ -95,13 +95,17 @@
   "scripts": {
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
-    "test": "node scripts/test.js"
+    "test": "node scripts/test.js",
+    "prepare": "husky install"
   },
   "eslintConfig": {
     "extends": [
       "react-app",
       "react-app/jest"
     ]
+  },
+  "lint-staged": {
+    "**/*": "prettier --write --ignore-unknown"
   },
   "browserslist": {
     "production": [
@@ -175,6 +179,9 @@
   "devDependencies": {
     "@types/aos": "^3.0.4",
     "@types/react-router-dom": "^5.3.0",
-    "node-sass": "^6.0.1"
+    "husky": "^7.0.2",
+    "lint-staged": "^11.1.2",
+    "node-sass": "^6.0.1",
+    "prettier": "2.4.1"
   }
 }

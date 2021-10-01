@@ -1,6 +1,6 @@
-import {Col, Row} from "antd";
-import {withTranslation} from "react-i18next";
-import {SvgIcon} from "../../common/SvgIcon";
+import { Col, Row } from "antd";
+import { withTranslation } from "react-i18next";
+import { SvgIcon } from "../../common/SvgIcon";
 import Container from "../../common/Container";
 
 import i18n from "i18next";
@@ -26,12 +26,12 @@ interface SocialLinkProps {
   src: string;
 }
 
-const Footer = ({t}: any) => {
+const Footer = ({ t }: any) => {
   const handleChange = (language: string) => {
     i18n.changeLanguage(language);
   };
 
-  const SocialLink = ({href, src}: SocialLinkProps) => {
+  const SocialLink = ({ href, src }: SocialLinkProps) => {
     return (
       <a
         href={href}
@@ -40,7 +40,7 @@ const Footer = ({t}: any) => {
         key={src}
         aria-label={src}
       >
-        <SvgIcon src={src} width="25px" height="25px"/>
+        <SvgIcon src={src} width="25px" height="25px" />
       </a>
     );
   };
@@ -70,7 +70,7 @@ const Footer = ({t}: any) => {
               </Large>
             </Col>
             <Col lg={6} md={6} sm={12} xs={12}>
-              <Empty/>
+              <Empty />
               <Large left="true" to="/">
                 {t("Support Center")}
               </Large>
@@ -81,7 +81,7 @@ const Footer = ({t}: any) => {
           </Row>
           <Row justify="space-between">
             <Col lg={10} md={10} sm={12} xs={12}>
-              <Empty/>
+              <Empty />
               <Language>{t("Address")}</Language>
               <Para>Rancho Santa Margarita</Para>
               <Para>2131 Elk Street</Para>
@@ -131,7 +131,7 @@ const Footer = ({t}: any) => {
           <Row
             justify="space-between"
             align="middle"
-            style={{paddingTop: "3rem"}}
+            style={{ paddingTop: "3rem" }}
           >
             <NavLink to="/">
               <LogoContainer>

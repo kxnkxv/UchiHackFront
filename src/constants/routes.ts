@@ -1,7 +1,7 @@
-export const AUTH = '/authorization';
-export const REGISTRATION = '/registration';
-export const NEW_QUESTION = '/newQuestion';
-export const PROFILE = '/profile';
-export const QUESTION = '/question';
-export const ALL_THEMES = '/themes';
-export const RESTORE_PASSWORD = '/restorePassword';
+export const AUTH = "/authorization";
+export const REGISTRATION = "/registration";
+export const NEW_QUESTION = "/newQuestion";
+export const PROFILE = "/profile";
+export const QUESTION = "/question";
+export const ALL_THEMES = "/themes";
+export const RESTORE_PASSWORD = "/restorePassword";

@@ -1,16 +1,36 @@
-import React, {FC} from 'react';
-import {QUESTION} from "../../../../constants/routes";
-import {QuestionType} from "../../../../types/QuestionType";
+import React, { FC } from "react";
+import { QUESTION } from "../../../../constants/routes";
+import { QuestionType } from "../../../../types/QuestionType";
 
-import {AnswersCount, Coast, Container, Description, Footer, Header, Title, ToAnswer,} from './styled';
-import {questionsThemes} from "../../../../constants/questionsThemes";
+import {
+  AnswersCount,
+  Coast,
+  Container,
+  Description,
+  Footer,
+  Header,
+  Title,
+  ToAnswer,
+} from "./styled";
+import { questionsThemes } from "../../../../constants/questionsThemes";
 
 interface OwnProps {
   question: QuestionType;
 }
 
-const ThemeItem: FC<OwnProps> = ({question}) => {
-  const {title, id, theme, time, createdAt, description, status, coast, urgently, user} = question;
+const ThemeItem: FC<OwnProps> = ({ question }) => {
+  const {
+    title,
+    id,
+    theme,
+    time,
+    createdAt,
+    description,
+    status,
+    coast,
+    urgently,
+    user,
+  } = question;
   return (
     <Container>
       <Header>
@@ -19,17 +39,13 @@ const ThemeItem: FC<OwnProps> = ({question}) => {
         </div>
         <Title>Добавлено {createdAt.fromNow()}</Title>
       </Header>
-      <Description to={`${QUESTION}/${id}`}>
-        {description}
-      </Description>
+      <Description to={`${QUESTION}/${id}`}>{description}</Description>
       <Footer>
         <Coast>{coast} баллов</Coast>
         {urgently && <Title urgently>Срочное</Title>}
         <Title>{time} минут</Title>
         <AnswersCount>0 ответов</AnswersCount>
-        <ToAnswer to={`${QUESTION}/${id}`}>
-          Ответить
-        </ToAnswer>
+        <ToAnswer to={`${QUESTION}/${id}`}>Ответить</ToAnswer>
       </Footer>
     </Container>
   );

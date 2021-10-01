@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 
 interface Props {
   bold?: boolean;
@@ -10,7 +10,7 @@ export const Container = styled.div`
   padding: 20px 30px;
   border-radius: 8px;
   margin: 20px auto 0;
-  background: #F2F7FF;
+  background: #f2f7ff;
   border: none;
 `;
 
@@ -21,8 +21,8 @@ export const Header = styled.div`
 
 export const Title = styled.span<Props>`
   font-size: 16px;
-  ${({bold}) => bold && 'font-weight: bold;'};
-  color: ${({urgently}) => urgently ? 'red' : '#000'};
+  ${({ bold }) => bold && "font-weight: bold;"};
+  color: ${({ urgently }) => (urgently ? "red" : "#000")};
   margin: 0 15px 0 0;
 `;
 
@@ -46,7 +46,7 @@ export const Footer = styled.div`
 export const ToAnswer = styled(Link)`
   display: block;
   margin: 0 0 0 20px;
-  background: #558BF5;
+  background: #558bf5;
   color: #fff;
   border-radius: 8px;
   padding: 10px 40px;
@@ -64,6 +64,6 @@ export const Coast = styled.span`
   background: #fff;
   border-radius: 8px;
   padding: 10px 20px;
-  color: #558BF5;
+  color: #558bf5;
   margin: 0 20px 0 0;
 `;

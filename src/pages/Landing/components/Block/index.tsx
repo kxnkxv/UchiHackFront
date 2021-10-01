@@ -1,5 +1,5 @@
-import {withTranslation} from "react-i18next";
-import {Container, Content, TextWrapper} from "./styles";
+import { withTranslation } from "react-i18next";
+import { Container, Content, TextWrapper } from "./styles";
 
 interface Props {
   title: string;
@@ -7,7 +7,7 @@ interface Props {
   t: any;
 }
 
-const Block = ({title, content, t}: Props) => {
+const Block = ({ title, content, t }: Props) => {
   return (
     <Container>
       <h6>{t(title)}</h6>

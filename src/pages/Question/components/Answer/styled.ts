@@ -15,15 +15,15 @@ export const Message = styled.div`
 `;
 
 export const AddComment = styled(TextArea)`
-  &&&{
-    border: 2px solid #EAEAEA;
+  &&& {
+    border: 2px solid #eaeaea;
     box-sizing: border-box;
     border-radius: 13px;
     height: 65px;
     margin: 20px 0 0 0;
 
-    ::placeholder{
-      color: #8C98AE;
+    ::placeholder {
+      color: #8c98ae;
       font-weight: 500;
     }
   }
@@ -36,9 +36,9 @@ export const OpenComment = styled.button`
   font-weight: 500;
   height: 50px;
   min-width: 50px;
-  color: #8C98AE;
+  color: #8c98ae;
   padding: 0 20px;
-  background: #F5F8FB;
+  background: #f5f8fb;
   border-radius: 8px;
   border: none;
   outline: none;

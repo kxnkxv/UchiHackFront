@@ -1,48 +1,39 @@
-import {Button, Card, Col, Form, Image, Input, Row, Typography} from 'antd';
+import { Button, Card, Col, Form, Image, Input, Row, Typography } from "antd";
 import Auth from "../../store/auth";
-import css from "./Registration.module.scss"
-import logo from "./../../img/logo.png"
-import {AUTH} from '../../constants/routes';
-import {MailOutlined} from '@ant-design/icons';
-import {Link} from "react-router-dom";
+import css from "./Registration.module.scss";
+import logo from "./../../img/logo.png";
+import { AUTH } from "../../constants/routes";
+import { MailOutlined } from "@ant-design/icons";
+import { Link } from "react-router-dom";
 
 const Authorization = () => {
-
   const [form] = Form.useForm();
 
   const onFinish = (values: any) => {
-    console.log('Success:', values);
-    Auth.setIsUserAuth(true)
+    console.log("Success:", values);
+    Auth.setIsUserAuth(true);
   };
 
   const onFinishFailed = (errorInfo: any) => {
-    console.log('Failed:', errorInfo);
+    console.log("Failed:", errorInfo);
   };
 
   return (
     <div className={css.wrapper}>
       <Card className={css.card}>
-        <Row
-          align="middle"
-          justify="center"
-          gutter={[25, 25]}
-        >
+        <Row align="middle" justify="center" gutter={[25, 25]}>
           <Col>
             <Link to="/">
-              <Image src={logo} preview={false} height={50} width={50}/>
+              <Image src={logo} preview={false} height={50} width={50} />
             </Link>
           </Col>
         </Row>
-        <Row
-          align="middle"
-          justify="center"
-          gutter={[25, 25]}
-        >
+        <Row align="middle" justify="center" gutter={[25, 25]}>
           <Col>
             <Typography.Title>Регистрация</Typography.Title>
           </Col>
         </Row>
-        <br/>
+        <br />
         <Form
           name="registration"
           onFinish={onFinish}
@@ -51,7 +42,7 @@ const Authorization = () => {
           initialValues={{
             email: "demo@demo.com",
             password: "demo",
-            confirm: "demo"
+            confirm: "demo",
           }}
         >
           <Form.Item
@@ -59,55 +50,51 @@ const Authorization = () => {
             rules={[
               {
                 required: true,
-                message: 'Пожалуйста введите свой email!'
+                message: "Пожалуйста введите свой email!",
               },
               {
-                type: 'email',
-                message: 'Введите email правильно!',
+                type: "email",
+                message: "Введите email правильно!",
               },
             ]}
           >
-            <Input prefix={<MailOutlined/>} placeholder="Электронная почта"/>
+            <Input prefix={<MailOutlined />} placeholder="Электронная почта" />
           </Form.Item>
           <Form.Item
             name="password"
             rules={[
               {
                 required: true,
-                message: 'Пожалуйста введите пароль!',
+                message: "Пожалуйста введите пароль!",
               },
             ]}
             hasFeedback
           >
-            <Input.Password/>
+            <Input.Password />
           </Form.Item>
           <Form.Item
             name="confirm"
-            dependencies={['password']}
+            dependencies={["password"]}
             hasFeedback
             rules={[
               {
                 required: true,
-                message: 'Пожалуйста подтвердите пароль!',
+                message: "Пожалуйста подтвердите пароль!",
               },
-              ({getFieldValue}) => ({
+              ({ getFieldValue }) => ({
                 validator(_, value) {
-                  if (!value || getFieldValue('password') === value) {
+                  if (!value || getFieldValue("password") === value) {
                     return Promise.resolve();
                   }
-                  return Promise.reject(new Error('Пароли не совпадают!'));
+                  return Promise.reject(new Error("Пароли не совпадают!"));
                 },
               }),
             ]}
           >
-            <Input.Password/>
+            <Input.Password />
           </Form.Item>
           <Form.Item>
-            <Row
-              align="middle"
-              justify="space-between"
-              gutter={[25, 25]}
-            >
+            <Row align="middle" justify="space-between" gutter={[25, 25]}>
               <Col>
                 <Button type="primary" htmlType="submit">
                   Зарегистрироваться

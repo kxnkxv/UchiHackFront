@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import {Button,} from "antd";
+import { Button } from "antd";
 import TextArea from "antd/es/input/TextArea";
 
 interface Props {
@@ -12,8 +12,7 @@ export const Container = styled.div`
   margin: 60px auto;
 `;
 
-export const QuestionWrap = styled.div`
-`;
+export const QuestionWrap = styled.div``;
 
 export const Description = styled.p`
   margin: 24px 0;
@@ -41,8 +40,8 @@ export const Title = styled.div`
 `;
 
 export const PublicChat = styled(Button)<Props>`
-  background: #F5F8FB;
-  margin: ${({toRight}) => toRight ? '0 0 0 auto' : '0'};
+  background: #f5f8fb;
+  margin: ${({ toRight }) => (toRight ? "0 0 0 auto" : "0")};
   border: none;
   border-radius: 8px;
   font-weight: 500;
@@ -55,7 +54,7 @@ export const AddAnswer = styled.div`
 `;
 
 export const Submit = styled(Button)`
-  background: #558BF5;
+  background: #558bf5;
   border-radius: 6px;
   width: 220px;
   height: 50px;
@@ -72,23 +71,23 @@ export const Status = styled.span<Props>`
   align-items: center;
   font-size: 16px;
   font-weight: 500;
-  color: #8C98AE;
-  background: #F5F8FB;
+  color: #8c98ae;
+  background: #f5f8fb;
   border-radius: 6px;
-  margin: ${({toRight}) => toRight ? '0 0 0 auto' : '0'};
+  margin: ${({ toRight }) => (toRight ? "0 0 0 auto" : "0")};
   padding: 6px 18px;
 `;
 
 export const StyledTextArea = styled(TextArea)`
-  &&&{
-    border: 2px solid #EAEAEA;
+  &&& {
+    border: 2px solid #eaeaea;
     box-sizing: border-box;
     border-radius: 13px;
     height: 140px;
     padding: 20px 20px 20px 25px;
 
-    ::placeholder{
-      color: #8C98AE;
+    ::placeholder {
+      color: #8c98ae;
       font-weight: 500;
     }
   }
@@ -98,8 +97,8 @@ export const Coast = styled.span`
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #F2F7FF;
-  color: #558BF5;
+  background: #f2f7ff;
+  color: #558bf5;
   font-weight: 500;
   border-radius: 8px;
   padding: 10px 20px;

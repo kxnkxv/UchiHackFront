@@ -1,19 +1,18 @@
-import React from 'react';
+import React from "react";
 import Auth from "../../store/auth";
-import {Button, Col, Form, Input, message, Row, Select, Switch} from "antd";
-import AvatarUpload from '../../components/AvatarUpload/AvatarUpload';
-import {MailOutlined} from "@ant-design/icons";
-import User from "./../../store/user/user"
+import { Button, Col, Form, Input, message, Row, Select, Switch } from "antd";
+import AvatarUpload from "../../components/AvatarUpload/AvatarUpload";
+import { MailOutlined } from "@ant-design/icons";
+import User from "./../../store/user/user";
 
 const UserProfile = () => {
-
   const onFinish = (values: any) => {
-    console.log('Success:', values);
-    message.success("Данные сохранены")
+    console.log("Success:", values);
+    message.success("Данные сохранены");
   };
 
   const onFinishFailed = (errorInfo: any) => {
-    console.log('Failed:', errorInfo);
+    console.log("Failed:", errorInfo);
   };
 
   return (
@@ -30,35 +29,29 @@ const UserProfile = () => {
       onFinish={onFinish}
       onFinishFailed={onFinishFailed}
     >
-      <Form.Item
-        label="Изображение профиля"
-      >
-        <AvatarUpload/>
+      <Form.Item label="Изображение профиля">
+        <AvatarUpload />
       </Form.Item>
       <Form.Item
         label="Фамилия Имя Отчество"
         style={{
-          marginBottom: 0
+          marginBottom: 0,
         }}
       >
-        <Row
-          align="middle"
-          justify="space-between"
-          gutter={[25, 25]}
-        >
+        <Row align="middle" justify="space-between" gutter={[25, 25]}>
           <Col span={8}>
             <Form.Item name="lastName">
-              <Input placeholder="Фамилия"/>
+              <Input placeholder="Фамилия" />
             </Form.Item>
           </Col>
           <Col span={8}>
             <Form.Item name="firstName">
-              <Input placeholder="Имя"/>
+              <Input placeholder="Имя" />
             </Form.Item>
           </Col>
           <Col span={8}>
             <Form.Item name="patronymic">
-              <Input placeholder="Отчество"/>
+              <Input placeholder="Отчество" />
             </Form.Item>
           </Col>
         </Row>
@@ -68,57 +61,47 @@ const UserProfile = () => {
         name="email"
         rules={[
           {
-            type: 'email',
-            message: 'Введите email правильно!',
+            type: "email",
+            message: "Введите email правильно!",
           },
         ]}
       >
-        <Input prefix={<MailOutlined/>} placeholder="Электронная почта"/>
+        <Input prefix={<MailOutlined />} placeholder="Электронная почта" />
       </Form.Item>
       <Form.Item
         label="Смена пароля"
         style={{
-          marginBottom: 0
+          marginBottom: 0,
         }}
       >
-        <Row
-          align="middle"
-          justify="space-between"
-          gutter={[25, 25]}
-        >
+        <Row align="middle" justify="space-between" gutter={[25, 25]}>
           <Col span={8}>
-            <Form.Item
-              name="oldPassword"
-              hasFeedback
-            >
-              <Input.Password placeholder="Введите старый пароль"/>
+            <Form.Item name="oldPassword" hasFeedback>
+              <Input.Password placeholder="Введите старый пароль" />
             </Form.Item>
           </Col>
           <Col span={8}>
-            <Form.Item
-              name="newPassword"
-              hasFeedback
-            >
-              <Input.Password placeholder="Введите новый пароль"/>
+            <Form.Item name="newPassword" hasFeedback>
+              <Input.Password placeholder="Введите новый пароль" />
             </Form.Item>
           </Col>
           <Col span={8}>
             <Form.Item
               name="newPasswordConfirm"
-              dependencies={['newPassword']}
+              dependencies={["newPassword"]}
               hasFeedback
               rules={[
-                ({getFieldValue}) => ({
+                ({ getFieldValue }) => ({
                   validator(_, value) {
-                    if (!value || getFieldValue('newPassword') === value) {
+                    if (!value || getFieldValue("newPassword") === value) {
                       return Promise.resolve();
                     }
-                    return Promise.reject(new Error('Пароли не совпадают!'));
+                    return Promise.reject(new Error("Пароли не совпадают!"));
                   },
                 }),
               ]}
             >
-              <Input.Password placeholder="Подтвердите новый пароль"/>
+              <Input.Password placeholder="Подтвердите новый пароль" />
             </Form.Item>
           </Col>
         </Row>
@@ -142,23 +125,27 @@ const UserProfile = () => {
           <Select.Option value="idwt">Не хочу говорить</Select.Option>
         </Select>
       </Form.Item>
-      <Form.Item label="Я хочу получать уведомления на почту" valuePropName="checked" name="emailNotify">
-        <Switch/>
-      </Form.Item>
-      <Row
-        align="middle"
-        justify="space-between"
-        gutter={[25, 25]}
+      <Form.Item
+        label="Я хочу получать уведомления на почту"
+        valuePropName="checked"
+        name="emailNotify"
       >
+        <Switch />
+      </Form.Item>
+      <Row align="middle" justify="space-between" gutter={[25, 25]}>
         <Col>
           <Form.Item>
             <Button danger>Отменить изменения</Button>
-            <Button danger onClick={() => Auth.setIsUserAuth(false)}>Выйти из аккаунта</Button>
+            <Button danger onClick={() => Auth.setIsUserAuth(false)}>
+              Выйти из аккаунта
+            </Button>
           </Form.Item>
         </Col>
         <Col>
           <Form.Item>
-            <Button type="primary" htmlType="submit">Сохранить</Button>
+            <Button type="primary" htmlType="submit">
+              Сохранить
+            </Button>
           </Form.Item>
         </Col>
       </Row>

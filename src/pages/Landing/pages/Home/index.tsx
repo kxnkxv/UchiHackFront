@@ -1,4 +1,4 @@
-import {lazy} from "react";
+import { lazy } from "react";
 import IntroContent from "../../content/IntroContent.json";
 import MiddleBlockContent from "../../content/MiddleBlockContent.json";
 import AboutContent from "../../content/AboutContent.json";
@@ -13,7 +13,7 @@ const ContentBlock = lazy(() => import("../../components/ContentBlock"));
 const Home = () => {
   return (
     <Container>
-      <ScrollToTop/>
+      <ScrollToTop />
       <ContentBlock
         type="right"
         title={IntroContent.title}

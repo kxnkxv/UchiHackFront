@@ -1,16 +1,16 @@
-import {action, makeAutoObservable} from "mobx"
+import { action, makeAutoObservable } from "mobx";
 
 class Auth {
-  isUserAuth = !!window.localStorage.getItem('isUserAuth');
+  isUserAuth = !!window.localStorage.getItem("isUserAuth");
 
   constructor() {
-    makeAutoObservable(this)
+    makeAutoObservable(this);
   }
 
   @action setIsUserAuth(status: boolean) {
     this.isUserAuth = status;
-    window.localStorage.setItem('isUserAuth', `${status || ''}`);
+    window.localStorage.setItem("isUserAuth", `${status || ""}`);
   }
 }
 
-export default new Auth()
+export default new Auth();
