@@ -9,7 +9,7 @@ export interface QuestionType {
   subTheme: string;
   createdAt: Moment;
   user: UserType;
-  coast: number;
+  cost: number;
   status: string;
   time: number;
   urgently: boolean;

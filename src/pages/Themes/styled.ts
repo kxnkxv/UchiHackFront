@@ -12,6 +12,4 @@ export const Heading = styled.div`
   font-weight: 500;
 `;
 
-export const Count = styled.div``;
-
 export const List = styled.div``;

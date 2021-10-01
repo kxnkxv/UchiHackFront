@@ -4,7 +4,7 @@ import { questionsList } from "../../mockData/questions";
 import ThemeItem from "./components/ThemeItem/ThemeItem";
 import { Row } from "antd";
 
-import { Container, Count, Heading, List } from "./styled";
+import { Container, Heading, List } from "./styled";
 
 interface RouteParams {
   themeId: string;
@@ -16,7 +16,6 @@ const Themes: FC<RouteComponentProps<RouteParams>> = ({ match }) => {
     <Container>
       <Row align="middle">
         <Heading>Все вопросы</Heading>
-        <Count>({questionsList.length})</Count>
       </Row>
       <List>
         {questionsList.map(

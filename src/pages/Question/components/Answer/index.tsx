@@ -1,19 +1,12 @@
 import { AnswerType, CommentType } from "../../../../types/AnswerType";
 import React, { FC } from "react";
-import Comment from "../Comment";
+import CustomComment from "../CustomComment";
 import UserInfo from "../../../../components/UserInfo";
-import { Row } from "antd";
-import { ReactComponent as HeartIcon } from "../../../../img/heart.svg";
+import { Button, Input, Row } from "antd";
 
-import {
-  AddComment,
-  Container,
-  Like,
-  Message,
-  MessageWrap,
-  OpenComment,
-} from "./styled";
+import { Container, Message, MessageWrap, OpenComment } from "./styled";
 import { PublicChat, Status, Title } from "../../styled";
+import { CheckCircleOutlined, HeartOutlined } from "@ant-design/icons";
 
 interface OwnProps {
   data: AnswerType;
@@ -25,7 +18,11 @@ const Answer: FC<OwnProps> = ({ data }) => {
     <Container>
       <Row align="middle" justify="space-between">
         <UserInfo data={user} />
-        {isRightAnswer ? <Status>Ответ является решением</Status> : null}
+        {isRightAnswer ? (
+          <Status icon={<CheckCircleOutlined />} color="success">
+            Ответ является решением
+          </Status>
+        ) : null}
         <Title>
           Добавлено <b>{createdAt.fromNow()}</b>
         </Title>
@@ -35,14 +32,12 @@ const Answer: FC<OwnProps> = ({ data }) => {
         <Message>{message}</Message>
         <Row justify="space-between">
           <OpenComment>{comments.length} комментария</OpenComment>
-          <Like>
-            <HeartIcon />
-          </Like>
+          <Button shape="circle" icon={<HeartOutlined />} />
         </Row>
-        <AddComment placeholder="Комментировать ответ" />
+        <Input.TextArea placeholder="Комментировать ответ" />
         <div>
           {comments.map((comment: CommentType) => (
-            <Comment key={comment.id} data={comment} />
+            <CustomComment key={comment.id} data={comment} />
           ))}
         </div>
       </MessageWrap>

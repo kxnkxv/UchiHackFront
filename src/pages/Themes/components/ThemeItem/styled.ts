@@ -1,17 +1,15 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import { Button, Card } from "antd";
 
 interface Props {
   bold?: boolean;
   urgently?: boolean;
 }
 
-export const Container = styled.div`
+export const Container = styled(Card)`
   padding: 20px 30px;
-  border-radius: 8px;
   margin: 20px auto 0;
-  background: #f2f7ff;
-  border: none;
 `;
 
 export const Header = styled.div`
@@ -43,14 +41,8 @@ export const Footer = styled.div`
   margin: 30px 0 0 0;
 `;
 
-export const ToAnswer = styled(Link)`
-  display: block;
+export const ToAnswer = styled(Button)`
   margin: 0 0 0 20px;
-  background: #558bf5;
-  color: #fff;
-  border-radius: 8px;
-  padding: 10px 40px;
-  font-weight: 500;
 `;
 
 export const AnswersCount = styled.span`

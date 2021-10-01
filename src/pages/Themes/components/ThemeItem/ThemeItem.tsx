@@ -1,7 +1,6 @@
 import React, { FC } from "react";
 import { QUESTION } from "../../../../constants/routes";
 import { QuestionType } from "../../../../types/QuestionType";
-
 import {
   AnswersCount,
   Coast,
@@ -13,24 +12,14 @@ import {
   ToAnswer,
 } from "./styled";
 import { questionsThemes } from "../../../../constants/questionsThemes";
+import { Link } from "react-router-dom";
 
 interface OwnProps {
   question: QuestionType;
 }
 
 const ThemeItem: FC<OwnProps> = ({ question }) => {
-  const {
-    title,
-    id,
-    theme,
-    time,
-    createdAt,
-    description,
-    status,
-    coast,
-    urgently,
-    user,
-  } = question;
+  const { id, theme, time, createdAt, description, cost, urgently } = question;
   return (
     <Container>
       <Header>
@@ -41,11 +30,13 @@ const ThemeItem: FC<OwnProps> = ({ question }) => {
       </Header>
       <Description to={`${QUESTION}/${id}`}>{description}</Description>
       <Footer>
-        <Coast>{coast} баллов</Coast>
+        <Coast>{cost} баллов</Coast>
         {urgently && <Title urgently>Срочное</Title>}
         <Title>{time} минут</Title>
         <AnswersCount>0 ответов</AnswersCount>
-        <ToAnswer to={`${QUESTION}/${id}`}>Ответить</ToAnswer>
+        <Link to={`${QUESTION}/${id}`}>
+          <ToAnswer type="primary">Ответить</ToAnswer>
+        </Link>
       </Footer>
     </Container>
   );

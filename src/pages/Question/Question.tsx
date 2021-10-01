@@ -1,4 +1,5 @@
 import React, { FC } from "react";
+import { SyncOutlined } from "@ant-design/icons";
 import { RouteComponentProps } from "react-router-dom";
 import { questionsList } from "../../mockData/questions";
 import { answers } from "../../mockData/answers";
@@ -10,8 +11,8 @@ import UserInfo from "../../components/UserInfo";
 
 import {
   AddAnswer,
-  Coast,
   Container,
+  Cost,
   Description,
   Footer,
   Header,
@@ -19,10 +20,10 @@ import {
   QuestionTitle,
   QuestionWrap,
   Status,
-  StyledTextArea,
   Submit,
   Title,
 } from "./styled";
+import { Card, Input } from "antd";
 
 interface RouteParams {
   questionId: string;
@@ -37,7 +38,7 @@ const Question: FC<RouteComponentProps<RouteParams>> = ({ match }) => {
     description,
     user,
     time,
-    coast,
+    cost,
     status,
     createdAt,
     urgently,
@@ -60,14 +61,18 @@ const Question: FC<RouteComponentProps<RouteParams>> = ({ match }) => {
           <UserInfo data={user} />
           <Title>{time} минут</Title>
           {urgently && <Title>Срочное</Title>}
-          <Coast>{coast} баллов</Coast>
-          <Status toRight>{status}</Status>
+          <Cost>{cost} баллов</Cost>
+          <Status toRight icon={<SyncOutlined spin />} color="processing">
+            {status}
+          </Status>
         </Footer>
       </QuestionWrap>
       <AddAnswer>
-        <h2>Ваш ответ</h2>
-        <StyledTextArea placeholder="Текстовое поле для ответа" />
-        <Submit>Отправить</Submit>
+        <Card>
+          <h2>Ваш ответ</h2>
+          <Input.TextArea placeholder="Текстовое поле для ответа" />
+          <Submit type="primary">Отправить</Submit>
+        </Card>
       </AddAnswer>
       <div>
         <h3>Ответов - {answers.length}</h3>
