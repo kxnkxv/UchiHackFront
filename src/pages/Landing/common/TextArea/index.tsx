@@ -2,7 +2,7 @@ import {withTranslation} from "react-i18next";
 import {Label, StyledContainer, StyledTextArea} from "./styles";
 import {InputProps} from "../types";
 
-const TextArea = ({ name, placeholder, onChange, t }: InputProps) => (
+const TextArea = ({name, placeholder, onChange, t}: InputProps) => (
   <StyledContainer>
     <Label htmlFor={name}>{t(name)}</Label>
     <StyledTextArea

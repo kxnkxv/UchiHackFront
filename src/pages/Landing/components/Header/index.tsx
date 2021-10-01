@@ -16,7 +16,7 @@ import {
   Span,
 } from "./styles";
 
-const Header = ({ t }: any) => {
+const Header = ({t}: any) => {
   const [visible, setVisibility] = useState(false);
 
   const showDrawer = () => {
@@ -47,7 +47,7 @@ const Header = ({ t }: any) => {
           <Span>{t("Product")}</Span>
         </CustomNavLinkSmall>
         <CustomNavLinkSmall
-          style={{ width: "180px" }}
+          style={{width: "180px"}}
           onClick={() => scrollTo("contact")}
         >
           <Span>
@@ -63,27 +63,27 @@ const Header = ({ t }: any) => {
       <Container>
         <Row justify="space-between">
           <LogoContainer to="/" aria-label="homepage">
-            <SvgIcon src="logo.svg" width="101px" height="64px" />
+            <SvgIcon src="logo.svg" width="101px" height="64px"/>
           </LogoContainer>
           <NotHidden>
-            <MenuItem />
+            <MenuItem/>
           </NotHidden>
           <Burger onClick={showDrawer}>
-            <Outline />
+            <Outline/>
           </Burger>
         </Row>
         <Drawer closable={false} visible={visible} onClose={onClose}>
-          <Col style={{ marginBottom: "2.5rem" }}>
+          <Col style={{marginBottom: "2.5rem"}}>
             <Label onClick={onClose}>
               <Col span={12}>
                 <Menu>Menu</Menu>
               </Col>
               <Col span={12}>
-                <Outline />
+                <Outline/>
               </Col>
             </Label>
           </Col>
-          <MenuItem />
+          <MenuItem/>
         </Drawer>
       </Container>
     </HeaderSection>

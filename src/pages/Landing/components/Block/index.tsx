@@ -7,7 +7,7 @@ interface Props {
   t: any;
 }
 
-const Block = ({ title, content, t }: Props) => {
+const Block = ({title, content, t}: Props) => {
   return (
     <Container>
       <h6>{t(title)}</h6>

@@ -9,58 +9,58 @@ import Complete from '../Complete/Complete';
 import logo from "./../../img/logo.png"
 
 const HeaderNav: FC = observer(() => {
-  return (
-    <>
-      <Row
-        gutter={[25, 25]}
-        align="middle"
-        style={{
-          padding: 0,
-          margin: 0,
-          paddingTop: 5
-        }}
-      >
-        <Col>
-          <Link to="/">
-            <Image src={logo} height={50} preview={false}/>
-          </Link>
-        </Col>
-        <Col>
-          <Complete/>
-        </Col>
-        <Col>
-          <Link to={NEW_QUESTION}>
-            <Button>Задать вопрос</Button>
-          </Link>
-        </Col>
-        <Col>
-          {
-            User
-              ? <Link to={`${PROFILE}/${User.user.id}`}>
-                {
-                  User.user.avatar
-                    ? <Avatar src={User.user.avatar}/>
-                    : <Avatar icon={<UserOutlined/>}/>
-                }
+    return (
+      <>
+        <Row
+          gutter={[25, 25]}
+          align="middle"
+          style={{
+            padding: 0,
+            margin: 0,
+            paddingTop: 5
+          }}
+        >
+          <Col>
+            <Link to="/">
+              <Image src={logo} height={50} preview={false}/>
+            </Link>
+          </Col>
+          <Col>
+            <Complete/>
+          </Col>
+          <Col>
+            <Link to={NEW_QUESTION}>
+              <Button>Задать вопрос</Button>
+            </Link>
+          </Col>
+          <Col>
+            {
+              User
+                ? <Link to={`${PROFILE}/${User.user.id}`}>
+                  {
+                    User.user.avatar
+                      ? <Avatar src={User.user.avatar}/>
+                      : <Avatar icon={<UserOutlined/>}/>
+                  }
 
-              </Link>
-              : <>
-                <Link to={AUTH}>
-                  <Button>
-                    Авторизация
-                  </Button>
                 </Link>
-                <Link to={REGISTRATION}>
-                  <Button>
-                    Регистрация
-                  </Button>
-                </Link>
-              </>
-          }
-        </Col>
-      </Row>
-    </>
-  );
+                : <>
+                  <Link to={AUTH}>
+                    <Button>
+                      Авторизация
+                    </Button>
+                  </Link>
+                  <Link to={REGISTRATION}>
+                    <Button>
+                      Регистрация
+                    </Button>
+                  </Link>
+                </>
+            }
+          </Col>
+        </Row>
+      </>
+    );
   }
 )
 

@@ -6,7 +6,7 @@ import i18n from './translation';
 const Landing = () => {
   return (
     <I18nextProvider i18n={i18n}>
-      <Router />
+      <Router/>
     </I18nextProvider>
   );
 };

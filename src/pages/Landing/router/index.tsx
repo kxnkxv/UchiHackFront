@@ -8,8 +8,8 @@ import {Styles} from "../styles/styles";
 const Router = () => {
   return (
     <Suspense fallback={null}>
-      <Styles />
-      <Header />
+      <Styles/>
+      <Header/>
       <Switch>
         {routes.map((routeItem) => {
           return (
@@ -22,7 +22,7 @@ const Router = () => {
           );
         })}
       </Switch>
-      <Footer />
+      <Footer/>
     </Suspense>
   );
 };

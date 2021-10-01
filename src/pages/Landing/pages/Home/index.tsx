@@ -13,7 +13,7 @@ const ContentBlock = lazy(() => import("../../components/ContentBlock"));
 const Home = () => {
   return (
     <Container>
-      <ScrollToTop />
+      <ScrollToTop/>
       <ContentBlock
         type="right"
         title={IntroContent.title}

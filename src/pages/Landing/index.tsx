@@ -9,9 +9,9 @@ import i18n from "./translation";
 const App = () => (
   <BrowserRouter>
     <I18nextProvider i18n={i18n}>
-      <Router />
+      <Router/>
     </I18nextProvider>
   </BrowserRouter>
 );
 
-ReactDOM.render(<App />, document.getElementById("root"));
+ReactDOM.render(<App/>, document.getElementById("root"));
