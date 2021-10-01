@@ -1,12 +1,12 @@
 {
-  "title": "Landing page template for developers & startups",
-  "text": "Beautifully designed templates using React.js, ant design and styled-components! Save weeks of time and build your landing page in minutes.",
+  "title": "Знаем ответы на все вопросы в мире!",
+  "text": "Стоит только задать вопрос.",
   "button": [
     {
-      "title": "Explore"
+      "title": "Регистрация"
     },
     {
-      "title": "Learn more",
+      "title": "Авторизация",
       "color": "#fff"
     }
   ]

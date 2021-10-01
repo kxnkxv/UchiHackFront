@@ -5,6 +5,8 @@ import {Button} from "../../../common/Button";
 import {ContentBlockProps} from "../types";
 import {Fade} from "react-awesome-reveal";
 import {ButtonWrapper, Content, ContentWrapper, RightBlockContainer,} from "./styles";
+import {Link} from "react-router-dom";
+import {AUTH, REGISTRATION} from "../../../../../constants/routes";
 
 const RightBlock = ({
                       title,
@@ -31,16 +33,42 @@ const RightBlock = ({
               <ButtonWrapper>
                 {typeof button === "object" &&
                 button.map((item: any, id: number) => {
-                  return (
-                    <Button
-                      key={id}
-                      color={item.color}
-                      fixedWidth={true}
-                      onClick={() => scrollTo("about")}
-                    >
-                      {t(item.title)}
-                    </Button>
-                  );
+                  if (item.title == "Регистрация") {
+                    return (
+                      <Link to={REGISTRATION}>
+                        <Button
+                          key={id}
+                          color={item.color}
+                          fixedWidth={true}
+                        >
+                          {t(item.title)}
+                        </Button>
+                      </Link>
+
+                    );
+                  } else if (item.title == "Авторизация") {
+                    return (
+                      <Link to={AUTH}>
+                        <Button
+                          key={id}
+                          color={item.color}
+                          fixedWidth={true}
+                        >
+                          {t(item.title)}
+                        </Button>
+                      </Link>
+                    );
+                  } else {
+                    return (
+                      <Button
+                        key={id}
+                        color={item.color}
+                        fixedWidth={true}
+                      >
+                        {t(item.title)}
+                      </Button>
+                    );
+                  }
                 })}
               </ButtonWrapper>
             </ContentWrapper>
