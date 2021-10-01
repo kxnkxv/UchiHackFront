@@ -1,14 +1,14 @@
-import {User} from "./User";
+import {UserType} from "./UserType";
 import {Moment} from "moment";
 
-export interface Question {
+export interface QuestionType {
   id: string;
   title: string;
   description: string;
   theme: string;
   subTheme: string;
   createdAt: Moment;
-  user: User;
+  user: UserType;
   coast: number;
   status: string;
   time: number;

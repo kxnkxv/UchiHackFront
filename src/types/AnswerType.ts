@@ -1,8 +1,8 @@
-import {User} from "./User";
+import {UserType} from "./UserType";
 import {Moment} from "moment";
 
 export interface AnswerType {
-  user: User;
+  user: UserType;
   id: string;
   isRightAnswer: boolean;
   message: string;
@@ -11,7 +11,7 @@ export interface AnswerType {
 }
 
 export interface CommentType {
-  user: User;
+  user: UserType;
   id: string;
   createdAt: Moment;
   message: string;

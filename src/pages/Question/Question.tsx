@@ -1,13 +1,28 @@
 import React, {FC} from 'react';
-import {RouteComponentProps} from "react-router-dom";
-import TextArea from "antd/lib/input/TextArea";
-import ThemeItem from "../Themes/components/ThemeItem/ThemeItem";
+import { RouteComponentProps} from "react-router-dom";
 import {questionsList} from "../../mockData/questions";
 import {answers} from "../../mockData/answers";
-import {CommentType} from "../../types/AnswerType";
-
-import {Button} from 'antd';
+import {QuestionType} from "../../types/QuestionType";
+import Answer from "./components/Answer";
 import NotFound from "../NotFound/NotFound";
+import {questionsThemes} from "../../constants/questionsThemes";
+import UserInfo from "../../components/UserInfo";
+
+import {
+  Container,
+  Description,
+  Header,
+  Title,
+  Footer,
+  QuestionWrap,
+  PublicChat,
+  QuestionTitle,
+  AddAnswer,
+  Status,
+  Submit,
+  StyledTextArea,
+  Coast
+} from "./styled";
 
 interface RouteParams {
   questionId: string;
@@ -16,43 +31,43 @@ interface RouteParams {
 const Question: FC<RouteComponentProps<RouteParams>> = ({match}) => {
   const {questionId} = match.params;
   const questionItem = questionsList.find(({id}) => id === questionId);
+  const { title, theme, description, user, time, coast, status, createdAt, urgently } = questionItem as QuestionType;
   return questionItem ? (
-    <>
-      <ThemeItem isQuestionPage question={questionItem}/>
-      <div>
+    <Container>
+      <QuestionWrap>
+        <Header>
+          <Title><b>{questionsThemes[theme]}</b></Title>
+          <Title>Добавлено <b>{createdAt.fromNow()}</b></Title>
+          <PublicChat toRight>Общий чат</PublicChat>
+        </Header>
+        <QuestionTitle>
+          {title}
+        </QuestionTitle>
+        <Description>{description}</Description>
+        <Footer>
+          <UserInfo data={user} />
+          <Title>{time} минут</Title>
+          {urgently && <Title>Срочное</Title>}
+          <Coast>{coast} баллов</Coast>
+          <Status toRight>{status}</Status>
+        </Footer>
+      </QuestionWrap>
+      <AddAnswer>
         <h2>Ваш ответ</h2>
-        <TextArea/>
-        <Button>Отправить</Button>
-      </div>
+        <StyledTextArea placeholder='Текстовое поле для ответа' />
+        <Submit>Отправить</Submit>
+      </AddAnswer>
       <div>
         <h3>Ответов - {answers.length}</h3>
         <div>
           {
-            answers.map(({user, id, createdAt, comments, message}) => (
-              <div key={id}>
-                <span>{user.firstName}</span>
-                <br/>
-                <span>{message}</span>
-                <TextArea placeholder='Добавить комментарий'/>
-                <div>
-                  {
-                    comments.map(({user, id, createdAt, message}: CommentType) => (
-                      <div key={id}>
-                        <span>{user.firstName}</span>
-                        <span> Добавлено {createdAt.fromNow()}</span>
-                        <br/>
-                        <span>{message}</span>
-                      </div>
-                    ))
-                  }
-                </div>
-                <br/>
-              </div>
+            answers.map((answer) => (
+              <Answer key={answer.id} data={answer} />
             ))
           }
         </div>
       </div>
-    </>
+    </Container>
   ) : <NotFound/>;
 };
 

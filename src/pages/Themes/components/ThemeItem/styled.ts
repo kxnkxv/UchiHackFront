@@ -7,12 +7,11 @@ interface Props {
 }
 
 export const Container = styled.div`
-  width: 100%;
-  max-width: 900px;
   padding: 20px 30px;
-  border: 1px solid #eee;
-  border-radius: 4px;
-  margin: 0 auto 30px;
+  border-radius: 8px;
+  margin: 20px auto 0;
+  background: #F2F7FF;
+  border: none;
 `;
 
 export const Header = styled.div`
@@ -27,27 +26,44 @@ export const Title = styled.span<Props>`
   margin: 0 15px 0 0;
 `;
 
-export const Description = styled.p<Props>`
-  display: flex;
+export const Description = styled(Link)`
+  display: block;
   padding: 0;
   width: 100%;
   margin: 30px 0 0 0;
-`;
-
-export const DescriptionLink = styled(Link)`
-  display: block;
-  margin: 30px 0 0 0;
-
-  ${Description} {
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2;
-    overflow: hidden;
-    margin: 0;
-  }
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
 `;
 
 export const Footer = styled.div`
   display: flex;
+  align-items: center;
   margin: 30px 0 0 0;
+`;
+
+export const ToAnswer = styled(Link)`
+  display: block;
+  margin: 0 0 0 20px;
+  background: #558BF5;
+  color: #fff;
+  border-radius: 8px;
+  padding: 10px 40px;
+  font-weight: 500;
+`;
+
+export const AnswersCount = styled.span`
+  display: block;
+  margin: 0 0 0 auto;
+`;
+
+export const Coast = styled.span`
+  display: block;
+  font-weight: 500;
+  background: #fff;
+  border-radius: 8px;
+  padding: 10px 20px;
+  color: #558BF5;
+  margin: 0 20px 0 0;
 `;
