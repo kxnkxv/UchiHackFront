@@ -3,7 +3,7 @@ import Auth from "../../store/auth";
 import css from "./Authorization.module.scss"
 import logo from "./../../img/logo.png"
 import {REGISTRATION} from '../../constants/routes';
-import {LockOutlined, UserOutlined} from '@ant-design/icons';
+import {LockOutlined, MailOutlined} from '@ant-design/icons';
 
 const Authorization = () => {
   const onFinish = (values: any) => {
@@ -39,12 +39,17 @@ const Authorization = () => {
         <Form
           name="login"
           onFinish={onFinish}
+          onFinishFailed={onFinishFailed}
+          initialValues={{
+            email: "demo@demo.com",
+            password: "demo"
+          }}
         >
           <Form.Item
-            name="username"
+            name="email"
             rules={[{required: true, message: 'Пожалуйста введите свой email!'}]}
           >
-            <Input prefix={<UserOutlined/>} placeholder="Username"/>
+            <Input prefix={<MailOutlined/>} type="email" placeholder="Username"/>
           </Form.Item>
           <Form.Item
             name="password"
