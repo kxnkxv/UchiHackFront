@@ -39,7 +39,12 @@ const CustomLayout: FC = ({ children }) => {
         >
           <SideBar />
         </Col>
-        <Col span={21}>
+        <Col
+          span={21}
+          style={{
+            paddingTop: 2,
+          }}
+        >
           <Content>{children}</Content>
         </Col>
       </Row>

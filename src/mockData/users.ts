@@ -2,14 +2,19 @@ import { UserType } from "../types/UserType";
 
 export const users: UserType[] = [
   {
-    firstName: "Имя пользователя 111",
-    lastName: "",
+    firstName: "Имя",
+    lastName: "Фамилия",
     id: "111",
-    avatar: "",
-    phone: "",
-    answers: 0,
-    questions: 0,
-    role: "",
+    avatar:
+      "https://im0-tub-ru.yandex.net/i?id=cb0ef2ded5c53f212c2f36fa49a5c987&n=13&exp=1",
+    phone: "89999999999",
+    answers: 500,
+    questions: 5,
+    role: "ADMIN",
+    patronymic: "Отчество",
+    education: "Я учусь в ВУЗе",
+    emailNotify: true,
+    balance: 1500,
   },
   {
     firstName: "Имя пользователя 222",
@@ -20,6 +25,10 @@ export const users: UserType[] = [
     answers: 0,
     questions: 0,
     role: "",
+    patronymic: "",
+    balance: 0,
+    education: "uni",
+    emailNotify: true,
   },
   {
     firstName: "Имя пользователя 333",
@@ -30,6 +39,10 @@ export const users: UserType[] = [
     answers: 0,
     questions: 0,
     role: "",
+    patronymic: "",
+    balance: 0,
+    education: "uni",
+    emailNotify: true,
   },
   {
     firstName: "Имя пользователя 444",
@@ -40,6 +53,10 @@ export const users: UserType[] = [
     answers: 0,
     questions: 0,
     role: "",
+    patronymic: "",
+    balance: 0,
+    education: "uni",
+    emailNotify: true,
   },
   {
     firstName: "Имя пользователя 555",
@@ -50,6 +67,10 @@ export const users: UserType[] = [
     answers: 0,
     questions: 0,
     role: "",
+    patronymic: "",
+    balance: 0,
+    education: "uni",
+    emailNotify: true,
   },
   {
     firstName: "Имя пользователя 666",
@@ -60,5 +81,9 @@ export const users: UserType[] = [
     answers: 0,
     questions: 0,
     role: "",
+    patronymic: "",
+    balance: 0,
+    education: "uni",
+    emailNotify: true,
   },
 ];
