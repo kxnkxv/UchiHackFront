@@ -4,6 +4,7 @@ import css from "./Authorization.module.scss"
 import logo from "./../../img/logo.png"
 import {REGISTRATION, RESTORE_PASSWORD} from '../../constants/routes';
 import {LockOutlined, MailOutlined} from '@ant-design/icons';
+import {Link} from 'react-router-dom';
 
 const Authorization = () => {
   const onFinish = (values: any) => {
@@ -24,7 +25,9 @@ const Authorization = () => {
           gutter={[25, 25]}
         >
           <Col>
-            <Image src={logo} preview={false} height={50} width={50}/>
+            <Link to="/">
+              <Image src={logo} preview={false} height={50} width={50}/>
+            </Link>
           </Col>
         </Row>
         <Row

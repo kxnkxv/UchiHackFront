@@ -4,6 +4,7 @@ import css from "./Registration.module.scss"
 import logo from "./../../img/logo.png"
 import {AUTH} from '../../constants/routes';
 import {MailOutlined} from '@ant-design/icons';
+import {Link} from "react-router-dom";
 
 const Authorization = () => {
 
@@ -27,7 +28,9 @@ const Authorization = () => {
           gutter={[25, 25]}
         >
           <Col>
-            <Image src={logo} preview={false} height={50} width={50}/>
+            <Link to="/">
+              <Image src={logo} preview={false} height={50} width={50}/>
+            </Link>
           </Col>
         </Row>
         <Row
