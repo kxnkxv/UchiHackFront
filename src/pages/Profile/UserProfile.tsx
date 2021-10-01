@@ -68,16 +68,60 @@ const UserProfile = () => {
           name="email"
           rules={[
             {
-              required: true,
-              message: 'Пожалуйста введите свой email!'
-            },
-            {
               type: 'email',
               message: 'Введите email правильно!',
             },
           ]}
         >
           <Input prefix={<MailOutlined/>} placeholder="Электронная почта"/>
+        </Form.Item>
+        <Form.Item
+          label="Смена пароля"
+          style={{
+            marginBottom: 0
+          }}
+        >
+          <Row
+            align="middle"
+            justify="space-between"
+            gutter={[25, 25]}
+          >
+            <Col span={8}>
+              <Form.Item
+                name="oldPassword"
+                hasFeedback
+              >
+                <Input.Password placeholder="Введите старый пароль"/>
+              </Form.Item>
+            </Col>
+            <Col span={8}>
+              <Form.Item
+                name="newPassword"
+                hasFeedback
+              >
+                <Input.Password placeholder="Введите новый пароль"/>
+              </Form.Item>
+            </Col>
+            <Col span={8}>
+              <Form.Item
+                name="newPasswordConfirm"
+                dependencies={['newPassword']}
+                hasFeedback
+                rules={[
+                  ({getFieldValue}) => ({
+                    validator(_, value) {
+                      if (!value || getFieldValue('newPassword') === value) {
+                        return Promise.resolve();
+                      }
+                      return Promise.reject(new Error('Пароли не совпадают!'));
+                    },
+                  }),
+                ]}
+              >
+                <Input.Password placeholder="Подтвердите новый пароль"/>
+              </Form.Item>
+            </Col>
+          </Row>
         </Form.Item>
         <Form.Item label="Уровень образования" name="education">
           <Select>
