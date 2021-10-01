@@ -1,9 +1,9 @@
-import {Question} from "../types/Question";
+import {QuestionType} from "../types/QuestionType";
 import {users} from "./users";
-import {User} from "../types/User";
+import {UserType} from "../types/UserType";
 import moment from "moment";
 
-export const questionsList: Question[] = [
+export const questionsList: QuestionType[] = [
   {
     id: '111',
     title: 'Вопрос 1',
@@ -11,7 +11,7 @@ export const questionsList: Question[] = [
     theme: 'russian',
     subTheme: '',
     createdAt: moment(),
-    user: users.find(({id}) => id === '111') as User,
+    user: users.find(({id}) => id === '111') as UserType,
     coast: 0,
     status: 'Не решено',
     time: 0,
@@ -24,7 +24,7 @@ export const questionsList: Question[] = [
     theme: 'art',
     subTheme: '',
     createdAt: moment(),
-    user: users.find(({id}) => id === '222') as User,
+    user: users.find(({id}) => id === '222') as UserType,
     coast: 0,
     status: 'Не решено',
     time: 0,
@@ -37,7 +37,7 @@ export const questionsList: Question[] = [
     theme: 'physic',
     subTheme: '',
     createdAt: moment(),
-    user: users.find(({id}) => id === '333') as User,
+    user: users.find(({id}) => id === '333') as UserType,
     coast: 0,
     status: 'Не решено',
     time: 0,
@@ -50,7 +50,7 @@ export const questionsList: Question[] = [
     theme: 'informatics',
     subTheme: '',
     createdAt: moment(),
-    user: users.find(({id}) => id === '444') as User,
+    user: users.find(({id}) => id === '444') as UserType,
     coast: 0,
     status: 'Не решено',
     time: 0,
@@ -63,7 +63,7 @@ export const questionsList: Question[] = [
     theme: 'literature',
     subTheme: '',
     createdAt: moment(),
-    user: users.find(({id}) => id === '555') as User,
+    user: users.find(({id}) => id === '555') as UserType,
     coast: 0,
     status: 'Не решено',
     time: 0,
@@ -76,7 +76,7 @@ export const questionsList: Question[] = [
     theme: 'math',
     subTheme: '',
     createdAt: moment(),
-    user: users.find(({id}) => id === '666') as User,
+    user: users.find(({id}) => id === '666') as UserType,
     coast: 0,
     status: 'Не решено',
     time: 0,
