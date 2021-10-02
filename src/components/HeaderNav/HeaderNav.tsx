@@ -71,7 +71,7 @@ const HeaderNav: FC = observer(() => {
               </Link>
             </Col>
             <Col>
-              {User ? (
+              {User.user ? (
                 <Link to={`${PROFILE}/${User.user.id}`}>
                   {User.user.avatar ? (
                     <Avatar src={User.user.avatar} />

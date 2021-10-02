@@ -1,21 +1,26 @@
 import React, { FC } from "react";
 import { UserType } from "../../types/UserType";
-import logo from "./../../img/logo.png";
 
-import { Container, UserAvatar, UserName } from "./styled";
+import { Container, UserName } from "./styled";
 import { PROFILE } from "../../constants/routes";
+import User from "../../store/user";
+import { Avatar } from "antd";
+import { UserOutlined } from "@ant-design/icons";
 
 interface OwnProps {
   data: UserType;
 }
 
 const UserInfo: FC<OwnProps> = ({ data }) => {
-  const { firstName } = data;
   return (
     <Container>
       <a href={`${PROFILE}/${data.id}`}>
-        <UserAvatar src={logo} />
-        <UserName>{firstName}</UserName>
+        {User.user.avatar ? (
+          <Avatar src={User.user.avatar} />
+        ) : (
+          <Avatar icon={<UserOutlined />} />
+        )}
+        <UserName>{data.firstName}</UserName>
       </a>
     </Container>
   );

@@ -15,10 +15,23 @@ import { REGISTRATION, RESTORE_PASSWORD } from "../../constants/routes";
 import { LockOutlined, MailOutlined } from "@ant-design/icons";
 import { Link } from "react-router-dom";
 import Auth from "../../store/auth";
+import { useState } from "react";
+import User from "../../store/user";
 
 const Authorization = () => {
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+
   const onFinish = (values: any) => {
-    Auth.authLogin(values.email, values.password);
+    Auth.authLogin(values.email, values.password)
+      .then((response) => {
+        User.setUser(response.data);
+        Auth.setIsUserAuth(true);
+      })
+      .catch((error) => {
+        setError(error.message);
+      })
+      .finally(() => setLoading(false));
   };
 
   const onFinishFailed = (errorInfo: any) => {
@@ -27,7 +40,7 @@ const Authorization = () => {
 
   return (
     <div className={css.wrapper}>
-      <Card className={css.card}>
+      <Card className={css.card} loading={loading}>
         <Row align="middle" justify="center" gutter={[25, 25]}>
           <Col>
             <Link to="/">
@@ -54,12 +67,18 @@ const Authorization = () => {
                 message: "Введите email правильно!",
               },
             ]}
+            style={{
+              marginBottom: 10,
+            }}
           >
             <Input prefix={<MailOutlined />} placeholder="Электронная почта" />
           </Form.Item>
           <Form.Item
             name="password"
             rules={[{ required: true, message: "Пожалуйста введите пароль!" }]}
+            style={{
+              marginBottom: 10,
+            }}
           >
             <Input
               prefix={<LockOutlined />}
@@ -67,7 +86,14 @@ const Authorization = () => {
               placeholder="Пароль"
             />
           </Form.Item>
-          <Form.Item>
+          {error ? (
+            <Typography.Text type="danger">{error}</Typography.Text>
+          ) : null}
+          <Form.Item
+            style={{
+              marginBottom: 10,
+            }}
+          >
             <Row align="middle" justify="space-between" gutter={[25, 25]}>
               <Col>
                 <Form.Item name="remember" valuePropName="checked" noStyle>
@@ -79,8 +105,11 @@ const Authorization = () => {
               </Col>
             </Row>
           </Form.Item>
-
-          <Form.Item>
+          <Form.Item
+            style={{
+              marginBottom: 10,
+            }}
+          >
             <Row align="middle" justify="space-between" gutter={[25, 25]}>
               <Col>
                 <Button type="primary" htmlType="submit">

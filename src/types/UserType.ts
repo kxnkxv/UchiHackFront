@@ -1,9 +1,9 @@
 export interface UserType {
-  id: string;
-  firstName: string;
-  lastName: string;
+  id?: string;
+  firstName?: string;
+  lastName?: string;
   patronymic?: string;
-  email: string;
+  email?: string;
   avatar?: string;
   phone?: string;
   answers?: number;
@@ -12,4 +12,5 @@ export interface UserType {
   education?: string;
   emailNotify?: boolean;
   balance?: number;
+  password?: string;
 }

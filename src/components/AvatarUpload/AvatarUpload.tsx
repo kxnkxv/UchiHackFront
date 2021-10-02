@@ -1,17 +1,9 @@
 import React, { useState } from "react";
 import { Upload } from "antd";
 import ImgCrop from "antd-img-crop";
-import User from "../../store/user";
 
 const AvatarUpload = () => {
-  const [fileList, setFileList] = useState([
-    {
-      uid: "1",
-      name: "avatar.png",
-      status: "done",
-      url: User.user.avatar,
-    },
-  ]);
+  const [fileList, setFileList] = useState([]);
 
   // @ts-ignore
   const onChange = ({ fileList: newFileList }) => {

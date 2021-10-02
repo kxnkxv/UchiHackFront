@@ -1,6 +1,7 @@
 import { action, makeAutoObservable } from "mobx";
 import axios from "axios";
 import { URL } from "../../constants/API";
+import { UserType } from "../../types/UserType";
 
 class Auth {
   isUserAuth = !!window.localStorage.getItem("isUserAuth");
@@ -19,44 +20,32 @@ class Auth {
     this.token = token;
   };
 
-  @action authLogin = (email: string, password: string) => {
-    axios
-      .post(`${URL}/auth/login`, {
+  @action authLogin = (email: string, password: string) =>
+    axios.request<UserType>({
+      method: "post",
+      url: `${URL}/auth/login`,
+      data: {
         email: email,
         password: password,
-      })
-      .then((response) => {
-        // User.setUser(response.data.user)
-        // this.setToken(response.data.user)
-        console.log(response);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
+      },
+    });
 
   @action authRegister = (
     email: string,
     password: string,
     firstName: string,
     lastName: string
-  ) => {
-    axios
-      .post(`${URL}/auth/register`, {
+  ) =>
+    axios.request<UserType>({
+      method: "post",
+      url: `${URL}/auth/register`,
+      data: {
         email: email,
         password: password,
         firstName: firstName,
         lastName: lastName,
-      })
-      .then((response) => {
-        this.setIsUserAuth(true);
-        // User.setUser(response.data)
-        console.log(response);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
+      },
+    });
 }
 
 export default new Auth();

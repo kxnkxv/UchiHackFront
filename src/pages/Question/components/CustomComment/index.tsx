@@ -12,18 +12,20 @@ interface OwnProps {
 }
 
 const CustomComment: FC<OwnProps> = ({ data }) => {
-  const { user, message } = data;
   return (
     <Comment
       author={
-        <a href={`${PROFILE}/${user.id}`}>
-          {user.firstName + " " + user.lastName}
+        <a href={`${PROFILE}/${data.user.id}`}>
+          {data.user.firstName + " " + data.user.lastName}
         </a>
       }
       avatar={
-        <Avatar src={user.avatar} alt={user.firstName + " " + user.lastName} />
+        <Avatar
+          src={data.user.avatar}
+          alt={data.user.firstName + " " + data.user.lastName}
+        />
       }
-      content={<p>{message}</p>}
+      content={<p>{data.message}</p>}
       datetime={
         <Tooltip title={moment().format("YYYY-MM-DD HH:mm:ss")}>
           <span>{moment().fromNow()}</span>

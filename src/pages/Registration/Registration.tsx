@@ -5,8 +5,12 @@ import { AUTH } from "../../constants/routes";
 import { MailOutlined } from "@ant-design/icons";
 import { Link } from "react-router-dom";
 import Auth from "../../store/auth";
+import User from "../../store/user";
+import { useState } from "react";
 
 const Authorization = () => {
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
   const [form] = Form.useForm();
 
   const onFinish = (values: any) => {
@@ -15,7 +19,15 @@ const Authorization = () => {
       values.password,
       values.firstName,
       values.lastName
-    );
+    )
+      .then((response) => {
+        User.setUser(response.data);
+        Auth.setIsUserAuth(true);
+      })
+      .catch((error) => {
+        setError(error.message);
+      })
+      .finally(() => setLoading(false));
   };
 
   const onFinishFailed = (errorInfo: any) => {
@@ -24,7 +36,7 @@ const Authorization = () => {
 
   return (
     <div className={css.wrapper}>
-      <Card className={css.card}>
+      <Card className={css.card} loading={loading}>
         <Row align="middle" justify="center" gutter={[25, 25]}>
           <Col>
             <Link to="/">
@@ -120,7 +132,9 @@ const Authorization = () => {
               </Form.Item>
             </Col>
           </Row>
-
+          {error ? (
+            <Typography.Text type="danger">{error}</Typography.Text>
+          ) : null}
           <Form.Item>
             <Row align="middle" justify="space-between" gutter={[25, 25]}>
               <Col>
