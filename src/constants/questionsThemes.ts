@@ -4,6 +4,6 @@ export const questionsThemes: Record<string, string> = {
   art: "Исскуство",
   physic: "Физика",
   informatics: "Информатика",
+  english: "Английский",
   literature: "Литература",
-  allThemes: "Остальные разделы",
 };
