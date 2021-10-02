@@ -54,16 +54,14 @@ class WebRTCConnectionGenerator {
     this.newPeerConnection.onnegotiationneeded = () =>
       this.handleNegotiationNeededEvent();
     this.newPeerConnection.ontrack = (ev) => this.handleTrackEvent(ev);
-    this.webcamStream
-      .getTracks()
-      .forEach(
-        (track) =>
-          this.newPeerConnection &&
-          this.webcamStream &&
-          this.newPeerConnection.addTransceiver(track, {
-            streams: [this.webcamStream],
-          })
-      );
+    this.webcamStream.getTracks().forEach(
+      (track) =>
+        this.newPeerConnection &&
+        this.webcamStream &&
+        this.newPeerConnection.addTransceiver(track, {
+          streams: [this.webcamStream],
+        })
+    );
   }
 
   async handleNegotiationNeededEvent(): Promise<void> {
@@ -146,7 +144,7 @@ class WebRTCConnectionGenerator {
         case "closed":
         case "failed":
         case "disconnected":
-          alert("disconnected");
+          console.log("disconnected");
           break;
         default:
       }
@@ -208,16 +206,14 @@ class WebRTCConnectionGenerator {
 
       try {
         if (this.newPeerConnection) {
-          this.webcamStream
-            .getTracks()
-            .forEach(
-              (track) =>
-                this.newPeerConnection &&
-                this.webcamStream &&
-                this.newPeerConnection.addTransceiver(track, {
-                  streams: [this.webcamStream],
-                })
-            );
+          this.webcamStream.getTracks().forEach(
+            (track) =>
+              this.newPeerConnection &&
+              this.webcamStream &&
+              this.newPeerConnection.addTransceiver(track, {
+                streams: [this.webcamStream],
+              })
+          );
         }
       } catch (err) {
         // handleGetUserMediaError(err);

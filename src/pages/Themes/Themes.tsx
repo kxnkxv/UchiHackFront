@@ -43,7 +43,7 @@ const Themes: FC<RouteComponentProps<RouteParams>> = ({ match }) => {
           </Row>
           <List>
             {questions.map((question) => (
-              <ThemeItem question={question} />
+              <ThemeItem key={question.id} question={question} />
             ))}
           </List>
         </Container>

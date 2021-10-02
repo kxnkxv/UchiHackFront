@@ -1,5 +1,6 @@
 import React, { FC, useCallback, useEffect, useRef, useState } from "react";
 import WebRTCConnectionGenerator from "../../../../utils/webRTCConnectionGenerator";
+import { Button } from "antd";
 
 import {
   CallWindow,
@@ -7,8 +8,10 @@ import {
   LocalVideo,
   RemoteVideo,
   StartCall,
+  Controls,
+  Close,
+  VideoContainer,
 } from "./styled";
-import { Button } from "antd";
 
 export const fullMediaConstraints = {
   audio: true,
@@ -28,9 +31,10 @@ interface OwnProps {
 }
 
 const Call: FC<OwnProps> = ({ close }) => {
-  const myUserName = `${Date.now()}`;
+  const myUserName = useRef(`${Date.now()}`);
 
-  const [isAudioEnabled, setIsAudioEnabled] = useState(true);
+  const [isAudioEnabled, setIsAudioEnabled] = useState(false);
+  const [isVideoEnabled, setIsVideoEnabled] = useState(false);
   const [isCallStarted, setIsCallStarted] = useState(false);
   const [usersList, setUsersList] = useState<string[]>([]);
 
@@ -39,9 +43,14 @@ const Call: FC<OwnProps> = ({ close }) => {
   const localVideoEl = useRef<HTMLVideoElement>(null);
   const remoteVideoEl = useRef<HTMLVideoElement>(null);
   const clientID = useRef("");
-  const testStart = useRef(false);
 
   const closeVideoHandler = () => {
+    if (connection.current) {
+      sendToServer({
+        name: myUserName.current,
+        type: "user-disconnected",
+      });
+    }
     cleanListeners();
     close();
   };
@@ -56,7 +65,7 @@ const Call: FC<OwnProps> = ({ close }) => {
 
   function setUsername(): void {
     sendToServer({
-      name: myUserName,
+      name: myUserName.current,
       id: clientID.current,
       type: "username",
     });
@@ -71,6 +80,8 @@ const Call: FC<OwnProps> = ({ close }) => {
           if (localVideoEl.current) {
             localVideoEl.current.srcObject = stream;
           }
+          setIsAudioEnabled(true);
+          setIsVideoEnabled(true);
         })
         .catch((err) => {
           navigator.mediaDevices
@@ -80,6 +91,8 @@ const Call: FC<OwnProps> = ({ close }) => {
               if (localVideoEl.current) {
                 localVideoEl.current.srcObject = stream;
               }
+              setIsAudioEnabled(true);
+              setIsVideoEnabled(false);
             })
             .catch(() => {});
         });
@@ -104,26 +117,35 @@ const Call: FC<OwnProps> = ({ close }) => {
   const startCall = () => {
     setIsCallStarted(true);
     sendToServer({
-      name: myUserName,
+      name: myUserName.current,
       type: "user-joined",
     });
   };
 
-  const muteAudio = () => {
-    if (webcamStream.current) {
-      webcamStream.current.getAudioTracks()[0].enabled = false;
-      setIsAudioEnabled(false);
-    }
+  const toggleAudio = () => {
+    setIsAudioEnabled((prevState) => {
+      if (webcamStream.current) {
+        webcamStream.current.getAudioTracks()[0].enabled = !prevState;
+      }
+      return !prevState;
+    });
   };
-  const unMuteAudio = () => {
-    if (webcamStream.current) {
-      webcamStream.current.getAudioTracks()[0].enabled = true;
-      setIsAudioEnabled(true);
-    }
+
+  const toggleVideo = () => {
+    setIsVideoEnabled((prevState) => {
+      if (webcamStream.current) {
+        webcamStream.current.getVideoTracks()[0].enabled = !prevState;
+      }
+      return !prevState;
+    });
   };
+
   useEffect(() => {
-    const serverUrl = "wss://wss.meet2code.com/video";
-    const peerConnectionsList: Record<string, WebRTCConnectionGenerator> = {};
+    const serverUrl = "wss://wss.meet2code.com/hahathon";
+    const peerConnectionsList: Record<
+      string,
+      WebRTCConnectionGenerator | null
+    > = {};
     connection.current = new WebSocket(serverUrl, "json");
 
     connection.current.onmessage = (evt) => {
@@ -131,7 +153,9 @@ const Call: FC<OwnProps> = ({ close }) => {
 
       if (
         msg.type !== "id" &&
+        msg.type !== "user-disconnected" &&
         msg.name &&
+        msg.name !== myUserName.current &&
         !peerConnectionsList[msg.name] &&
         localVideoEl.current
       ) {
@@ -139,7 +163,7 @@ const Call: FC<OwnProps> = ({ close }) => {
         peerConnectionsList[msg.name] = new WebRTCConnectionGenerator(
           localVideoEl.current.srcObject as MediaStream,
           sendToServer,
-          myUserName,
+          myUserName.current,
           msg.name
         );
       }
@@ -151,27 +175,26 @@ const Call: FC<OwnProps> = ({ close }) => {
           break;
 
         case "user-joined":
-          testStart.current = true;
           break;
 
-        case "partner-disconnected":
-          peerConnectionsList[msg.name].closeVideoCall();
+        case "user-disconnected":
+          setUsersList((prevState) =>
+            [...prevState].filter((item) => item !== msg.name)
+          );
+          peerConnectionsList[msg.name]?.closeVideoCall();
+          peerConnectionsList[msg.name] = null;
           break;
 
         case "video-offer":
-          peerConnectionsList[msg.name].handleVideoOfferMsg(msg);
+          peerConnectionsList[msg.name]?.handleVideoOfferMsg(msg);
           break;
 
         case "video-answer":
-          peerConnectionsList[msg.name].handleVideoAnswerMsg(msg);
+          peerConnectionsList[msg.name]?.handleVideoAnswerMsg(msg);
           break;
 
         case "new-ice-candidate":
-          peerConnectionsList[msg.name].handleNewICECandidateMsg(msg);
-          break;
-
-        case "hang-up":
-          peerConnectionsList[msg.name].closeVideoCall();
+          peerConnectionsList[msg.name]?.handleNewICECandidateMsg(msg);
           break;
 
         default:
@@ -184,31 +207,35 @@ const Call: FC<OwnProps> = ({ close }) => {
     initWebCam();
   }, [initWebCam]);
 
-  useEffect(
-    () => () => {
-      cleanListeners();
-    },
-    []
-  );
-
-  useEffect(() => {
-    testStart.current = isCallStarted;
-  }, [isCallStarted]);
-
   return (
     <Container>
       <CallWindow>
-        <Button onClick={closeVideoHandler}>Закрыть</Button>
-        <LocalVideo id="localVideo" ref={localVideoEl} autoPlay muted />
+        <Close onClick={closeVideoHandler}>Закрыть</Close>
+        <VideoContainer usersCount={usersList.length + 1 || 1}>
+          <LocalVideo
+            playsInline
+            id="localVideo"
+            ref={localVideoEl}
+            autoPlay
+            muted
+          />
+        </VideoContainer>
         {usersList.map((item) => (
-          <RemoteVideo key={item} id={item} ref={remoteVideoEl} autoPlay />
+          <VideoContainer key={item} usersCount={usersList.length + 1 || 1}>
+            <RemoteVideo playsInline id={item} ref={remoteVideoEl} autoPlay />
+          </VideoContainer>
         ))}
-        <StartCall onClick={startCall}>
-          {isCallStarted ? "Звонок начат" : "Начать звонок"}
-        </StartCall>
-        <Button onClick={isAudioEnabled ? muteAudio : unMuteAudio}>
-          {isAudioEnabled ? "Звук включен" : "Звук выключен"}
-        </Button>
+        <Controls>
+          <Button onClick={toggleAudio}>
+            {isAudioEnabled ? "Звук включен" : "Звук выключен"}
+          </Button>
+          <StartCall onClick={startCall}>
+            {isCallStarted ? "Звонок начат" : "Начать звонок"}
+          </StartCall>
+          <Button onClick={toggleVideo}>
+            {isVideoEnabled ? "Видео включено" : "Видео выключено"}
+          </Button>
+        </Controls>
       </CallWindow>
     </Container>
   );

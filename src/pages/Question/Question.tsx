@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { FC, useState } from "react";
 import { SyncOutlined } from "@ant-design/icons";
 import { RouteComponentProps } from "react-router-dom";
 import { questionsList } from "../../mockData/questions";
@@ -27,6 +27,7 @@ import { Card, Input, Tooltip } from "antd";
 import moment from "moment";
 
 import "moment/locale/ru";
+import Chat from "../Chat";
 
 moment.locale("ru");
 
@@ -36,6 +37,8 @@ interface RouteParams {
 
 const Question: FC<RouteComponentProps<RouteParams>> = ({ match }) => {
   const { questionId } = match.params;
+  const [isChatOpen, setIsChatOpen] = useState(false);
+  const openChatHandler = () => setIsChatOpen(!isChatOpen);
   const questionItem = questionsList.find(({ id }) => id === questionId);
   const {
     title,
@@ -60,7 +63,9 @@ const Question: FC<RouteComponentProps<RouteParams>> = ({ match }) => {
               Добавлено <b>{createdAt.fromNow()}</b>
             </Title>
           </Tooltip>
-          <PublicChat toRight>Общий чат</PublicChat>
+          <PublicChat onClick={openChatHandler} toRight>
+            Общий чат
+          </PublicChat>
         </Header>
         <QuestionTitle>{title}</QuestionTitle>
         <Description>{description}</Description>
@@ -89,6 +94,7 @@ const Question: FC<RouteComponentProps<RouteParams>> = ({ match }) => {
           ))}
         </div>
       </div>
+      {isChatOpen && <Chat publicChat close={openChatHandler} />}
     </Container>
   ) : (
     <NotFound />
