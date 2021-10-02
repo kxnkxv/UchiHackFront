@@ -6,6 +6,7 @@ import { UserOutlined } from "@ant-design/icons";
 import { questionsList } from "../../../mockData/questions";
 import ThemeItem from "../../Themes/components/ThemeItem/ThemeItem";
 import { List } from "../../Themes/styled";
+import NotFound from "../../NotFound/NotFound";
 
 const { TabPane } = Tabs;
 
@@ -16,7 +17,7 @@ interface PublicProfileProps {
 const PublicProfile: FC<PublicProfileProps> = ({ userId }) => {
   const currentUser = users.find(({ id }) => id === userId) as UserType;
 
-  return (
+  return currentUser ? (
     <Card>
       <Row gutter={[25, 25]} justify="space-around" align="middle">
         <Col>
@@ -57,6 +58,8 @@ const PublicProfile: FC<PublicProfileProps> = ({ userId }) => {
         </Tabs>
       </Row>
     </Card>
+  ) : (
+    <NotFound />
   );
 };
 
