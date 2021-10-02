@@ -32,7 +32,7 @@ export const answers: AnswerType[] = [
       },
       {
         user: users.find(({ id }) => id === "666") as UserType,
-        id: "555",
+        id: "333",
         createdAt: moment(),
         message: "Оооочень, плохой ответ",
       },

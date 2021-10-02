@@ -1,14 +1,17 @@
 import React, { FC, useState } from "react";
 import Call from "../Call";
-import { Button, Col, Form, Input, Row } from "antd";
-import { Messages } from "./styled";
+import { Button, Form, Input } from "antd";
+import { Messages, Message, Header, MessageForm } from "./styled";
+import UserInfo from "../../../../components/UserInfo";
+import { users } from "../../../../mockData/users";
 
 interface OwnProps {
   back: () => void;
   data: any;
+  publicChat?: boolean;
 }
 
-const Dialog: FC<OwnProps> = ({ back, data }) => {
+const Dialog: FC<OwnProps> = ({ back, data, publicChat }) => {
   const [isOpenCall, setIsOpenCall] = useState(false);
   const setIsOpenCallHandler = () => setIsOpenCall(!isOpenCall);
   const onFinish = (values: any) => {
@@ -23,55 +26,42 @@ const Dialog: FC<OwnProps> = ({ back, data }) => {
 
   const messagesMock: any[] = [
     {
+      id: "123",
       owner: "user",
       text: "Сообщение",
     },
     {
+      id: "1234",
       owner: "me",
       text: "Сообщение",
     },
     {
+      id: "12345",
       owner: "user",
       text: "Сообщение",
     },
   ];
 
   return (
-    <div>
-      <Row align="middle" justify="space-around" gutter={[25, 25]}>
-        <Col>{isOpenCall && <Call close={setIsOpenCallHandler} />}</Col>
-        <Col>
-          <Button onClick={back}>Назад</Button>
-        </Col>
-        <Col>{data}</Col>
-        <Col>
-          <Button onClick={setIsOpenCallHandler}>Позвонить</Button>
-        </Col>
-      </Row>
-      <Row align="middle" justify="space-around" gutter={[25, 25]}>
-        <Col>
-          <Messages>
-            {messagesMock.map((message) => {
-              if (message.owner !== "me") {
-                return <div>{message.text}</div>;
-              } else {
-                return <div>Моё {message.text}</div>;
-              }
-            })}
-          </Messages>
-        </Col>
-      </Row>
-      <Row align="middle" gutter={[25, 25]}>
+    <Messages>
+      <Header>
+        {!publicChat && <Button onClick={back}>{"<"}</Button>}
+        <UserInfo data={users[0]} />
+        {isOpenCall && <Call close={setIsOpenCallHandler} />}
+        <Button onClick={setIsOpenCallHandler}>Позвонить</Button>
+      </Header>
+      {messagesMock.map(({ owner, text, id }) => (
+        <Message key={id} myMessage={owner === "me"}>
+          {text}
+        </Message>
+      ))}
+      <MessageForm>
         <Form name="login" onFinish={onFinish} onFinishFailed={onFinishFailed}>
-          <Col span={16}>
-            <Input.TextArea placeholder="Введите сообщение" />
-          </Col>
-          <Col span={1}>
-            <Button type="primary">Отправить</Button>
-          </Col>
+          <Input.TextArea placeholder="Введите сообщение" />
+          <Button type="primary">Отправить</Button>
         </Form>
-      </Row>
-    </div>
+      </MessageForm>
+    </Messages>
   );
 };
 

@@ -15,14 +15,14 @@ export const Header = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 25px;
+  padding: 25px;
 `;
 
 export const ChatWrap = styled.div`
+  position: relative;
   width: 500px;
   height: 100%;
   background: #fff;
-  padding: 25px 0;
 `;
 
 export const Heading = styled.span`
@@ -34,7 +34,7 @@ export const Heading = styled.span`
 export const Close = styled.button`
   height: 100%;
   width: 100%;
-  background: rgba(0,0,0,.3);
+  background: rgba(0, 0, 0, 0.3);
   border: none;
   outline: none;
 `;

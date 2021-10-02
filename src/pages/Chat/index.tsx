@@ -7,12 +7,13 @@ import { Button } from "antd";
 
 interface OwnProps {
   close: () => void;
+  publicChat?: boolean;
 }
 
 const dialogs = ["user1", "user2", "user3", "user4"];
 
-const Chat: FC<OwnProps> = ({ close }) => {
-  const [isShowDialog, setIsShowDialog] = useState(false);
+const Chat: FC<OwnProps> = ({ close, publicChat }) => {
+  const [isShowDialog, setIsShowDialog] = useState(!!publicChat);
   const dialogId = useRef(-1);
   const setIsShowDialogHandler =
     (id = -1) =>
@@ -27,6 +28,7 @@ const Chat: FC<OwnProps> = ({ close }) => {
       <ChatWrap>
         {isShowDialog ? (
           <Dialog
+            publicChat={!!publicChat}
             data={dialogs[dialogId.current]}
             back={setIsShowDialogHandler()}
           />
