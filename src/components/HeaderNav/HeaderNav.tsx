@@ -1,4 +1,4 @@
-import { FC } from "react";
+import {FC, useState} from "react";
 import { Avatar, Button, Col, Image, Row } from "antd";
 import { UserOutlined } from "@ant-design/icons";
 import User from "../../store/user/user";
@@ -12,8 +12,12 @@ import {
 } from "../../constants/routes";
 import Complete from "../Complete/Complete";
 import logo from "./../../img/logo.png";
+import Chat from "../../pages/Chat";
 
 const HeaderNav: FC = observer(() => {
+  const [isChatOpen, setIsChatOpen] = useState(false);
+  const openChatHandler = () => setIsChatOpen(!isChatOpen);
+
   return (
     <>
       <Row
@@ -60,6 +64,7 @@ const HeaderNav: FC = observer(() => {
               margin: 0,
             }}
           >
+            <Button onClick={openChatHandler}>Чат</Button>
             <Col>
               <Link to={NEW_QUESTION}>
                 <Button type="primary">Задать вопрос</Button>
@@ -88,6 +93,7 @@ const HeaderNav: FC = observer(() => {
           </Row>
         </Col>
       </Row>
+      {isChatOpen && <Chat close={openChatHandler} />}
     </>
   );
 });
