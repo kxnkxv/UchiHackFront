@@ -11,16 +11,30 @@ export const Container = styled.div`
   z-index: 999;
 `;
 
-export const Close = styled.button`
-  height: 100%;
-  width: 100%;
-  background: rgba(0,0,0,.3);
-  border: none;
-  outline: none;
+export const Header = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 25px;
 `;
 
 export const ChatWrap = styled.div`
   width: 500px;
   height: 100%;
   background: #fff;
+  padding: 25px 0;
+`;
+
+export const Heading = styled.span`
+  display: block;
+  font-size: 18px;
+  font-weight: 500;
+`;
+
+export const Close = styled.button`
+  height: 100%;
+  width: 100%;
+  background: rgba(0,0,0,.3);
+  border: none;
+  outline: none;
 `;

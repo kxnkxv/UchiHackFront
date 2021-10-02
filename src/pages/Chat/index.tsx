@@ -1,30 +1,50 @@
 import React, {
-  FC, useState,
+  FC, useRef, useState,
 } from 'react';
-import Call from "./components/Call";
+import DialogsList from "./components/DialogsList";
+import Dialog from './components/Dialog';
 
 import {
   Container,
   ChatWrap,
-  Close
+  Close,
+  Heading,
+  Header,
 } from  './styled';
 
 interface OwnProps {
   close: () => void;
 }
 
+const dialogs = ['user1', 'user2', 'user3', 'user4'];
+
 const Chat: FC<OwnProps> = ({close}) => {
-  const [isOpenCall, setIsOpenCall] = useState(false);
-  const setIsOpenCallHandler = () => setIsOpenCall(!isOpenCall);
+
+  const [isShowDialog, setIsShowDialog] = useState(false);
+  const dialogId = useRef(-1);
+  const setIsShowDialogHandler = (id = -1) => () => {
+    dialogId.current = id;
+    setIsShowDialog(!isShowDialog);
+  };
 
   return (
     <Container>
       <Close onClick={close} />
       <ChatWrap>
-        chat
-        <button onClick={setIsOpenCallHandler}>звонок</button>
+        {
+          isShowDialog
+            ? <Dialog data={dialogs[dialogId.current]} back={setIsShowDialogHandler()} />
+          : (
+              <>
+                <Header>
+                  <Heading>Чат с пользователями</Heading>
+                  <button onClick={close}>X</button>
+                </Header>
+                <DialogsList openDialog={setIsShowDialogHandler} data={dialogs} />
+              </>
+            )
+        }
       </ChatWrap>
-      {isOpenCall && <Call close={setIsOpenCallHandler} />}
     </Container>
   )
 };
