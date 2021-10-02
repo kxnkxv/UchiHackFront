@@ -27,12 +27,18 @@ const SideBar: FC = observer(() => {
         Все вопросы
         <Link to="/" />
       </Menu.Item>
-      {Object.keys(questionsThemes).map((key) => (
-        <Menu.Item key={key}>
-          {questionsThemes[key]}
-          <Link to={`${THEMES}/${key}`} />
-        </Menu.Item>
-      ))}
+      {Object.keys(questionsThemes)
+        .slice(0, 5)
+        .map((key) => (
+          <Menu.Item key={key}>
+            {questionsThemes[key]}
+            <Link to={`${THEMES}/${key}`} />
+          </Menu.Item>
+        ))}
+      <Menu.Item key="allThemes" icon={<AppstoreOutlined />}>
+        Все предметы
+        <Link to={`${THEMES}/allThemes`} />
+      </Menu.Item>
     </Menu>
   );
 });
