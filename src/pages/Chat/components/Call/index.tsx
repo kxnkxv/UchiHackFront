@@ -204,10 +204,10 @@ const Call: FC<OwnProps> = ({ close }) => {
           <RemoteVideo key={item} id={item} ref={remoteVideoEl} autoPlay />
         ))}
         <StartCall onClick={startCall}>
-          {isCallStarted ? "звонок начат" : "начать звонок"}
+          {isCallStarted ? "Звонок начат" : "Начать звонок"}
         </StartCall>
         <Button onClick={isAudioEnabled ? muteAudio : unMuteAudio}>
-          {isAudioEnabled ? "звук включен" : "выключен"}
+          {isAudioEnabled ? "Звук включен" : "Звук выключен"}
         </Button>
       </CallWindow>
     </Container>
