@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import {Avatar} from "antd";
+import { Avatar } from "antd";
 
 export const Container = styled.div`
   display: flex;
