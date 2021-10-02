@@ -14,11 +14,11 @@ import logo from "./../../img/logo.png";
 import { REGISTRATION, RESTORE_PASSWORD } from "../../constants/routes";
 import { LockOutlined, MailOutlined } from "@ant-design/icons";
 import { Link } from "react-router-dom";
-import { authLogin } from "../../API/auth/login";
+import User from "../../store/user";
 
 const Authorization = () => {
   const onFinish = (values: any) => {
-    authLogin(values.email, values.password);
+    User.authLogin(values.email, values.password);
   };
 
   const onFinishFailed = (errorInfo: any) => {

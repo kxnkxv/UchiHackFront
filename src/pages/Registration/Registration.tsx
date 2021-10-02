@@ -4,13 +4,13 @@ import logo from "./../../img/logo.png";
 import { AUTH } from "../../constants/routes";
 import { MailOutlined } from "@ant-design/icons";
 import { Link } from "react-router-dom";
-import { authRegister } from "../../API/auth/register";
+import User from "../../store/user";
 
 const Authorization = () => {
   const [form] = Form.useForm();
 
   const onFinish = (values: any) => {
-    authRegister(
+    User.authRegister(
       values.email,
       values.password,
       values.firstName,

@@ -1,4 +1,7 @@
-import { makeAutoObservable } from "mobx";
+import { action, makeAutoObservable } from "mobx";
+import axios from "axios";
+import { URL } from "../../API";
+import Auth from "../auth";
 
 class User {
   user = {
@@ -21,6 +24,45 @@ class User {
   constructor() {
     makeAutoObservable(this);
   }
+
+  @action authLogin = (email: string, password: string) => {
+    axios
+      .post(`${URL}/auth/login`, {
+        email: email,
+        password: password,
+      })
+      .then((response) => {
+        Auth.setIsUserAuth(true);
+        // this.user = response.data
+        console.log(response);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  @action authRegister = (
+    email: string,
+    password: string,
+    firstName: string,
+    lastName: string
+  ) => {
+    axios
+      .post(`${URL}/auth/register`, {
+        email: email,
+        password: password,
+        firstName: firstName,
+        lastName: lastName,
+      })
+      .then((response) => {
+        Auth.setIsUserAuth(true);
+        // this.user = response.data
+        console.log(response);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 }
 
 export default new User();
