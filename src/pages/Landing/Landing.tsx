@@ -1,13 +1,18 @@
+import { Button } from "antd";
 import React from "react";
-import { I18nextProvider } from "react-i18next";
-import Router from "./router";
-import i18n from "./translation";
+import { Link } from "react-router-dom";
+import { AUTH, REGISTRATION } from "../../constants/routes";
 
 const Landing = () => {
   return (
-    <I18nextProvider i18n={i18n}>
-      <Router />
-    </I18nextProvider>
+    <div>
+      <Link to={AUTH}>
+        <Button>Авторизация</Button>
+      </Link>
+      <Link to={REGISTRATION}>
+        <Button>Регистрация</Button>
+      </Link>
+    </div>
   );
 };
 
