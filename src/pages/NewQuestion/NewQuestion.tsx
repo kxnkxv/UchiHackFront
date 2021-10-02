@@ -8,7 +8,6 @@ import {
   Input,
   Row,
   Select,
-  Space,
   Typography,
 } from "antd";
 import React, { useState } from "react";
@@ -18,6 +17,7 @@ import moment from "moment";
 import { users } from "../../mockData/users";
 import { UserType } from "../../types/UserType";
 import User from "../../store/user/user";
+import { Container } from "./styled";
 
 const NewQuestion = () => {
   const [form] = Form.useForm();
@@ -84,160 +84,158 @@ const NewQuestion = () => {
   }
 
   return (
-    <Row align="middle" justify="space-around">
-      <Space size={[25, 25]} direction="vertical">
-        <Card>
-          <Form
-            name="basic"
-            onFinish={onFinish}
-            onFinishFailed={onFinishFailed}
-            autoComplete="off"
-            form={form}
-            initialValues={{
-              urgently: false,
-            }}
+    <Container>
+      <Card>
+        <Form
+          name="basic"
+          onFinish={onFinish}
+          onFinishFailed={onFinishFailed}
+          autoComplete="off"
+          form={form}
+          initialValues={{
+            urgently: false,
+          }}
+        >
+          <Typography.Title>Задать вопрос</Typography.Title>
+          <Row align="middle" justify="space-between" gutter={[25, 25]}>
+            <Col span={12}>
+              <Form.Item
+                name="theme"
+                rules={[
+                  {
+                    required: true,
+                    message: "Это поле обязательно для заполнения!",
+                  },
+                ]}
+              >
+                <AutoComplete
+                  options={themes}
+                  filterOption={(inputValue, option) =>
+                    option!.value
+                      .toUpperCase()
+                      .indexOf(inputValue.toUpperCase()) !== -1
+                  }
+                  placeholder="Введите название предмета или выберите из выпадающего списка"
+                />
+              </Form.Item>
+            </Col>
+            <Col span={12}>
+              <Form.Item
+                name="subtheme"
+                rules={[
+                  {
+                    required: true,
+                    message: "Это поле обязательно для заполнения!",
+                  },
+                ]}
+              >
+                <AutoComplete
+                  options={subThemes}
+                  filterOption={(inputValue, option) =>
+                    option!.value
+                      .toUpperCase()
+                      .indexOf(inputValue.toUpperCase()) !== -1
+                  }
+                  placeholder="Введите название темы или выберите из выпадающего списка"
+                />
+              </Form.Item>
+            </Col>
+          </Row>
+          <Form.Item
+            name="title"
+            rules={[
+              {
+                required: true,
+                message: "Это поле обязательно для заполнения!",
+              },
+            ]}
           >
-            <Typography.Title>Задать вопрос</Typography.Title>
-            <Row align="middle" justify="space-between" gutter={[25, 25]}>
-              <Col span={12}>
-                <Form.Item
-                  name="theme"
-                  rules={[
-                    {
-                      required: true,
-                      message: "Это поле обязательно для заполнения!",
-                    },
-                  ]}
-                >
-                  <AutoComplete
-                    options={themes}
-                    filterOption={(inputValue, option) =>
-                      option!.value
-                        .toUpperCase()
-                        .indexOf(inputValue.toUpperCase()) !== -1
-                    }
-                    placeholder="Введите название предмета или выберите из выпадающего списка"
-                  />
-                </Form.Item>
-              </Col>
-              <Col span={12}>
-                <Form.Item
-                  name="subtheme"
-                  rules={[
-                    {
-                      required: true,
-                      message: "Это поле обязательно для заполнения!",
-                    },
-                  ]}
-                >
-                  <AutoComplete
-                    options={subThemes}
-                    filterOption={(inputValue, option) =>
-                      option!.value
-                        .toUpperCase()
-                        .indexOf(inputValue.toUpperCase()) !== -1
-                    }
-                    placeholder="Введите название темы или выберите из выпадающего списка"
-                  />
-                </Form.Item>
-              </Col>
-            </Row>
-            <Form.Item
-              name="title"
-              rules={[
-                {
-                  required: true,
-                  message: "Это поле обязательно для заполнения!",
-                },
-              ]}
-            >
-              <Input
-                placeholder="Кратко опишите Ваш вопрос"
-                onChange={getSimilar}
-              />
-            </Form.Item>
-            <Form.Item
-              name="description"
-              rules={[
-                {
-                  required: true,
-                  message: "Это поле обязательно для заполнения!",
-                },
-              ]}
-            >
-              <Input.TextArea
-                placeholder="Подробно опишите Ваш вопрос"
-                autoSize={{ minRows: 3, maxRows: 5 }}
-                onChange={getSimilar}
-              />
-            </Form.Item>
-            <Row align="middle" justify="space-between" gutter={[25, 25]}>
-              <Col span={8}>
-                <Form.Item
-                  label="Стоимость"
-                  name="cost"
-                  rules={[
-                    {
-                      required: true,
-                      message: "Это поле обязательно для заполнения!",
-                    },
-                  ]}
-                >
-                  <Select>
-                    {cost.map((cos) => {
-                      return (
-                        <Select.Option value={cos}>{cos} баллов</Select.Option>
-                      );
-                    })}
-                  </Select>
-                </Form.Item>
-              </Col>
-              <Col>
-                <Form.Item name="urgently" valuePropName="checked">
-                  <Checkbox>Нужно срочное решение!</Checkbox>
-                </Form.Item>
-              </Col>
-              <Col span={5}>
-                <Form.Item
-                  name="time"
-                  rules={[
-                    {
-                      required: true,
-                      message: "Это поле обязательно для заполнения!",
-                    },
-                  ]}
-                >
-                  <Select>
-                    {time.map((min) => {
-                      return (
-                        <Select.Option value={min}>{min} минут</Select.Option>
-                      );
-                    })}
-                  </Select>
-                </Form.Item>
-              </Col>
-              <Col>
-                <Form.Item>
-                  <Button type="primary" htmlType="submit">
-                    Создать вопрос
-                  </Button>
-                </Form.Item>
-              </Col>
-            </Row>
-          </Form>
+            <Input
+              placeholder="Кратко опишите Ваш вопрос"
+              onChange={getSimilar}
+            />
+          </Form.Item>
+          <Form.Item
+            name="description"
+            rules={[
+              {
+                required: true,
+                message: "Это поле обязательно для заполнения!",
+              },
+            ]}
+          >
+            <Input.TextArea
+              placeholder="Подробно опишите Ваш вопрос"
+              autoSize={{ minRows: 3, maxRows: 5 }}
+              onChange={getSimilar}
+            />
+          </Form.Item>
+          <Row align="middle" justify="space-between" gutter={[25, 25]}>
+            <Col span={8}>
+              <Form.Item
+                label="Стоимость"
+                name="cost"
+                rules={[
+                  {
+                    required: true,
+                    message: "Это поле обязательно для заполнения!",
+                  },
+                ]}
+              >
+                <Select>
+                  {cost.map((cos) => {
+                    return (
+                      <Select.Option value={cos}>{cos} баллов</Select.Option>
+                    );
+                  })}
+                </Select>
+              </Form.Item>
+            </Col>
+            <Col>
+              <Form.Item name="urgently" valuePropName="checked">
+                <Checkbox>Нужно срочное решение!</Checkbox>
+              </Form.Item>
+            </Col>
+            <Col span={5}>
+              <Form.Item
+                name="time"
+                rules={[
+                  {
+                    required: true,
+                    message: "Это поле обязательно для заполнения!",
+                  },
+                ]}
+              >
+                <Select>
+                  {time.map((min) => {
+                    return (
+                      <Select.Option value={min}>{min} минут</Select.Option>
+                    );
+                  })}
+                </Select>
+              </Form.Item>
+            </Col>
+            <Col>
+              <Form.Item>
+                <Button type="primary" htmlType="submit">
+                  Создать вопрос
+                </Button>
+              </Form.Item>
+            </Col>
+          </Row>
+        </Form>
+      </Card>
+      {similar.length !== 0 ? (
+        <Card>
+          <Typography.Title>Похожие вопросы</Typography.Title>
+          <List>
+            {similar.map((question) => (
+              <ThemeItem question={question} />
+            ))}
+          </List>
         </Card>
-        {similar.length !== 0 ? (
-          <Card>
-            <Typography.Title>Похожие вопросы</Typography.Title>
-            <List>
-              {similar.map((question) => (
-                <ThemeItem question={question} />
-              ))}
-            </List>
-          </Card>
-        ) : null}
-      </Space>
-    </Row>
+      ) : null}
+    </Container>
   );
 };
 
