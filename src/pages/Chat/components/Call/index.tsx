@@ -42,6 +42,11 @@ const Call: FC<OwnProps> = ({close}) => {
   const clientID = useRef('');
   const testStart = useRef(false);
 
+  const closeVideoHandler = () => {
+    cleanListeners();
+    close();
+  }
+
   function sendToServer(msg: any): void {
     const msgJSON = JSON.stringify(msg);
 
@@ -182,7 +187,7 @@ const Call: FC<OwnProps> = ({close}) => {
   return (
     <Container>
       <CallWindow>
-        <button onClick={close}>закрыть</button>
+        <button onClick={closeVideoHandler}>закрыть</button>
         <LocalVideo
           id='localVideo'
           ref={localVideoEl}
