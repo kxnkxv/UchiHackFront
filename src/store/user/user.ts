@@ -15,7 +15,7 @@ class User {
     role: "",
     education: "Я учусь в ВУЗе",
     emailNotify: true,
-    balance: 99999,
+    balance: 1000,
   };
 
   constructor() {

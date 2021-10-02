@@ -17,6 +17,7 @@ import { List } from "../Themes/styled";
 import moment from "moment";
 import { users } from "../../mockData/users";
 import { UserType } from "../../types/UserType";
+import User from "../../store/user/user";
 
 const NewQuestion = () => {
   const [form] = Form.useForm();
@@ -68,6 +69,19 @@ const NewQuestion = () => {
     setSimilar(result);
     console.log(theme, subtheme, title, description);
   };
+
+  let time = [];
+  let i = 0;
+  while (i <= 60) {
+    time.push(i);
+    i = i + 5;
+  }
+  let cost = [];
+  let y = 0;
+  while (y <= User.user.balance) {
+    cost.push(y);
+    y++;
+  }
 
   return (
     <Row align="middle" justify="space-around">
@@ -123,30 +137,34 @@ const NewQuestion = () => {
               />
             </Form.Item>
             <Row align="middle" justify="space-between" gutter={[25, 25]}>
-              <Col span={6}>
-                <Form.Item label="Баллы" name="cost">
+              <Col span={8}>
+                <Form.Item label="Стоимость" name="cost">
                   <Select>
-                    <Select.Option value="Первый класс">
-                      Первый класс
-                    </Select.Option>
+                    {cost.map((cos) => {
+                      return (
+                        <Select.Option value={cos}>{cos} баллов</Select.Option>
+                      );
+                    })}
                   </Select>
                 </Form.Item>
               </Col>
-              <Col span={6}>
+              <Col>
                 <Form.Item name="urgently">
                   <Checkbox>Нужно срочное решение!</Checkbox>
                 </Form.Item>
               </Col>
-              <Col span={6}>
+              <Col span={5}>
                 <Form.Item name="time">
                   <Select>
-                    <Select.Option value="Первый класс">
-                      Первый класс
-                    </Select.Option>
+                    {time.map((min) => {
+                      return (
+                        <Select.Option value={min}>{min} минут</Select.Option>
+                      );
+                    })}
                   </Select>
                 </Form.Item>
               </Col>
-              <Col span={6}>
+              <Col>
                 <Form.Item>
                   <Button type="primary" htmlType="submit">
                     Создать вопрос
