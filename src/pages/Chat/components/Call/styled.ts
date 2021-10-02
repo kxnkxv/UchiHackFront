@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Button } from "antd";
 
 export const Container = styled.div`
   position: fixed;
@@ -9,7 +10,7 @@ export const Container = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  background: rgba(0,0,0,.3);
+  background: rgba(0, 0, 0, 0.3);
   z-index: 9999;
 `;
 
@@ -34,7 +35,7 @@ export const RemoteVideo = styled.video`
   background: lightblue;
 `;
 
-export const StartCall = styled.button`
+export const StartCall = styled(Button)`
   width: 200px;
   height: 50px;
 `;

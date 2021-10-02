@@ -1,20 +1,22 @@
-import React, {FC, useState} from 'react';
+import React, { FC, useState } from "react";
 import Call from "../Call";
+import { Button } from "antd";
 
-interface OwnProps{
+interface OwnProps {
   back: () => void;
   data: any;
 }
 
-const Dialog: FC<OwnProps> = ({back, data}) => {
+const Dialog: FC<OwnProps> = ({ back, data }) => {
   const [isOpenCall, setIsOpenCall] = useState(false);
   const setIsOpenCallHandler = () => setIsOpenCall(!isOpenCall);
   return (
     <div>
       {isOpenCall && <Call close={setIsOpenCallHandler} />}
-      <button onClick={setIsOpenCallHandler}>звонок</button>
-      <button onClick={back}>back</button>
+
+      <Button onClick={back}>back</Button>
       {data}
+      <Button onClick={setIsOpenCallHandler}>звонок</Button>
     </div>
   );
 };
