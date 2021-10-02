@@ -1,11 +1,6 @@
 import { FC } from "react";
 import { Redirect, Route, Switch } from "react-router-dom";
-import {
-  ALL_THEMES,
-  NEW_QUESTION,
-  PROFILE,
-  QUESTION,
-} from "../constants/routes";
+import { NEW_QUESTION, PROFILE, QUESTION, THEMES } from "../constants/routes";
 import Themes from "../pages/Themes/Themes";
 import NewQuestion from "../pages/NewQuestion/NewQuestion";
 import UserProfile from "../pages/Profile/UserProfile";
@@ -20,7 +15,7 @@ const PrivateRoutes: FC = () => {
         <Route exact path={NEW_QUESTION} component={NewQuestion} />
         <Route exact path={`${PROFILE}/:userId`} component={UserProfile} />
         <Route exact path={`${QUESTION}/:questionId`} component={Question} />
-        <Route exact path={`${ALL_THEMES}/:themeId`} component={Themes} />
+        <Route exact path={`${THEMES}/:themeId`} component={Themes} />
         <Redirect to="/" />
       </Switch>
     </CustomLayout>

@@ -3,7 +3,7 @@ import { Menu } from "antd";
 import { AppstoreOutlined } from "@ant-design/icons";
 import { observer } from "mobx-react-lite";
 import { Link } from "react-router-dom";
-import { ALL_THEMES } from "../../constants/routes";
+import { THEMES } from "../../constants/routes";
 import { questionsThemes } from "../../constants/questionsThemes";
 
 const SideBar: FC = observer(() => {
@@ -30,7 +30,7 @@ const SideBar: FC = observer(() => {
       {Object.keys(questionsThemes).map((key) => (
         <Menu.Item key={key}>
           {questionsThemes[key]}
-          <Link to={`${ALL_THEMES}/${key}`} />
+          <Link to={`${THEMES}/${key}`} />
         </Menu.Item>
       ))}
     </Menu>
