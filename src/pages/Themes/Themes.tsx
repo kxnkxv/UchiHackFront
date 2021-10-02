@@ -52,7 +52,7 @@ const Themes: FC<RouteComponentProps<RouteParams>> = ({ match }) => {
       return (
         <Empty
           description={
-            <span>Пока в этом разделе ещё никто-ничего не спрашивал</span>
+            <span>Пока в этом разделе ещё никто ничего не спрашивал</span>
           }
         >
           <Link to={NEW_QUESTION}>
