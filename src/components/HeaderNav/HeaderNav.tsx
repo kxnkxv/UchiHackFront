@@ -62,7 +62,7 @@ const HeaderNav: FC = observer(() => {
           >
             <Col>
               <Link to={NEW_QUESTION}>
-                <Button>Задать вопрос</Button>
+                <Button type="primary">Задать вопрос</Button>
               </Link>
             </Col>
             <Col>
