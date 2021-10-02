@@ -93,11 +93,22 @@ const NewQuestion = () => {
             onFinishFailed={onFinishFailed}
             autoComplete="off"
             form={form}
+            initialValues={{
+              urgently: false,
+            }}
           >
             <Typography.Title>Задать вопрос</Typography.Title>
             <Row align="middle" justify="space-between" gutter={[25, 25]}>
               <Col span={12}>
-                <Form.Item name="theme">
+                <Form.Item
+                  name="theme"
+                  rules={[
+                    {
+                      required: true,
+                      message: "Это поле обязательно для заполнения!",
+                    },
+                  ]}
+                >
                   <AutoComplete
                     options={themes}
                     filterOption={(inputValue, option) =>
@@ -110,7 +121,15 @@ const NewQuestion = () => {
                 </Form.Item>
               </Col>
               <Col span={12}>
-                <Form.Item name="subtheme">
+                <Form.Item
+                  name="subtheme"
+                  rules={[
+                    {
+                      required: true,
+                      message: "Это поле обязательно для заполнения!",
+                    },
+                  ]}
+                >
                   <AutoComplete
                     options={subThemes}
                     filterOption={(inputValue, option) =>
@@ -123,13 +142,29 @@ const NewQuestion = () => {
                 </Form.Item>
               </Col>
             </Row>
-            <Form.Item name="title">
+            <Form.Item
+              name="title"
+              rules={[
+                {
+                  required: true,
+                  message: "Это поле обязательно для заполнения!",
+                },
+              ]}
+            >
               <Input
                 placeholder="Кратко опишите Ваш вопрос"
                 onChange={getSimilar}
               />
             </Form.Item>
-            <Form.Item name="description">
+            <Form.Item
+              name="description"
+              rules={[
+                {
+                  required: true,
+                  message: "Это поле обязательно для заполнения!",
+                },
+              ]}
+            >
               <Input.TextArea
                 placeholder="Подробно опишите Ваш вопрос"
                 autoSize={{ minRows: 3, maxRows: 5 }}
@@ -138,7 +173,16 @@ const NewQuestion = () => {
             </Form.Item>
             <Row align="middle" justify="space-between" gutter={[25, 25]}>
               <Col span={8}>
-                <Form.Item label="Стоимость" name="cost">
+                <Form.Item
+                  label="Стоимость"
+                  name="cost"
+                  rules={[
+                    {
+                      required: true,
+                      message: "Это поле обязательно для заполнения!",
+                    },
+                  ]}
+                >
                   <Select>
                     {cost.map((cos) => {
                       return (
@@ -149,12 +193,20 @@ const NewQuestion = () => {
                 </Form.Item>
               </Col>
               <Col>
-                <Form.Item name="urgently">
+                <Form.Item name="urgently" valuePropName="checked">
                   <Checkbox>Нужно срочное решение!</Checkbox>
                 </Form.Item>
               </Col>
               <Col span={5}>
-                <Form.Item name="time">
+                <Form.Item
+                  name="time"
+                  rules={[
+                    {
+                      required: true,
+                      message: "Это поле обязательно для заполнения!",
+                    },
+                  ]}
+                >
                   <Select>
                     {time.map((min) => {
                       return (
