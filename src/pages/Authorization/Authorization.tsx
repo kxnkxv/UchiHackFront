@@ -9,17 +9,16 @@ import {
   Row,
   Typography,
 } from "antd";
-import Auth from "../../store/auth";
 import css from "./Authorization.module.scss";
 import logo from "./../../img/logo.png";
 import { REGISTRATION, RESTORE_PASSWORD } from "../../constants/routes";
 import { LockOutlined, MailOutlined } from "@ant-design/icons";
 import { Link } from "react-router-dom";
+import { authLogin } from "../../API/auth/login";
 
 const Authorization = () => {
   const onFinish = (values: any) => {
-    console.log("Success:", values);
-    Auth.setIsUserAuth(true);
+    authLogin(values.email, values.password);
   };
 
   const onFinishFailed = (errorInfo: any) => {
@@ -42,15 +41,7 @@ const Authorization = () => {
           </Col>
         </Row>
         <br />
-        <Form
-          name="login"
-          onFinish={onFinish}
-          onFinishFailed={onFinishFailed}
-          initialValues={{
-            email: "demo@demo.com",
-            password: "demo",
-          }}
-        >
+        <Form name="login" onFinish={onFinish} onFinishFailed={onFinishFailed}>
           <Form.Item
             name="email"
             rules={[

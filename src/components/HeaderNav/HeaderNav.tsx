@@ -1,7 +1,7 @@
-import {FC, useState} from "react";
+import { FC, useState } from "react";
 import { Avatar, Button, Col, Image, Row } from "antd";
 import { UserOutlined } from "@ant-design/icons";
-import User from "../../store/user/user";
+import User from "../../store/user";
 import { observer } from "mobx-react-lite";
 import { Link } from "react-router-dom";
 import {

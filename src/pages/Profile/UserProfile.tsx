@@ -1,6 +1,6 @@
 import React from "react";
 
-import User from "./../../store/user/user";
+import User from "../../store/user";
 import PublicProfile from "./PublicProfile/PublicProfile";
 import MyProfile from "./MyProfile/MyProfile";
 

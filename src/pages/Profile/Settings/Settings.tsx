@@ -1,6 +1,6 @@
 import React, { FC } from "react";
 import { Button, Checkbox, Col, Form, Input, message, Row, Select } from "antd";
-import User from "../../../store/user/user";
+import User from "../../../store/user";
 import AvatarUpload from "../../../components/AvatarUpload/AvatarUpload";
 import { MailOutlined } from "@ant-design/icons";
 

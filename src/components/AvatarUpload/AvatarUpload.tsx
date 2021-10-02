@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Upload } from "antd";
 import ImgCrop from "antd-img-crop";
-import User from "./../../store/user/user";
+import User from "../../store/user";
 
 const AvatarUpload = () => {
   const [fileList, setFileList] = useState([

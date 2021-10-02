@@ -2,7 +2,7 @@ import { Avatar, Button, Card, Col, Row, Tabs } from "antd";
 import React, { FC } from "react";
 import { UserOutlined } from "@ant-design/icons";
 import Auth from "../../../../store/auth";
-import User from "../../../../store/user/user";
+import User from "../../../../store/user";
 import { questionsList } from "../../../../mockData/questions";
 import ThemeItem from "../../../Themes/components/ThemeItem/ThemeItem";
 import { List } from "../../../Themes/styled";

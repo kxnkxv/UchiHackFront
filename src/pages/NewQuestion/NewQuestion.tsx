@@ -16,7 +16,7 @@ import { List } from "../Themes/styled";
 import moment from "moment";
 import { users } from "../../mockData/users";
 import { UserType } from "../../types/UserType";
-import User from "../../store/user/user";
+import User from "../../store/user";
 import { Container } from "./styled";
 
 const NewQuestion = () => {

@@ -1,17 +1,21 @@
 import { Button, Card, Col, Form, Image, Input, Row, Typography } from "antd";
-import Auth from "../../store/auth";
 import css from "./Registration.module.scss";
 import logo from "./../../img/logo.png";
 import { AUTH } from "../../constants/routes";
 import { MailOutlined } from "@ant-design/icons";
 import { Link } from "react-router-dom";
+import { authRegister } from "../../API/auth/register";
 
 const Authorization = () => {
   const [form] = Form.useForm();
 
   const onFinish = (values: any) => {
-    console.log("Success:", values);
-    Auth.setIsUserAuth(true);
+    authRegister(
+      values.email,
+      values.password,
+      values.firstName,
+      values.lastName
+    );
   };
 
   const onFinishFailed = (errorInfo: any) => {
@@ -39,12 +43,29 @@ const Authorization = () => {
           onFinish={onFinish}
           onFinishFailed={onFinishFailed}
           form={form}
-          initialValues={{
-            email: "demo@demo.com",
-            password: "demo",
-            confirm: "demo",
-          }}
         >
+          <Form.Item
+            name="firstName"
+            rules={[
+              {
+                required: true,
+                message: "Пожалуйста введите своё имя!",
+              },
+            ]}
+          >
+            <Input placeholder="Ваше имя" />
+          </Form.Item>
+          <Form.Item
+            name="lastName"
+            rules={[
+              {
+                required: true,
+                message: "Пожалуйста введите свою фамилию!",
+              },
+            ]}
+          >
+            <Input placeholder="Ваша фамилия" />
+          </Form.Item>
           <Form.Item
             name="email"
             rules={[
@@ -60,39 +81,46 @@ const Authorization = () => {
           >
             <Input prefix={<MailOutlined />} placeholder="Электронная почта" />
           </Form.Item>
-          <Form.Item
-            name="password"
-            rules={[
-              {
-                required: true,
-                message: "Пожалуйста введите пароль!",
-              },
-            ]}
-            hasFeedback
-          >
-            <Input.Password />
-          </Form.Item>
-          <Form.Item
-            name="confirm"
-            dependencies={["password"]}
-            hasFeedback
-            rules={[
-              {
-                required: true,
-                message: "Пожалуйста подтвердите пароль!",
-              },
-              ({ getFieldValue }) => ({
-                validator(_, value) {
-                  if (!value || getFieldValue("password") === value) {
-                    return Promise.resolve();
-                  }
-                  return Promise.reject(new Error("Пароли не совпадают!"));
-                },
-              }),
-            ]}
-          >
-            <Input.Password />
-          </Form.Item>
+          <Row align="middle" justify="space-between" gutter={[25, 25]}>
+            <Col span={12}>
+              <Form.Item
+                name="password"
+                rules={[
+                  {
+                    required: true,
+                    message: "Пожалуйста введите пароль!",
+                  },
+                ]}
+                hasFeedback
+              >
+                <Input.Password placeholder="Придумайте пароль" />
+              </Form.Item>
+            </Col>
+            <Col span={12}>
+              <Form.Item
+                name="confirm"
+                dependencies={["password"]}
+                hasFeedback
+                rules={[
+                  {
+                    required: true,
+                    message: "Пожалуйста подтвердите пароль!",
+                  },
+                  ({ getFieldValue }) => ({
+                    validator(_, value) {
+                      if (!value || getFieldValue("password") === value) {
+                        return Promise.resolve();
+                      }
+                      return Promise.reject(new Error("Пароли не совпадают!"));
+                    },
+                  }),
+                ]}
+              >
+                <Input.Password placeholder="Подтвердите пароль" />
+              </Form.Item>
+            </Col>
+          </Row>
+
           <Form.Item>
             <Row align="middle" justify="space-between" gutter={[25, 25]}>
               <Col>
