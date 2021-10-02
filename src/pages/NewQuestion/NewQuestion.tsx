@@ -16,7 +16,6 @@ import { List } from "../Themes/styled";
 import moment from "moment";
 import { users } from "../../mockData/users";
 import { UserType } from "../../types/UserType";
-import User from "../../store/user";
 import { Container } from "./styled";
 
 const NewQuestion = () => {
@@ -78,7 +77,7 @@ const NewQuestion = () => {
   }
   let cost = [];
   let y = 0;
-  while (y <= User.user.balance) {
+  while (y <= 100) {
     cost.push(y);
     y++;
   }

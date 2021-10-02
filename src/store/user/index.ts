@@ -2,7 +2,7 @@ import { action, makeAutoObservable } from "mobx";
 import { UserType } from "../../types/UserType";
 
 class User {
-  user = {
+  user: UserType = {
     id: "1",
     firstName: "Артем",
     lastName: "Коньков",
@@ -24,7 +24,7 @@ class User {
   }
 
   @action setUser = (user: UserType) => {
-    this.user = user;
+    // this.user = user;
   };
 }
 

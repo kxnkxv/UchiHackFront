@@ -1,6 +1,6 @@
 import { action, makeAutoObservable } from "mobx";
 import axios from "axios";
-import { URL } from "../../API";
+import { URL } from "../../constants/API";
 
 class Auth {
   isUserAuth = !!window.localStorage.getItem("isUserAuth");
