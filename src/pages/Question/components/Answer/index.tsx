@@ -8,6 +8,9 @@ import { Container, Message, MessageWrap, OpenComment } from "./styled";
 import { PublicChat, Status, Title } from "../../styled";
 import { CheckCircleOutlined, HeartOutlined } from "@ant-design/icons";
 import moment from "moment";
+import "moment/locale/ru";
+
+moment.locale("ru");
 
 interface OwnProps {
   data: AnswerType;

@@ -13,8 +13,11 @@ import {
 } from "./styled";
 import { questionsThemes } from "../../../../constants/questionsThemes";
 import { Link } from "react-router-dom";
-import moment from "moment";
 import { Tooltip } from "antd";
+import moment from "moment";
+import "moment/locale/ru";
+
+moment.locale("ru");
 
 interface OwnProps {
   question: QuestionType;

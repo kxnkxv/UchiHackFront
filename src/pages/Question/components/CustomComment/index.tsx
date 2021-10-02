@@ -1,8 +1,11 @@
 import { CommentType } from "../../../../types/AnswerType";
 import React, { FC } from "react";
 import { Avatar, Comment, Tooltip } from "antd";
-import moment from "moment";
 import { PROFILE } from "../../../../constants/routes";
+import moment from "moment";
+import "moment/locale/ru";
+
+moment.locale("ru");
 
 interface OwnProps {
   data: CommentType;
