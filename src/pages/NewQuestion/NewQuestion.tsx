@@ -20,6 +20,7 @@ import { QuestionType } from "../../types/QuestionType";
 import { URL } from "../../constants/API";
 import Auth from "../../store/auth";
 import { QUESTION } from "../../constants/routes";
+import { removeDuplicates } from "../../utils/removeDuplicates";
 
 export interface SuggQuestionType {
   data: QuestionType[];
@@ -88,7 +89,7 @@ const NewQuestion = () => {
         .then((response) => {
           temp.push(response.data.data);
         });
-      setSimilar(temp);
+      setSimilar(removeDuplicates(temp));
     }
   };
 
