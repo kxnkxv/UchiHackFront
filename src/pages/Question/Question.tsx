@@ -1,8 +1,8 @@
-import React, { FC, useState } from "react";
+import React, { FC, useEffect, useState } from "react";
 import { SyncOutlined } from "@ant-design/icons";
 import { RouteComponentProps } from "react-router-dom";
-import { questionsList } from "../../mockData/questions";
-import { answers } from "../../mockData/answers";
+// import { questionsList } from "../../mockData/questions";
+// import { answers } from "../../mockData/answers";
 import { QuestionType } from "../../types/QuestionType";
 import Answer from "./components/Answer";
 import NotFound from "../NotFound/NotFound";
@@ -28,6 +28,7 @@ import moment from "moment";
 
 import "moment/locale/ru";
 import Chat from "../Chat";
+import { AnswerType } from "../../types/AnswerType";
 
 moment.locale("ru");
 
@@ -36,10 +37,15 @@ interface RouteParams {
 }
 
 const Question: FC<RouteComponentProps<RouteParams>> = ({ match }) => {
+  // @ts-ignore
+  const [question, setQuestion] = useState<QuestionType>(null);
+  const [answers, setAnswers] = useState<AnswerType[]>([]);
+  useEffect(() => {
+    //  TODO: получить вопрос о id
+  }, []);
   const { questionId } = match.params;
   const [isChatOpen, setIsChatOpen] = useState(false);
   const openChatHandler = () => setIsChatOpen(!isChatOpen);
-  const questionItem = questionsList.find(({ id }) => id === questionId);
   const {
     title,
     theme,
@@ -50,8 +56,8 @@ const Question: FC<RouteComponentProps<RouteParams>> = ({ match }) => {
     status,
     createdAt,
     urgently,
-  } = questionItem as QuestionType;
-  return questionItem ? (
+  } = question;
+  return question ? (
     <Container>
       <QuestionWrap>
         <Header>
