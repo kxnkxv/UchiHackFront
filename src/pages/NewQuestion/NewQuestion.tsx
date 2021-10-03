@@ -12,7 +12,7 @@ import {
   Space,
   Typography,
 } from "antd";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import ThemeItem from "../Themes/components/ThemeItem/ThemeItem";
 import { Container } from "./styled";
 import axios from "axios";
@@ -75,7 +75,7 @@ const NewQuestion = () => {
   };
 
   const [similar, setSimilar] = useState<any[]>([]);
-  const temp: any[] = [];
+  const temp = useRef<any>([]);
   const getSimilar = (e: any) => {
     if (e.target.value != "") {
       axios
@@ -87,9 +87,9 @@ const NewQuestion = () => {
           },
         })
         .then((response) => {
-          temp.push(response.data.data);
+          temp.current = response.data.data;
         });
-      setSimilar(removeDuplicates(temp));
+      setSimilar(removeDuplicates(temp.current));
     }
   };
 
@@ -242,14 +242,16 @@ const NewQuestion = () => {
           </Row>
         </Form>
       </Card>
-      <Card>
-        <Typography.Title>Похожие вопросы</Typography.Title>
-        <div>
-          {similar.map((question: QuestionType) => (
-            <ThemeItem question={question} />
-          ))}
-        </div>
-      </Card>
+      {!!similar.length && (
+        <Card>
+          <Typography.Title>Похожие вопросы</Typography.Title>
+          <div>
+            {similar.map((question: QuestionType) => (
+              <ThemeItem question={question} />
+            ))}
+          </div>
+        </Card>
+      )}
     </Container>
   );
 };
