@@ -14,13 +14,12 @@ import {
 } from "antd";
 import React, { useEffect, useState } from "react";
 import ThemeItem from "../Themes/components/ThemeItem/ThemeItem";
-import { List } from "../Themes/styled";
 import { Container } from "./styled";
 import axios from "axios";
 import { QuestionType } from "../../types/QuestionType";
 import { URL } from "../../constants/API";
 import Auth from "../../store/auth";
-import { removeDuplicates } from "../../utils/removeDuplicates";
+import { QUESTION } from "../../constants/routes";
 
 export interface SuggQuestionType {
   data: QuestionType[];
@@ -58,18 +57,22 @@ const NewQuestion = () => {
       .then((response) => {
         console.log(response);
         message.success("Вопрос создан");
+        window.location.replace(`${QUESTION}/${response.data.id}`);
       })
       .catch((e) => {
         console.log(e);
         setError(e.message);
         message.error("Ошибка при создании вопроса");
       })
-      .finally(() => setLoading(false));
+      .finally(() => {
+        setLoading(false);
+      });
   };
 
   const onFinishFailed = (errorInfo: any) => {
     console.log("Failed:", errorInfo);
   };
+
   const [similar, setSimilar] = useState<any[]>([]);
   const temp: any[] = [];
   const getSimilar = (e: any) => {
@@ -85,7 +88,7 @@ const NewQuestion = () => {
         .then((response) => {
           temp.push(response.data.data);
         });
-      setSimilar(removeDuplicates(temp));
+      setSimilar(temp);
     }
   };
 
@@ -238,16 +241,14 @@ const NewQuestion = () => {
           </Row>
         </Form>
       </Card>
-      {similar.length != 0 ? (
-        <Card>
-          <Typography.Title>Похожие вопросы</Typography.Title>
-          <List>
-            {similar.map((question: QuestionType) => (
-              <ThemeItem question={question} />
-            ))}
-          </List>
-        </Card>
-      ) : null}
+      <Card>
+        <Typography.Title>Похожие вопросы</Typography.Title>
+        <div>
+          {similar.map((question: QuestionType) => (
+            <ThemeItem question={question} />
+          ))}
+        </div>
+      </Card>
     </Container>
   );
 };

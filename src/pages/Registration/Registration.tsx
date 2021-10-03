@@ -6,6 +6,7 @@ import { MailOutlined } from "@ant-design/icons";
 import { Link } from "react-router-dom";
 import Auth from "../../store/auth";
 import { useState } from "react";
+import { removeStorageItem } from "../../utils/localStorage";
 
 const Authorization = () => {
   const [loading, setLoading] = useState(false);
@@ -22,6 +23,9 @@ const Authorization = () => {
     )
       .then(() => {
         window.location.replace(AUTH);
+        Auth.setIsUserAuth(false);
+        removeStorageItem("user");
+        removeStorageItem("token");
       })
       .catch((error) => {
         setError(error.message);

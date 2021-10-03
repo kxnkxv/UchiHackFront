@@ -10,8 +10,6 @@ interface Props {
 
 export const Container = styled(Card)`
   background: #f2f7ff;
-  border: none;
-  border-radius: 7px;
   margin: 30px 0 0 0;
 `;
 

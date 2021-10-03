@@ -6,7 +6,6 @@ import Auth from "../../store/auth";
 import { removeDuplicates } from "../../utils/removeDuplicates";
 import { SuggQuestionType } from "../../pages/NewQuestion/NewQuestion";
 import { Card, Typography } from "antd";
-import { List } from "../../pages/Themes/styled";
 import { QuestionType } from "../../types/QuestionType";
 import ThemeItem from "../../pages/Themes/components/ThemeItem/ThemeItem";
 
@@ -39,11 +38,11 @@ const Complete: React.FC = () => {
       {similar.length != 0 ? (
         <Card>
           <Typography.Title>Похожие вопросы</Typography.Title>
-          <List>
+          <div>
             {similar.map((question: QuestionType) => (
               <ThemeItem question={question} />
             ))}
-          </List>
+          </div>
         </Card>
       ) : null}
     </>

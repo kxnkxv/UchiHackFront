@@ -4,7 +4,6 @@ import { UserOutlined } from "@ant-design/icons";
 import Auth from "../../../../store/auth";
 import User from "../../../../store/user";
 import ThemeItem from "../../../Themes/components/ThemeItem/ThemeItem";
-import { List } from "../../../Themes/styled";
 import { QuestionType } from "../../../../types/QuestionType";
 import Answer from "../../../Question/components/Answer";
 import { AnswerType } from "../../../../types/AnswerType";
@@ -94,7 +93,7 @@ const PersonalPage: FC = () => {
       <Row gutter={[25, 25]} justify="space-around" align="middle">
         <Tabs defaultActiveKey="1">
           <TabPane tab="Вопросы" key="1">
-            <List>
+            <div>
               {questions.length !== 0 ? (
                 questions.map((question: QuestionType) => {
                   return <ThemeItem question={question} />;
@@ -102,7 +101,7 @@ const PersonalPage: FC = () => {
               ) : (
                 <Empty />
               )}
-            </List>
+            </div>
           </TabPane>
           <TabPane tab="Ответы" key="2">
             {answers.length !== 0 ? (

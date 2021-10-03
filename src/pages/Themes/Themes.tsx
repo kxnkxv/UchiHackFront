@@ -2,11 +2,9 @@ import React, { FC, useEffect, useState } from "react";
 import { Link, RouteComponentProps } from "react-router-dom";
 import ThemeItem from "./components/ThemeItem/ThemeItem";
 import { Button, Col, Empty, Image, Row, Space } from "antd";
-
-import { Container, Heading, List, Theme } from "./styled";
+import { Container, Heading, Theme } from "./styled";
 import { NEW_QUESTION, THEMES } from "../../constants/routes";
 import { QuestionType } from "../../types/QuestionType";
-import axios from "axios";
 import { URL } from "../../constants/API";
 import Auth from "../../store/auth";
 
@@ -76,11 +74,11 @@ const Themes: FC<RouteComponentProps<RouteParams>> = ({ match }) => {
           <Row align="middle">
             <Heading>Все вопросы</Heading>
           </Row>
-          <List>
+          <div>
             {questionsByTheme.map((question) => (
               <ThemeItem key={question.id} question={question} />
             ))}
-          </List>
+          </div>
         </Container>
       );
     } else {

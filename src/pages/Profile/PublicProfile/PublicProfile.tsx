@@ -3,7 +3,6 @@ import React, { FC, useEffect, useState } from "react";
 import { UserType } from "../../../types/UserType";
 import { UserOutlined } from "@ant-design/icons";
 import ThemeItem from "../../Themes/components/ThemeItem/ThemeItem";
-import { List } from "../../Themes/styled";
 import NotFound from "../../NotFound/NotFound";
 import { QuestionType } from "../../../types/QuestionType";
 import { AnswerType } from "../../../types/AnswerType";
@@ -92,7 +91,7 @@ const PublicProfile: FC<PublicProfileProps> = ({ userId }) => {
       <Row gutter={[25, 25]} justify="space-around" align="middle">
         <Tabs defaultActiveKey="1">
           <TabPane tab="Вопросы" key="1">
-            <List>
+            <div>
               {questions.length !== 0 ? (
                 questions.map((question: QuestionType) => {
                   return <ThemeItem question={question} />;
@@ -100,7 +99,7 @@ const PublicProfile: FC<PublicProfileProps> = ({ userId }) => {
               ) : (
                 <Empty />
               )}
-            </List>
+            </div>
           </TabPane>
           <TabPane tab="Ответы" key="2">
             {answers.length !== 0 ? (

@@ -17,5 +17,3 @@ export const Theme = styled(Card)`
   width: 200px;
   height: 200px;
 `;
-
-export const List = styled.div``;
