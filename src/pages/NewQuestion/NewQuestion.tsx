@@ -20,12 +20,19 @@ import axios from "axios";
 import { QuestionType } from "../../types/QuestionType";
 import { URL } from "../../constants/API";
 import Auth from "../../store/auth";
+import { removeDuplicates } from "../../utils/removeDuplicates";
 
 const NewQuestion = () => {
   const [form] = Form.useForm();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [themes, setThemes] = useState<any[]>([]);
+  const [query, setQuery] = useState("");
+
+  useEffect(() => {
+    const timeOutId = setTimeout(() => getSimilar(query), 1000);
+    return () => clearTimeout(timeOutId);
+  }, [query]);
 
   useEffect(() => {
     fetch(`${URL}/themes/`, {
@@ -66,31 +73,35 @@ const NewQuestion = () => {
     console.log("Failed:", errorInfo);
   };
 
-  const themesCust = [];
-  themes.map((theme) => {
-    const obj = {
-      id: theme.id,
-      value: theme.title,
-    };
-    themesCust.push(obj);
-  });
+  const [similar, setSimilar] = useState<any[]>([]);
 
-  const subThemes = [
-    { value: "Вторая мировая война" },
-    { value: "Логарифмы" },
-    { value: "Грамматика" },
-  ];
-
-  const [similar, setSimilar] = useState([]);
-
-  const getSimilar = () => {
-    const theme = form.getFieldValue("theme");
-    const subTheme = form.getFieldValue("subTheme");
+  const getSimilar = (query: string) => {
+    const temp: any[] = [];
     const title = form.getFieldValue("title");
     const description = form.getFieldValue("description");
-    //TODO: Поиск похожих вопросов
-    setSimilar([]);
-    console.log(theme, subTheme, title, description);
+    axios
+      .request<QuestionType>({
+        method: "get",
+        url: `${URL}/questions/suggestions?q=${description}`,
+        headers: {
+          Authorization: `Bearer ${Auth.token.accessToken}`,
+        },
+      })
+      .then((response) => {
+        temp.push(response.data);
+      });
+    axios
+      .request<QuestionType>({
+        method: "get",
+        url: `${URL}/questions/suggestions?q=${title}`,
+        headers: {
+          Authorization: `Bearer ${Auth.token.accessToken}`,
+        },
+      })
+      .then((response) => {
+        temp.push(response.data);
+      });
+    setSimilar(removeDuplicates(temp));
   };
 
   let time = [];
@@ -117,6 +128,7 @@ const NewQuestion = () => {
           form={form}
           initialValues={{
             urgently: false,
+            subTheme: null,
           }}
         >
           <Space>
@@ -137,12 +149,10 @@ const NewQuestion = () => {
                 ]}
               >
                 <AutoComplete
-                  options={themes}
-                  filterOption={(inputValue, option) =>
-                    option!.value
-                      .toUpperCase()
-                      .indexOf(inputValue.toUpperCase()) !== -1
-                  }
+                  options={themes.map((item) => ({
+                    value: item.id,
+                    label: item.title,
+                  }))}
                   placeholder="Введите название предмета или выберите из выпадающего списка"
                 />
               </Form.Item>
@@ -150,12 +160,10 @@ const NewQuestion = () => {
             <Col span={12}>
               <Form.Item name="subTheme">
                 <AutoComplete
-                  options={subThemes}
-                  filterOption={(inputValue, option) =>
-                    option!.value
-                      .toUpperCase()
-                      .indexOf(inputValue.toUpperCase()) !== -1
-                  }
+                  options={themes.map((item) => ({
+                    value: item.id,
+                    label: item.title,
+                  }))}
                   placeholder="Введите название темы или выберите из выпадающего списка"
                 />
               </Form.Item>
@@ -172,7 +180,8 @@ const NewQuestion = () => {
           >
             <Input
               placeholder="Кратко опишите Ваш вопрос"
-              onChange={getSimilar}
+              value={query}
+              onChange={(event) => setQuery(event.target.value)}
             />
           </Form.Item>
           <Form.Item
@@ -187,7 +196,8 @@ const NewQuestion = () => {
             <Input.TextArea
               placeholder="Подробно опишите Ваш вопрос"
               autoSize={{ minRows: 3, maxRows: 5 }}
-              onChange={getSimilar}
+              value={query}
+              onChange={(event) => setQuery(event.target.value)}
             />
           </Form.Item>
           <Row align="middle" justify="space-between" gutter={[25, 25]}>
