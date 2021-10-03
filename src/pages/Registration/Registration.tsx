@@ -5,7 +5,6 @@ import { AUTH } from "../../constants/routes";
 import { MailOutlined } from "@ant-design/icons";
 import { Link } from "react-router-dom";
 import Auth from "../../store/auth";
-import User from "../../store/user";
 import { useState } from "react";
 
 const Authorization = () => {
@@ -21,9 +20,8 @@ const Authorization = () => {
       values.firstName,
       values.lastName
     )
-      .then((response) => {
-        User.setUser(response.data);
-        Auth.setIsUserAuth(true);
+      .then(() => {
+        window.location.replace(AUTH);
       })
       .catch((error) => {
         setError(error.message);
