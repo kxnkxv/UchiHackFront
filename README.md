@@ -77,9 +77,14 @@
 ## Демо
 
 [Uchi Front Landing] (https://www.silentium.design/hahathon)
+
 [Uchi Front React] (https://uchi-hack.vercel.app/)
+
 [Uchi Back Docs] (https://uchi.pointb.su/documentation)
+
 [Uchi Back API] (https://uchi.pointb.su)
+
+USER - admin@hahathon.ru:p@$$word
 
 ## НЕОБХОДИМЫЕ УСЛОВИЯ ДЛЯ РАБОТЫ ПРИЛОЖЕНИЯ
 
