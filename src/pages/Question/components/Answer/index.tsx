@@ -29,7 +29,7 @@ const Answer: FC<OwnProps> = ({ data }) => {
         ) : null}
         <Tooltip title={moment().format("YYYY-MM-DD HH:mm:ss")}>
           <Title>
-            Добавлено <b>{createdAt.fromNow()}</b>
+            Добавлено <b>{moment(createdAt).fromNow()}</b>
           </Title>
         </Tooltip>
         <PublicChat>Чат с участником</PublicChat>
