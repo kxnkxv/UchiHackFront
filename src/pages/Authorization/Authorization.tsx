@@ -73,18 +73,12 @@ const Authorization = () => {
                 message: "Введите email правильно!",
               },
             ]}
-            style={{
-              marginBottom: 10,
-            }}
           >
             <Input prefix={<MailOutlined />} placeholder="Электронная почта" />
           </Form.Item>
           <Form.Item
             name="password"
             rules={[{ required: true, message: "Пожалуйста введите пароль!" }]}
-            style={{
-              marginBottom: 10,
-            }}
           >
             <Input
               prefix={<LockOutlined />}
@@ -95,11 +89,7 @@ const Authorization = () => {
           {error ? (
             <Typography.Text type="danger">{error}</Typography.Text>
           ) : null}
-          <Form.Item
-            style={{
-              marginBottom: 10,
-            }}
-          >
+          <Form.Item>
             <Row align="middle" justify="space-between" gutter={[25, 25]}>
               <Col>
                 <Form.Item name="remember" valuePropName="checked" noStyle>
@@ -111,11 +101,7 @@ const Authorization = () => {
               </Col>
             </Row>
           </Form.Item>
-          <Form.Item
-            style={{
-              marginBottom: 10,
-            }}
-          >
+          <Form.Item>
             <Row align="middle" justify="space-between" gutter={[25, 25]}>
               <Col>
                 <Button type="primary" htmlType="submit">

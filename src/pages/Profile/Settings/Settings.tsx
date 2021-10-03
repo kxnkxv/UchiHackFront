@@ -31,12 +31,7 @@ const Settings: FC = () => {
       <Form.Item label="Изображение профиля">
         <AvatarUpload />
       </Form.Item>
-      <Form.Item
-        label="Фамилия Имя Отчество"
-        style={{
-          marginBottom: 0,
-        }}
-      >
+      <Form.Item label="Фамилия Имя Отчество">
         <Row align="middle" justify="space-between" gutter={[25, 25]}>
           <Col span={8}>
             <Form.Item name="lastName">
@@ -67,12 +62,7 @@ const Settings: FC = () => {
       >
         <Input prefix={<MailOutlined />} placeholder="Электронная почта" />
       </Form.Item>
-      <Form.Item
-        label="Смена пароля"
-        style={{
-          marginBottom: 0,
-        }}
-      >
+      <Form.Item label="Смена пароля">
         <Row align="middle" justify="space-between" gutter={[25, 25]}>
           <Col span={8}>
             <Form.Item name="oldPassword" hasFeedback>
