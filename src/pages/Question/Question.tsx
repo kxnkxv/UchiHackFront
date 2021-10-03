@@ -1,8 +1,6 @@
 import React, { FC, useEffect, useState } from "react";
 import { SyncOutlined } from "@ant-design/icons";
 import { RouteComponentProps } from "react-router-dom";
-// import { questionsList } from "../../mockData/questions";
-// import { answers } from "../../mockData/answers";
 import { QuestionType } from "../../types/QuestionType";
 import Answer from "./components/Answer";
 import NotFound from "../NotFound/NotFound";
@@ -11,10 +9,12 @@ import UserInfo from "../../components/UserInfo";
 
 import {
   AddAnswer,
+  AnswersWrap,
   Container,
   Cost,
   Description,
   Footer,
+  Grid,
   Header,
   PublicChat,
   QuestionTitle,
@@ -22,10 +22,8 @@ import {
   Status,
   Submit,
   Title,
-  Grid,
-  AnswersWrap,
 } from "./styled";
-import { Card, Input, Tooltip } from "antd";
+import { Input, Tooltip } from "antd";
 import moment from "moment";
 
 import "moment/locale/ru";
@@ -74,9 +72,15 @@ const Question: FC<RouteComponentProps<RouteParams>> = ({ match }) => {
           setQuestion(r.data);
         }
       });
-  }, []);
-  useEffect(() => {
-    //  TODO: получить вопрос о id
+    axios
+      .request<AnswerType[]>({
+        method: "get",
+        url: `${URL}/answers/question/${questionId}`,
+        headers: {
+          Authorization: `Bearer ${Auth.token.accessToken}`,
+        },
+      })
+      .then((r) => setAnswers(r.data));
   }, []);
 
   return question ? (

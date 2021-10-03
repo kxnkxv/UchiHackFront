@@ -10,6 +10,7 @@ import { AnswerType } from "../../../types/AnswerType";
 import axios from "axios";
 import { URL } from "../../../constants/API";
 import Auth from "../../../store/auth";
+import Answer from "../../Question/components/Answer";
 
 const { TabPane } = Tabs;
 
@@ -21,9 +22,7 @@ const PublicProfile: FC<PublicProfileProps> = ({ userId }) => {
   // @ts-ignore
   const [currentUser, setCurrentUser] = useState<UserType>(null);
   const [questions, setQuestions] = useState<QuestionType[]>([]);
-
-  const answers = [];
-  const questionsId: string[] = [];
+  const [answers, setAnswers] = useState<AnswerType[]>([]);
 
   const getUserById = (id: string) => {
     axios
@@ -41,35 +40,30 @@ const PublicProfile: FC<PublicProfileProps> = ({ userId }) => {
     axios
       .request<QuestionType[]>({
         method: "get",
-        url: `${URL}/questions/`,
+        url: `${URL}/questions/user/${id}`,
         headers: {
           Authorization: `Bearer ${Auth.token.accessToken}`,
         },
       })
-      .then((r) => {
-        const filtered = r.data.filter((question) => id !== question.user.id);
-        setQuestions(filtered);
-      });
+      .then((r) => setQuestions(r.data));
   };
 
-  const getAnswersByUserId = () => {
-    questionsId.map((id) => {
-      axios
-        .request<AnswerType>({
-          method: "get",
-          url: `${URL}/answers/question/${id}/`,
-          headers: {
-            Authorization: `Bearer ${Auth.token.accessToken}`,
-          },
-        })
-        .then((r) => answers.push(r.data));
-    });
+  const getAnswersByUserId = (id: string) => {
+    axios
+      .request<AnswerType[]>({
+        method: "get",
+        url: `${URL}/answers/user/${id}`,
+        headers: {
+          Authorization: `Bearer ${Auth.token.accessToken}`,
+        },
+      })
+      .then((r) => setAnswers(r.data));
   };
 
   useEffect(() => {
     getUserById(userId);
     getQuestionsByUserId(userId);
-    getAnswersByUserId();
+    getAnswersByUserId(userId);
   }, []);
   return currentUser ? (
     <Card>
@@ -99,9 +93,8 @@ const PublicProfile: FC<PublicProfileProps> = ({ userId }) => {
         <Tabs defaultActiveKey="1">
           <TabPane tab="Вопросы" key="1">
             <List>
-              {questions.length === 0 ? (
+              {questions.length !== 0 ? (
                 questions.map((question: QuestionType) => {
-                  questionsId.push(question.id);
                   return <ThemeItem question={question} />;
                 })
               ) : (
@@ -110,11 +103,11 @@ const PublicProfile: FC<PublicProfileProps> = ({ userId }) => {
             </List>
           </TabPane>
           <TabPane tab="Ответы" key="2">
-            {/*{answers*/}
-            {/*  ? Object.keys(answers).map((answer) => (*/}
-            {/*      <Answer key={answer.id} data={answer} />*/}
-            {/*    ))*/}
-            {/*  : <Empty/>}*/}
+            {answers.length !== 0 ? (
+              answers.map((answer) => <Answer key={answer.id} data={answer} />)
+            ) : (
+              <Empty />
+            )}
           </TabPane>
         </Tabs>
       </Row>

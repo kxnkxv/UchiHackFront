@@ -4,7 +4,7 @@ import { getStorageItem, setStorageItem } from "../../utils/localStorage";
 
 class User {
   // @ts-ignore
-  user: UserType = getStorageItem("user") || null;
+  user: UserType = getStorageItem("user") || "";
 
   constructor() {
     makeAutoObservable(this);

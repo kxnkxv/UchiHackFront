@@ -1,4 +1,4 @@
-import { Avatar, Button, Card, Col, Row, Tabs } from "antd";
+import { Avatar, Button, Card, Col, Empty, Row, Tabs } from "antd";
 import React, { FC, useEffect, useState } from "react";
 import { UserOutlined } from "@ant-design/icons";
 import Auth from "../../../../store/auth";
@@ -9,16 +9,45 @@ import { List } from "../../../Themes/styled";
 import { QuestionType } from "../../../../types/QuestionType";
 import Answer from "../../../Question/components/Answer";
 import { AnswerType } from "../../../../types/AnswerType";
+import axios from "axios";
+import { URL } from "../../../../constants/API";
+import { removeStorageItem } from "../../../../utils/localStorage";
 
 const { TabPane } = Tabs;
 
 const PersonalPage: FC = () => {
-  const [questions, setQuestions] = useState([]);
-  const [answers, setAnswers] = useState([]);
-  useEffect(() => {
-    //  TODO: получить список вопросов (и отдельно ответов) юзера
-  }, []);
+  // @ts-ignore
+  const [questions, setQuestions] = useState<QuestionType[]>([]);
+  const [answers, setAnswers] = useState<AnswerType[]>([]);
 
+  const getQuestionsByUserId = (id: string) => {
+    axios
+      .request<QuestionType[]>({
+        method: "get",
+        url: `${URL}/questions/user/${id}`,
+        headers: {
+          Authorization: `Bearer ${Auth.token.accessToken}`,
+        },
+      })
+      .then((r) => setQuestions(r.data));
+  };
+
+  const getAnswersByUserId = (id: string) => {
+    axios
+      .request<AnswerType[]>({
+        method: "get",
+        url: `${URL}/answers/user/${id}`,
+        headers: {
+          Authorization: `Bearer ${Auth.token.accessToken}`,
+        },
+      })
+      .then((r) => setAnswers(r.data));
+  };
+
+  useEffect(() => {
+    getQuestionsByUserId(User.user.id || "");
+    getAnswersByUserId(User.user.id || "");
+  }, []);
   return (
     <Card>
       <Row gutter={[25, 25]} justify="space-around" align="middle">
@@ -40,7 +69,14 @@ const PersonalPage: FC = () => {
         <Col>{User.user.education}</Col>
         <Col>Баланс: {User.user.balance}</Col>
         <Col>
-          <Button danger onClick={() => Auth.setIsUserAuth(false)}>
+          <Button
+            danger
+            onClick={() => {
+              Auth.setIsUserAuth(false);
+              removeStorageItem("user");
+              removeStorageItem("token");
+            }}
+          >
             Выйти из аккаунта
           </Button>
         </Col>
@@ -49,21 +85,21 @@ const PersonalPage: FC = () => {
         <Tabs defaultActiveKey="1">
           <TabPane tab="Вопросы" key="1">
             <List>
-              {questions
-                ? questions.map((question: QuestionType) => (
-                    <ThemeItem question={question} />
-                  ))
-                : null}
+              {questions.length !== 0 ? (
+                questions.map((question: QuestionType) => {
+                  return <ThemeItem question={question} />;
+                })
+              ) : (
+                <Empty />
+              )}
             </List>
           </TabPane>
           <TabPane tab="Ответы" key="2">
-            <List>
-              {answers
-                ? answers.map((answer: AnswerType) => (
-                    <Answer key={answer.id} data={answer} />
-                  ))
-                : null}
-            </List>
+            {answers.length !== 0 ? (
+              answers.map((answer) => <Answer key={answer.id} data={answer} />)
+            ) : (
+              <Empty />
+            )}
           </TabPane>
         </Tabs>
       </Row>
