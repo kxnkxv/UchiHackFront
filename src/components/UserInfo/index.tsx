@@ -12,7 +12,9 @@ interface OwnProps {
 }
 
 const UserInfo: FC<OwnProps> = ({ data }) => {
-  return (
+  return !data ? (
+    <span>аноним</span>
+  ) : (
     <Container>
       <a href={`${PROFILE}/${data.id}`}>
         {User.user.avatar ? (

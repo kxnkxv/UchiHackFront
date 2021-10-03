@@ -5,6 +5,8 @@ import { QuestionType } from "../../types/QuestionType";
 import Answer from "./components/Answer";
 import NotFound from "../NotFound/NotFound";
 import UserInfo from "../../components/UserInfo";
+import User from "../../store/user";
+import { v4 as uuid } from "uuid";
 
 import {
   AddAnswer,
@@ -45,6 +47,20 @@ const Question: FC<RouteComponentProps<RouteParams>> = ({ match }) => {
   const { questionId } = match.params;
   const [isChatOpen, setIsChatOpen] = useState(false);
   const openChatHandler = () => setIsChatOpen(!isChatOpen);
+  const [answerBody, setAnswerBody] = useState({
+    id: uuid(),
+    message: "string",
+    question: questionId,
+    user: User.user.id,
+    createdAt: "2021-10-03T03:52:07.518Z",
+    updatedAt: "2021-10-03T03:52:07.518Z",
+  });
+
+  const setAnswerBodyHandler = (ev: React.ChangeEvent) => {
+    const { value } = ev.target as HTMLTextAreaElement;
+    setAnswerBody((prevState) => ({ ...prevState, message: value }));
+  };
+
   const {
     title,
     theme,
@@ -61,15 +77,22 @@ const Question: FC<RouteComponentProps<RouteParams>> = ({ match }) => {
     fetch(`${URL}/answers/create`, {
       method: "POST",
       headers: {
+        "Content-Type": "application/json",
         Authorization: `Bearer ${Auth.token.accessToken}`,
       },
-      body: JSON.stringify({
-        message: "string",
-        question,
-        user: {},
-      }),
+
+      body: JSON.stringify(answerBody),
     }).then((res) => {
-      console.log(res);
+      //answers
+      fetch(`${URL}/answers/question/${questionId}`, {
+        headers: {
+          Authorization: `Bearer ${Auth.token.accessToken}`,
+        },
+      })
+        .then((res) => res.json())
+        .then((res) => {
+          setAnswers(res.data);
+        });
     });
   };
 
@@ -115,7 +138,7 @@ const Question: FC<RouteComponentProps<RouteParams>> = ({ match }) => {
           <QuestionTitle>{title}</QuestionTitle>
           <Description>{description}</Description>
           <Footer>
-            {/*<UserInfo data={user} />*/}
+            <UserInfo data={user} />
             <Title>{time} минут</Title>
             {urgently && <Title>Срочное</Title>}
             <Cost>{cost} баллов</Cost>
@@ -127,7 +150,10 @@ const Question: FC<RouteComponentProps<RouteParams>> = ({ match }) => {
         <AddAnswer>
           <div>
             <h2>Ваш ответ</h2>
-            <Input.TextArea placeholder="Текстовое поле для ответа" />
+            <Input.TextArea
+              onChange={setAnswerBodyHandler}
+              placeholder="Текстовое поле для ответа"
+            />
             <Submit onClick={createAnswerHandler} type="primary">
               Отправить
             </Submit>

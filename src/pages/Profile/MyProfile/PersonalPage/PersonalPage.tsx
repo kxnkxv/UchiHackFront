@@ -16,19 +16,8 @@ const { TabPane } = Tabs;
 
 const PersonalPage: FC = () => {
   // @ts-ignore
-  const [rawQuestions, setRawQuestions] = useState<QuestionType[]>([]);
   const [questions, setQuestions] = useState<QuestionType[]>([]);
-  const [rawAnswers, setRawAnswers] = useState<AnswerType[]>([]);
   const [answers, setAnswers] = useState<AnswerType[]>([]);
-
-  useEffect(() => {
-    // @ts-ignore
-    return setAnswers(Object.entries(rawAnswers));
-  }, [rawAnswers]);
-  useEffect(() => {
-    // @ts-ignore
-    return setQuestions(Object.entries(rawQuestions));
-  }, [rawQuestions]);
 
   const getQuestionsByUserId = (id: string) => {
     axios
@@ -39,7 +28,7 @@ const PersonalPage: FC = () => {
           Authorization: `Bearer ${Auth.token.accessToken}`,
         },
       })
-      .then((r) => setRawQuestions(r.data));
+      .then((r) => setQuestions(r.data));
   };
 
   const getAnswersByUserId = (id: string) => {
@@ -51,7 +40,7 @@ const PersonalPage: FC = () => {
           Authorization: `Bearer ${Auth.token.accessToken}`,
         },
       })
-      .then((r) => setRawAnswers(r.data));
+      .then((r) => setAnswers(r.data));
   };
 
   useEffect(() => {
