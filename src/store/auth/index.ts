@@ -2,6 +2,7 @@ import { makeAutoObservable } from "mobx";
 import axios from "axios";
 import { URL } from "../../constants/API";
 import { UserType } from "../../types/UserType";
+import { getStorageItem, setStorageItem } from "../../utils/localStorage";
 
 interface AuthServer {
   data: {
@@ -11,8 +12,10 @@ interface AuthServer {
 }
 
 class Auth {
-  isUserAuth = !!window.localStorage.getItem("isUserAuth");
-  token = {};
+  isUserAuth = !!getStorageItem("isUserAuth");
+  token: { expiresIn: number; accessToken: string } = getStorageItem(
+    "token"
+  ) || { expiresIn: 0, accessToken: "" };
 
   constructor() {
     makeAutoObservable(this);
@@ -20,11 +23,12 @@ class Auth {
 
   setIsUserAuth(status: boolean) {
     this.isUserAuth = status;
-    window.localStorage.setItem("isUserAuth", `${status || ""}`);
+    setStorageItem("isUserAuth", status);
   }
 
-  setToken = (token: {}) => {
+  setToken = (token: { expiresIn: number; accessToken: string }) => {
     this.token = token;
+    setStorageItem("token", token);
   };
 
   authLogin = (email: string, password: string) =>
@@ -35,7 +39,6 @@ class Auth {
         email,
         password,
       },
-      headers: {},
     });
 
   authRegister = (

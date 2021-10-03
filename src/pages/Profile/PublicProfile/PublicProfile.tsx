@@ -10,6 +10,9 @@ import NotFound from "../../NotFound/NotFound";
 import { QuestionType } from "../../../types/QuestionType";
 import { AnswerType } from "../../../types/AnswerType";
 import Answer from "../../Question/components/Answer";
+import axios from "axios";
+import { URL } from "../../../constants/API";
+import Auth from "../../../store/auth";
 
 const { TabPane } = Tabs;
 
@@ -22,8 +25,22 @@ const PublicProfile: FC<PublicProfileProps> = ({ userId }) => {
   const [currentUser, setCurrentUser] = useState<UserType>(null);
   const [questions, setQuestions] = useState<QuestionType[]>([]);
   const [answers, setAnswers] = useState<AnswerType[]>([]);
+
+  const getUserById = (id: string) => {
+    axios
+      .request<UserType>({
+        method: "get",
+        url: `${URL}/users/${id}`,
+        headers: {
+          Authorization: `Bearer ${Auth.token.accessToken}`,
+        },
+      })
+      .then((r) => setCurrentUser(r.data));
+  };
+
   useEffect(() => {
     //  TODO: получить список вопросов (и отдельно ответов) + юзера
+    getUserById(userId);
   }, []);
   return currentUser ? (
     <Card>
