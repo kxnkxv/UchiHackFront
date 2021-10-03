@@ -16,12 +16,12 @@ import { Item, List, Logo } from "./styled";
 import { URL } from "../../constants/API";
 
 const icons: Record<string, JSX.Element> = {
-  math: <MathIcon />,
-  russian: <RussianIcon />,
-  art: <ArtIcon />,
-  physic: <PhysicIcon />,
+  "929b2633-4a39-42a1-8d98-05b93a1e709c": <MathIcon />,
+  "9896d837-f828-4400-977c-c1bcd1e5dd34": <RussianIcon />,
+  "f7fe95eb-c8ec-46f4-96ed-4c42c0f7a726": <ArtIcon />,
+  "df7bf495-f57a-45ca-b427-113713d99559": <PhysicIcon />,
   informatics: <InformaticsIcon />,
-  literature: <LiteratureIcon />,
+  "5c2159c2-993e-4a3f-80b7-14abd1f29f91": <LiteratureIcon />,
 };
 
 const SideBar: FC = observer(() => {

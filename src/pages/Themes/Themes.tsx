@@ -16,6 +16,7 @@ interface RouteParams {
 
 const Themes: FC<RouteComponentProps<RouteParams>> = ({ match }) => {
   const { themeId } = match.params;
+
   const [questionsByTheme, setQuestionsByTheme] = useState<QuestionType[]>([]);
   const [themes, setThemes] = useState<any[]>([]);
   useEffect(() => {
@@ -26,24 +27,24 @@ const Themes: FC<RouteComponentProps<RouteParams>> = ({ match }) => {
     })
       .then((res) => res.json())
       .then((res) => {
-        setThemes(res.data);
+        setThemes(res.data || []);
       });
-    if (themeId) {
-      axios
-        .request({
-          method: "get",
-          url: `${URL}/questions/theme/${themeId}`,
-          headers: {
-            Authorization: `Bearer ${Auth.token.accessToken}`,
-          },
-        })
-        .then((r) => {
-          if (r.data) {
-            setQuestionsByTheme(r.data);
-          }
-        });
-    }
-  }, []);
+
+    const questionsUrl = themeId
+      ? `${URL}/questions/theme/${themeId}`
+      : `${URL}/questions`;
+
+    fetch(questionsUrl, {
+      headers: {
+        Authorization: `Bearer ${Auth.token.accessToken}`,
+      },
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        setQuestionsByTheme(res.data || []);
+      });
+  }, [themeId]);
+
   if (themeId === "allThemes") {
     return (
       <Row align="middle" justify="space-around">

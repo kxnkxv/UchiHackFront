@@ -55,31 +55,46 @@ const Question: FC<RouteComponentProps<RouteParams>> = ({ match }) => {
     status,
     createdAt,
     urgently,
-  } = question;
+  } = question || {};
+
+  const createAnswerHandler = () => {
+    fetch(`${URL}/answers/create`, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${Auth.token.accessToken}`,
+      },
+      body: JSON.stringify({
+        message: "string",
+        question,
+        user: {},
+      }),
+    }).then((res) => {
+      console.log(res);
+    });
+  };
 
   useEffect(() => {
-    axios
-      .request<QuestionType>({
-        method: "get",
-        url: `${URL}/questions/${questionId}`,
-        headers: {
-          Authorization: `Bearer ${Auth.token.accessToken}`,
-        },
-      })
-      .then((r) => {
-        if (r.data) {
-          setQuestion(r.data);
-        }
+    // questions
+    fetch(`${URL}/questions/${questionId}`, {
+      headers: {
+        Authorization: `Bearer ${Auth.token.accessToken}`,
+      },
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        setQuestion(res);
       });
-    axios
-      .request<AnswerType[]>({
-        method: "get",
-        url: `${URL}/answers/question/${questionId}`,
-        headers: {
-          Authorization: `Bearer ${Auth.token.accessToken}`,
-        },
-      })
-      .then((r) => setAnswers(r.data));
+
+    //answers
+    fetch(`${URL}/answers/question/${questionId}`, {
+      headers: {
+        Authorization: `Bearer ${Auth.token.accessToken}`,
+      },
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        setAnswers(res.data);
+      });
   }, []);
 
   return question ? (
@@ -92,7 +107,7 @@ const Question: FC<RouteComponentProps<RouteParams>> = ({ match }) => {
             </Title>
             <Tooltip title={moment().format("YYYY-MM-DD HH:mm:ss")}>
               <Title>
-                Добавлено <b>{createdAt.fromNow()}</b>
+                Добавлено <b>{createdAt}</b>
               </Title>
             </Tooltip>
             <PublicChat onClick={openChatHandler}>Общий чат</PublicChat>
@@ -100,7 +115,7 @@ const Question: FC<RouteComponentProps<RouteParams>> = ({ match }) => {
           <QuestionTitle>{title}</QuestionTitle>
           <Description>{description}</Description>
           <Footer>
-            <UserInfo data={user} />
+            {/*<UserInfo data={user} />*/}
             <Title>{time} минут</Title>
             {urgently && <Title>Срочное</Title>}
             <Cost>{cost} баллов</Cost>
@@ -113,7 +128,9 @@ const Question: FC<RouteComponentProps<RouteParams>> = ({ match }) => {
           <div>
             <h2>Ваш ответ</h2>
             <Input.TextArea placeholder="Текстовое поле для ответа" />
-            <Submit type="primary">Отправить</Submit>
+            <Submit onClick={createAnswerHandler} type="primary">
+              Отправить
+            </Submit>
           </div>
         </AddAnswer>
       </Grid>
