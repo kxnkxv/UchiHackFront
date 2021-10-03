@@ -20,27 +20,28 @@ const PersonalPage: FC = () => {
   const [answers, setAnswers] = useState<AnswerType[]>([]);
 
   const getQuestionsByUserId = (id: string) => {
-    axios
-      .request<QuestionType[]>({
-        method: "get",
-        url: `${URL}/questions/user/${id}`,
-        headers: {
-          Authorization: `Bearer ${Auth.token.accessToken}`,
-        },
-      })
-      .then((r) => setQuestions(r.data));
+    // questions
+    fetch(`${URL}/questions/user/${id}`, {
+      headers: {
+        Authorization: `Bearer ${Auth.token.accessToken}`,
+      },
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        setQuestions(res.data);
+      });
   };
 
   const getAnswersByUserId = (id: string) => {
-    axios
-      .request<AnswerType[]>({
-        method: "get",
-        url: `${URL}/answers/user/${id}`,
-        headers: {
-          Authorization: `Bearer ${Auth.token.accessToken}`,
-        },
-      })
-      .then((r) => setAnswers(r.data));
+    fetch(`${URL}/answers/user/${id}`, {
+      headers: {
+        Authorization: `Bearer ${Auth.token.accessToken}`,
+      },
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        setAnswers(res.data);
+      });
   };
 
   useEffect(() => {
@@ -84,7 +85,8 @@ const PersonalPage: FC = () => {
         <Tabs defaultActiveKey="1">
           <TabPane tab="Вопросы" key="1">
             <List>
-              {questions.length !== 0 ? (
+              {questions && questions.length !== 0 ? (
+                questions &&
                 questions.map((question: QuestionType) => {
                   return <ThemeItem question={question} />;
                 })
@@ -94,7 +96,8 @@ const PersonalPage: FC = () => {
             </List>
           </TabPane>
           <TabPane tab="Ответы" key="2">
-            {answers.length !== 0 ? (
+            {answers && answers.length !== 0 ? (
+              answers &&
               answers.map((answer) => <Answer key={answer.id} data={answer} />)
             ) : (
               <Empty />
