@@ -32,7 +32,7 @@ const ThemeItem: FC<OwnProps> = ({ question }) => {
         </div>
         <Tooltip title={moment().format("YYYY-MM-DD HH:mm:ss")}>
           <Title small>
-            Добавлено <b>{createdAt.fromNow()}</b>
+            Добавлено <b>{moment(createdAt).fromNow()}</b>
           </Title>
         </Tooltip>
       </Header>

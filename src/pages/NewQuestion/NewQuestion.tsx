@@ -22,17 +22,15 @@ import { URL } from "../../constants/API";
 import Auth from "../../store/auth";
 import { removeDuplicates } from "../../utils/removeDuplicates";
 
+export interface SuggQuestionType {
+  data: QuestionType[];
+}
+
 const NewQuestion = () => {
   const [form] = Form.useForm();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [themes, setThemes] = useState<any[]>([]);
-  const [query, setQuery] = useState("");
-
-  useEffect(() => {
-    const timeOutId = setTimeout(() => getSimilar(query), 1000);
-    return () => clearTimeout(timeOutId);
-  }, [query]);
 
   useEffect(() => {
     fetch(`${URL}/themes/`, {
@@ -72,36 +70,23 @@ const NewQuestion = () => {
   const onFinishFailed = (errorInfo: any) => {
     console.log("Failed:", errorInfo);
   };
-
   const [similar, setSimilar] = useState<any[]>([]);
-
-  const getSimilar = (query: string) => {
-    const temp: any[] = [];
-    const title = form.getFieldValue("title");
-    const description = form.getFieldValue("description");
-    axios
-      .request<QuestionType>({
-        method: "get",
-        url: `${URL}/questions/suggestions?q=${description}`,
-        headers: {
-          Authorization: `Bearer ${Auth.token.accessToken}`,
-        },
-      })
-      .then((response) => {
-        temp.push(response.data);
-      });
-    axios
-      .request<QuestionType>({
-        method: "get",
-        url: `${URL}/questions/suggestions?q=${title}`,
-        headers: {
-          Authorization: `Bearer ${Auth.token.accessToken}`,
-        },
-      })
-      .then((response) => {
-        temp.push(response.data);
-      });
-    setSimilar(removeDuplicates(temp));
+  const temp: any[] = [];
+  const getSimilar = (e: any) => {
+    if (e.target.value != "") {
+      axios
+        .request<SuggQuestionType>({
+          method: "get",
+          url: `${URL}/questions/suggestions?q=${e.target.value}`,
+          headers: {
+            Authorization: `Bearer ${Auth.token.accessToken}`,
+          },
+        })
+        .then((response) => {
+          temp.push(response.data.data);
+        });
+      setSimilar(removeDuplicates(temp));
+    }
   };
 
   let time = [];
@@ -180,8 +165,7 @@ const NewQuestion = () => {
           >
             <Input
               placeholder="Кратко опишите Ваш вопрос"
-              value={query}
-              onChange={(event) => setQuery(event.target.value)}
+              onChange={getSimilar}
             />
           </Form.Item>
           <Form.Item
@@ -196,8 +180,7 @@ const NewQuestion = () => {
             <Input.TextArea
               placeholder="Подробно опишите Ваш вопрос"
               autoSize={{ minRows: 3, maxRows: 5 }}
-              value={query}
-              onChange={(event) => setQuery(event.target.value)}
+              onChange={getSimilar}
             />
           </Form.Item>
           <Row align="middle" justify="space-between" gutter={[25, 25]}>
@@ -255,11 +238,11 @@ const NewQuestion = () => {
           </Row>
         </Form>
       </Card>
-      {similar.length !== 0 ? (
+      {similar.length != 0 ? (
         <Card>
           <Typography.Title>Похожие вопросы</Typography.Title>
           <List>
-            {similar.map((question) => (
+            {similar.map((question: QuestionType) => (
               <ThemeItem question={question} />
             ))}
           </List>
