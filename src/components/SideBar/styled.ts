@@ -7,7 +7,7 @@ interface Props {
 export const List = styled.ul`
   background: #252d3d;
   width: 250px;
-  height: 100%;
+  min-height: 100%;
   margin: 0;
   padding: 0;
 `;
