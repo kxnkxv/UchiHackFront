@@ -13,9 +13,7 @@ import {
 import React, { useState } from "react";
 import ThemeItem from "../Themes/components/ThemeItem/ThemeItem";
 import { List } from "../Themes/styled";
-import moment from "moment";
-import { users } from "../../mockData/users";
-import { UserType } from "../../types/UserType";
+// import { users } from "../../mockData/users";
 import { Container } from "./styled";
 
 const NewQuestion = () => {
@@ -48,24 +46,8 @@ const NewQuestion = () => {
     const subtheme = form.getFieldValue("subtheme");
     const title = form.getFieldValue("title");
     const description = form.getFieldValue("description");
-    const result = [
-      {
-        id: "111",
-        title: "Вопрос 1",
-        description:
-          "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip",
-        theme: "russian",
-        subTheme: "",
-        createdAt: moment(),
-        user: users.find(({ id }) => id === "111") as UserType,
-        cost: 0,
-        status: "Не решено",
-        time: 0,
-        urgently: false,
-      },
-    ];
-    // @ts-ignore
-    setSimilar(result);
+    //TODO: Поиск похожих вопросов
+    setSimilar([]);
     console.log(theme, subtheme, title, description);
   };
 

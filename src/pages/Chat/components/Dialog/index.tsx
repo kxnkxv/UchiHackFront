@@ -1,9 +1,8 @@
 import React, { FC, useState } from "react";
 import Call from "../Call";
 import { Button, Form, Input } from "antd";
-import { Messages, Message, Header, MessageForm } from "./styled";
+import { Header, Message, MessageForm, Messages } from "./styled";
 import UserInfo from "../../../../components/UserInfo";
-import { users } from "../../../../mockData/users";
 
 interface OwnProps {
   back: () => void;
@@ -23,6 +22,8 @@ const Dialog: FC<OwnProps> = ({ back, data, publicChat }) => {
     // ошибка при отправке
     console.log(errorInfo);
   };
+
+  const userMock = {};
 
   const messagesMock: any[] = [
     {
@@ -46,7 +47,7 @@ const Dialog: FC<OwnProps> = ({ back, data, publicChat }) => {
     <Messages>
       <Header>
         {!publicChat && <Button onClick={back}>{"<"}</Button>}
-        <UserInfo data={users[0]} />
+        <UserInfo data={userMock} />
         {isOpenCall && <Call close={setIsOpenCallHandler} />}
         <Button onClick={setIsOpenCallHandler}>Позвонить</Button>
       </Header>
