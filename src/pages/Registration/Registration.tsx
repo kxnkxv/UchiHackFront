@@ -14,6 +14,7 @@ const Authorization = () => {
   const [form] = Form.useForm();
 
   const onFinish = (values: any) => {
+    setLoading(true);
     Auth.authRegister(
       values.email,
       values.password,

@@ -29,6 +29,7 @@ const Authorization = () => {
   };
 
   const onFinish = (values: any) => {
+    setLoading(true);
     Auth.authLogin(values.email, values.password)
       .then((response) => {
         saveAuth(response);
