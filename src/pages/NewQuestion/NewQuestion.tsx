@@ -12,7 +12,7 @@ import {
   Space,
   Typography,
 } from "antd";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ThemeItem from "../Themes/components/ThemeItem/ThemeItem";
 import { List } from "../Themes/styled";
 import { Container } from "./styled";
@@ -25,6 +25,19 @@ const NewQuestion = () => {
   const [form] = Form.useForm();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [themes, setThemes] = useState<any[]>([]);
+
+  useEffect(() => {
+    fetch(`${URL}/themes/`, {
+      headers: {
+        Authorization: `Bearer ${Auth.token.accessToken}`,
+      },
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        setThemes(res.data);
+      });
+  }, []);
 
   const onFinish = (values: any) => {
     setLoading(true);
@@ -53,11 +66,14 @@ const NewQuestion = () => {
     console.log("Failed:", errorInfo);
   };
 
-  const themes = [
-    { value: "Математика" },
-    { value: "Русский" },
-    { value: "Исскуство" },
-  ];
+  const themesCust = [];
+  themes.map((theme) => {
+    const obj = {
+      id: theme.id,
+      value: theme.title,
+    };
+    themesCust.push(obj);
+  });
 
   const subThemes = [
     { value: "Вторая мировая война" },
@@ -132,15 +148,7 @@ const NewQuestion = () => {
               </Form.Item>
             </Col>
             <Col span={12}>
-              <Form.Item
-                name="subTheme"
-                rules={[
-                  {
-                    required: true,
-                    message: "Это поле обязательно для заполнения!",
-                  },
-                ]}
-              >
+              <Form.Item name="subTheme">
                 <AutoComplete
                   options={subThemes}
                   filterOption={(inputValue, option) =>

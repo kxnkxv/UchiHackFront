@@ -1,4 +1,4 @@
-import React, { FC, useState } from "react";
+import React, { FC, useEffect, useState } from "react";
 import { observer } from "mobx-react-lite";
 import { Link } from "react-router-dom";
 import { THEMES } from "../../constants/routes";
@@ -10,9 +10,10 @@ import { ReactComponent as ArtIcon } from "../../icons/art.svg";
 import { ReactComponent as PhysicIcon } from "../../icons/physic.svg";
 import { ReactComponent as LiteratureIcon } from "../../icons/literature.svg";
 import logo from "../../img/logo.png";
+import Auth from "../../store/auth";
 
 import { Item, List, Logo } from "./styled";
-import { themes } from "../../constants/themes";
+import { URL } from "../../constants/API";
 
 const icons: Record<string, JSX.Element> = {
   math: <MathIcon />,
@@ -24,6 +25,19 @@ const icons: Record<string, JSX.Element> = {
 };
 
 const SideBar: FC = observer(() => {
+  const [themes, setThemes] = useState<any[]>([]);
+  useEffect(() => {
+    fetch(`${URL}/themes/`, {
+      headers: {
+        Authorization: `Bearer ${Auth.token.accessToken}`,
+      },
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        setThemes(res.data);
+      });
+  }, []);
+
   const [current, setCurrent] = useState("/");
 
   const handleClick = (key: string) => () => {

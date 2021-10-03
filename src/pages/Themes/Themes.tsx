@@ -9,7 +9,6 @@ import { QuestionType } from "../../types/QuestionType";
 import axios from "axios";
 import { URL } from "../../constants/API";
 import Auth from "../../store/auth";
-import { themes } from "../../constants/themes";
 
 interface RouteParams {
   themeId: string;
@@ -18,7 +17,17 @@ interface RouteParams {
 const Themes: FC<RouteComponentProps<RouteParams>> = ({ match }) => {
   const { themeId } = match.params;
   const [questionsByTheme, setQuestionsByTheme] = useState<QuestionType[]>([]);
+  const [themes, setThemes] = useState<any[]>([]);
   useEffect(() => {
+    fetch(`${URL}/themes/`, {
+      headers: {
+        Authorization: `Bearer ${Auth.token.accessToken}`,
+      },
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        setThemes(res.data);
+      });
     if (themeId) {
       axios
         .request({
