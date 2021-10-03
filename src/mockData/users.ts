@@ -20,7 +20,7 @@ export const users: UserType[] = [
   {
     firstName: "Имя",
     lastName: "Фамилия",
-    id: "111",
+    id: "222",
     avatar:
       "https://im0-tub-ru.yandex.net/i?id=cb0ef2ded5c53f212c2f36fa49a5c987&n=13&exp=1",
     phone: "89999999999",
@@ -36,7 +36,7 @@ export const users: UserType[] = [
   {
     firstName: "Имя",
     lastName: "Фамилия",
-    id: "111",
+    id: "333",
     avatar:
       "https://im0-tub-ru.yandex.net/i?id=cb0ef2ded5c53f212c2f36fa49a5c987&n=13&exp=1",
     phone: "89999999999",
@@ -52,7 +52,7 @@ export const users: UserType[] = [
   {
     firstName: "Имя",
     lastName: "Фамилия",
-    id: "111",
+    id: "444",
     avatar:
       "https://im0-tub-ru.yandex.net/i?id=cb0ef2ded5c53f212c2f36fa49a5c987&n=13&exp=1",
     phone: "89999999999",
@@ -68,7 +68,7 @@ export const users: UserType[] = [
   {
     firstName: "Имя",
     lastName: "Фамилия",
-    id: "111",
+    id: "555",
     avatar:
       "https://im0-tub-ru.yandex.net/i?id=cb0ef2ded5c53f212c2f36fa49a5c987&n=13&exp=1",
     phone: "89999999999",
@@ -84,7 +84,7 @@ export const users: UserType[] = [
   {
     firstName: "Имя",
     lastName: "Фамилия",
-    id: "111",
+    id: "666",
     avatar:
       "https://im0-tub-ru.yandex.net/i?id=cb0ef2ded5c53f212c2f36fa49a5c987&n=13&exp=1",
     phone: "89999999999",

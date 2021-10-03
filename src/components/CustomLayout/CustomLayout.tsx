@@ -10,24 +10,11 @@ const CustomLayout: FC = ({ children }) => {
     <>
       <Row
         gutter={[25, 25]}
-        justify="space-around"
-        align="middle"
-        style={{
-          padding: 0,
-          margin: 0,
-        }}
-      >
-        <Col span={24}>
-          <HeaderNav />
-        </Col>
-      </Row>
-      <Row
-        gutter={[25, 25]}
         justify="center"
         style={{
           padding: 0,
           margin: 0,
-          minHeight: "calc(100vh - 131px)",
+          minHeight: "calc(100vh - 70px)",
         }}
       >
         <Col
@@ -45,6 +32,19 @@ const CustomLayout: FC = ({ children }) => {
             paddingTop: 2,
           }}
         >
+          <Row
+            gutter={[25, 25]}
+            justify="space-around"
+            align="middle"
+            style={{
+              padding: 0,
+              margin: 0,
+            }}
+          >
+            <Col span={24}>
+              <HeaderNav />
+            </Col>
+          </Row>
           <Content>{children}</Content>
         </Col>
       </Row>
