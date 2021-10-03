@@ -11,7 +11,6 @@ import {
   Title,
   ToAnswer,
 } from "./styled";
-import { questionsThemes } from "../../../../constants/questionsThemes";
 import { Link } from "react-router-dom";
 import { Tooltip } from "antd";
 import moment from "moment";
@@ -29,7 +28,7 @@ const ThemeItem: FC<OwnProps> = ({ question }) => {
     <Container>
       <Header>
         <div>
-          <Title bold>{questionsThemes[theme]}</Title>
+          <Title bold>{theme}</Title>
         </div>
         <Tooltip title={moment().format("YYYY-MM-DD HH:mm:ss")}>
           <Title small>

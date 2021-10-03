@@ -4,7 +4,6 @@ import { RouteComponentProps } from "react-router-dom";
 import { QuestionType } from "../../types/QuestionType";
 import Answer from "./components/Answer";
 import NotFound from "../NotFound/NotFound";
-import { questionsThemes } from "../../constants/questionsThemes";
 import UserInfo from "../../components/UserInfo";
 
 import {
@@ -89,7 +88,7 @@ const Question: FC<RouteComponentProps<RouteParams>> = ({ match }) => {
         <QuestionWrap>
           <Header>
             <Title>
-              <b>{questionsThemes[theme]}</b>
+              <b>{question.theme}</b>
             </Title>
             <Tooltip title={moment().format("YYYY-MM-DD HH:mm:ss")}>
               <Title>

@@ -9,6 +9,7 @@ import { QuestionType } from "../../types/QuestionType";
 import axios from "axios";
 import { URL } from "../../constants/API";
 import Auth from "../../store/auth";
+import { themes } from "../../constants/themes";
 
 interface RouteParams {
   themeId: string;
@@ -17,34 +18,22 @@ interface RouteParams {
 const Themes: FC<RouteComponentProps<RouteParams>> = ({ match }) => {
   const { themeId } = match.params;
   const [questionsByTheme, setQuestionsByTheme] = useState<QuestionType[]>([]);
-  const [themes, setThemes] = useState([]);
   useEffect(() => {
-    axios
-      .request({
-        method: "get",
-        url: `${URL}/themes/`,
-        headers: {
-          Authorization: `Bearer ${Auth.token.accessToken}`,
-        },
-      })
-      .then((r) => {
-        if (r.data) {
-          setThemes(r.data);
-        }
-      });
-    axios
-      .request({
-        method: "get",
-        url: `${URL}/questions/theme/${themeId}`,
-        headers: {
-          Authorization: `Bearer ${Auth.token.accessToken}`,
-        },
-      })
-      .then((r) => {
-        if (r.data) {
-          setThemes(r.data);
-        }
-      });
+    if (themeId) {
+      axios
+        .request({
+          method: "get",
+          url: `${URL}/questions/theme/${themeId}`,
+          headers: {
+            Authorization: `Bearer ${Auth.token.accessToken}`,
+          },
+        })
+        .then((r) => {
+          if (r.data) {
+            setQuestionsByTheme(r.data);
+          }
+        });
+    }
   }, []);
   if (themeId === "allThemes") {
     return (
