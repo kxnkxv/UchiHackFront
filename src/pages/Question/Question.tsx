@@ -29,6 +29,10 @@ import moment from "moment";
 import "moment/locale/ru";
 import Chat from "../Chat";
 import { AnswerType } from "../../types/AnswerType";
+import axios from "axios";
+import { UserType } from "../../types/UserType";
+import { URL } from "../../constants/API";
+import Auth from "../../store/auth";
 
 moment.locale("ru");
 
@@ -40,9 +44,6 @@ const Question: FC<RouteComponentProps<RouteParams>> = ({ match }) => {
   // @ts-ignore
   const [question, setQuestion] = useState<QuestionType>(null);
   const [answers, setAnswers] = useState<AnswerType[]>([]);
-  useEffect(() => {
-    //  TODO: получить вопрос о id
-  }, []);
   const { questionId } = match.params;
   const [isChatOpen, setIsChatOpen] = useState(false);
   const openChatHandler = () => setIsChatOpen(!isChatOpen);
@@ -57,6 +58,26 @@ const Question: FC<RouteComponentProps<RouteParams>> = ({ match }) => {
     createdAt,
     urgently,
   } = question;
+
+  useEffect(() => {
+    axios
+      .request<QuestionType>({
+        method: "get",
+        url: `${URL}/questions/${questionId}`,
+        headers: {
+          Authorization: `Bearer ${Auth.token.accessToken}`,
+        },
+      })
+      .then((r) => {
+        if (r.data) {
+          setQuestion(r.data);
+        }
+      });
+  }, []);
+  useEffect(() => {
+    //  TODO: получить вопрос о id
+  }, []);
+
   return question ? (
     <Container>
       <QuestionWrap>
