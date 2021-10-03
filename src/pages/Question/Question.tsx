@@ -69,9 +69,7 @@ const Question: FC<RouteComponentProps<RouteParams>> = ({ match }) => {
               Добавлено <b>{createdAt.fromNow()}</b>
             </Title>
           </Tooltip>
-          <PublicChat onClick={openChatHandler} toRight>
-            Общий чат
-          </PublicChat>
+          <PublicChat onClick={openChatHandler}>Общий чат</PublicChat>
         </Header>
         <QuestionTitle>{title}</QuestionTitle>
         <Description>{description}</Description>
@@ -80,7 +78,7 @@ const Question: FC<RouteComponentProps<RouteParams>> = ({ match }) => {
           <Title>{time} минут</Title>
           {urgently && <Title>Срочное</Title>}
           <Cost>{cost} баллов</Cost>
-          <Status toRight icon={<SyncOutlined spin />} color="processing">
+          <Status icon={<SyncOutlined spin />} color="processing">
             {status}
           </Status>
         </Footer>

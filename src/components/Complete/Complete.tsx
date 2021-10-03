@@ -1,6 +1,8 @@
 import React, { useState } from "react";
-import { AutoComplete, Input } from "antd";
+import { AutoComplete } from "antd";
 import { SelectProps } from "antd/es/select";
+
+import { Search } from "./styled";
 
 function getRandomInt(max: number, min: number = 0) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -58,7 +60,7 @@ const Complete: React.FC = () => {
         option!.value.toUpperCase().indexOf(inputValue.toUpperCase()) !== -1
       }
     >
-      <Input.Search placeholder="Найти ответ на любой вопрос" enterButton />
+      <Search placeholder="Найти ответ на любой вопрос" enterButton />
     </AutoComplete>
   );
 };

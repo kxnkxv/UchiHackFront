@@ -11,7 +11,6 @@ import {
   REGISTRATION,
 } from "../../constants/routes";
 import Complete from "../Complete/Complete";
-import logo from "./../../img/logo.png";
 import Chat from "../../pages/Chat";
 
 const HeaderNav: FC = observer(() => {
@@ -27,6 +26,7 @@ const HeaderNav: FC = observer(() => {
           padding: 0,
           margin: 0,
           paddingTop: 5,
+          height: 80,
         }}
       >
         <Col
@@ -44,11 +44,6 @@ const HeaderNav: FC = observer(() => {
               margin: 0,
             }}
           >
-            <Col>
-              <Link to="/">
-                <Image src={logo} height={50} width={50} preview={false} />
-              </Link>
-            </Col>
             <Col span={19}>
               <Complete />
             </Col>

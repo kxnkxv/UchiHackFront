@@ -1,10 +1,6 @@
 import styled from "styled-components";
 import { Button, Card, Tag } from "antd";
 
-interface Props {
-  toRight?: boolean;
-}
-
 export const Container = styled.div`
   max-width: 1260px;
   padding: 0 40px;
@@ -38,8 +34,8 @@ export const Title = styled.div`
   margin: 0 30px 0 0;
 `;
 
-export const PublicChat = styled(Button)<Props>`
-  margin: ${({ toRight }) => (toRight ? "0 0 0 auto" : "0")};
+export const PublicChat = styled(Button)`
+  margin: 0;
   height: 44px;
 `;
 
@@ -51,8 +47,8 @@ export const Submit = styled(Button)`
   margin: 20px 0 0;
 `;
 
-export const Status = styled(Tag)<Props>`
-  margin: ${({ toRight }) => (toRight ? "0 0 0 auto" : "0")};
+export const Status = styled(Tag)`
+  margin: 0;
 `;
 
 export const Cost = styled.span`
