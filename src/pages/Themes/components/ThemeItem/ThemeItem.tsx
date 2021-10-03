@@ -29,10 +29,10 @@ const ThemeItem: FC<OwnProps> = ({ question }) => {
     <Container>
       <Header>
         <div>
-          <Title>{questionsThemes[theme]}</Title>
+          <Title bold>{questionsThemes[theme]}</Title>
         </div>
         <Tooltip title={moment().format("YYYY-MM-DD HH:mm:ss")}>
-          <Title>
+          <Title small>
             Добавлено <b>{createdAt.fromNow()}</b>
           </Title>
         </Tooltip>

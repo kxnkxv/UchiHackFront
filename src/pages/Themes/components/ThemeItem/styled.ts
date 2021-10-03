@@ -5,11 +5,14 @@ import { Button, Card } from "antd";
 interface Props {
   bold?: boolean;
   urgently?: boolean;
+  small?: boolean;
 }
 
 export const Container = styled(Card)`
-  padding: 20px 30px;
-  margin: 20px auto 0;
+  background: #f2f7ff;
+  border: none;
+  border-radius: 7px;
+  margin: 30px 0 0 0;
 `;
 
 export const Header = styled.div`
@@ -18,7 +21,7 @@ export const Header = styled.div`
 `;
 
 export const Title = styled.span<Props>`
-  font-size: 16px;
+  font-size: ${({ small }) => (small ? "14px" : "16px")};
   ${({ bold }) => bold && "font-weight: bold;"};
   color: ${({ urgently }) => (urgently ? "red" : "#000")};
   margin: 0 15px 0 0;
@@ -29,6 +32,9 @@ export const Description = styled(Link)`
   padding: 0;
   width: 100%;
   margin: 30px 0 0 0;
+  font-size: 20px;
+  font-weight: 500;
+  color: #111;
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
@@ -43,6 +49,9 @@ export const Footer = styled.div`
 
 export const ToAnswer = styled(Button)`
   margin: 0 0 0 20px;
+  padding: 10px 30px;
+  height: auto;
+  background: #558bf5;
 `;
 
 export const AnswersCount = styled.span`

@@ -12,6 +12,9 @@ import {
 } from "../../constants/routes";
 import Complete from "../Complete/Complete";
 import Chat from "../../pages/Chat";
+import { ReactComponent as ChatIcon } from "../../icons/message.svg";
+
+import { ChatButton } from "./styled";
 
 const HeaderNav: FC = observer(() => {
   const [isChatOpen, setIsChatOpen] = useState(false);
@@ -58,7 +61,9 @@ const HeaderNav: FC = observer(() => {
               margin: 0,
             }}
           >
-            <Button onClick={openChatHandler}>Чат</Button>
+            <ChatButton onClick={openChatHandler}>
+              <ChatIcon />
+            </ChatButton>
             <Col>
               <Link to={NEW_QUESTION}>
                 <Button type="primary">Задать вопрос</Button>

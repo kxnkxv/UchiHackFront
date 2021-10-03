@@ -3,13 +3,13 @@ import { Input } from "antd";
 
 export const Search = styled(Input.Search)`
   input {
-    background: #f5f8fb;
+    background: #f2f7ff;
     border: none;
     height: 50px;
   }
 
   button {
-    background: transparent;
+    background: #f2f7ff;
     border: none;
     outline: none;
     box-shadow: none;

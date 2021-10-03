@@ -22,6 +22,8 @@ import {
   Status,
   Submit,
   Title,
+  Grid,
+  AnswersWrap,
 } from "./styled";
 import { Card, Input, Tooltip } from "antd";
 import moment from "moment";
@@ -30,7 +32,6 @@ import "moment/locale/ru";
 import Chat from "../Chat";
 import { AnswerType } from "../../types/AnswerType";
 import axios from "axios";
-import { UserType } from "../../types/UserType";
 import { URL } from "../../constants/API";
 import Auth from "../../store/auth";
 
@@ -80,45 +81,49 @@ const Question: FC<RouteComponentProps<RouteParams>> = ({ match }) => {
 
   return question ? (
     <Container>
-      <QuestionWrap>
-        <Header>
-          <Title>
-            <b>{questionsThemes[theme]}</b>
-          </Title>
-          <Tooltip title={moment().format("YYYY-MM-DD HH:mm:ss")}>
+      <Grid>
+        <QuestionWrap>
+          <Header>
             <Title>
-              Добавлено <b>{createdAt.fromNow()}</b>
+              <b>{questionsThemes[theme]}</b>
             </Title>
-          </Tooltip>
-          <PublicChat onClick={openChatHandler}>Общий чат</PublicChat>
-        </Header>
-        <QuestionTitle>{title}</QuestionTitle>
-        <Description>{description}</Description>
-        <Footer>
-          <UserInfo data={user} />
-          <Title>{time} минут</Title>
-          {urgently && <Title>Срочное</Title>}
-          <Cost>{cost} баллов</Cost>
-          <Status icon={<SyncOutlined spin />} color="processing">
-            {status}
-          </Status>
-        </Footer>
-      </QuestionWrap>
-      <AddAnswer>
-        <Card>
-          <h2>Ваш ответ</h2>
-          <Input.TextArea placeholder="Текстовое поле для ответа" />
-          <Submit type="primary">Отправить</Submit>
-        </Card>
-      </AddAnswer>
-      <div>
-        <h3>Ответов - {answers.length}</h3>
-        <div>
-          {answers.map((answer) => (
-            <Answer key={answer.id} data={answer} />
-          ))}
-        </div>
-      </div>
+            <Tooltip title={moment().format("YYYY-MM-DD HH:mm:ss")}>
+              <Title>
+                Добавлено <b>{createdAt.fromNow()}</b>
+              </Title>
+            </Tooltip>
+            <PublicChat onClick={openChatHandler}>Общий чат</PublicChat>
+          </Header>
+          <QuestionTitle>{title}</QuestionTitle>
+          <Description>{description}</Description>
+          <Footer>
+            <UserInfo data={user} />
+            <Title>{time} минут</Title>
+            {urgently && <Title>Срочное</Title>}
+            <Cost>{cost} баллов</Cost>
+            <Status icon={<SyncOutlined spin />} color="processing">
+              {status}
+            </Status>
+          </Footer>
+        </QuestionWrap>
+        <AddAnswer>
+          <div>
+            <h2>Ваш ответ</h2>
+            <Input.TextArea placeholder="Текстовое поле для ответа" />
+            <Submit type="primary">Отправить</Submit>
+          </div>
+        </AddAnswer>
+      </Grid>
+      <AnswersWrap>
+        <Grid>
+          <h3>{answers.length} ответ</h3>
+          <div>
+            {answers.map((answer) => (
+              <Answer key={answer.id} data={answer} />
+            ))}
+          </div>
+        </Grid>
+      </AnswersWrap>
       {isChatOpen && <Chat publicChat close={openChatHandler} />}
     </Container>
   ) : (
