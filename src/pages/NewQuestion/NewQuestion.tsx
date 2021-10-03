@@ -15,12 +15,41 @@ import ThemeItem from "../Themes/components/ThemeItem/ThemeItem";
 import { List } from "../Themes/styled";
 // import { users } from "../../mockData/users";
 import { Container } from "./styled";
+import axios from "axios";
+import { QuestionType } from "../../types/QuestionType";
+import { URL } from "../../constants/API";
+import Auth from "../../store/auth";
+
+const test = {
+  id: "string",
+  createdAt: "2021-10-03T02:34:20.735Z",
+  updatedAt: "2021-10-03T02:34:20.735Z",
+  title: "string",
+  description: "string",
+  theme: {},
+  subTheme: {},
+  cost: 0,
+  status: 0,
+  time: 0,
+  urgently: true,
+};
 
 const NewQuestion = () => {
   const [form] = Form.useForm();
 
   const onFinish = (values: any) => {
-    console.log("Success:", values);
+    axios
+      .request<QuestionType>({
+        method: "post",
+        url: `${URL}/questions/create`,
+        headers: {
+          Authorization: `Bearer ${Auth.token.accessToken}`,
+        },
+        data: test as unknown as QuestionType,
+      })
+      .then(() => {
+        alert("ok");
+      });
   };
 
   const onFinishFailed = (errorInfo: any) => {
@@ -43,12 +72,12 @@ const NewQuestion = () => {
 
   const getSimilar = () => {
     const theme = form.getFieldValue("theme");
-    const subtheme = form.getFieldValue("subtheme");
+    const subTheme = form.getFieldValue("subTheme");
     const title = form.getFieldValue("title");
     const description = form.getFieldValue("description");
     //TODO: Поиск похожих вопросов
     setSimilar([]);
-    console.log(theme, subtheme, title, description);
+    console.log(theme, subTheme, title, description);
   };
 
   let time = [];
@@ -102,7 +131,7 @@ const NewQuestion = () => {
             </Col>
             <Col span={12}>
               <Form.Item
-                name="subtheme"
+                name="subTheme"
                 rules={[
                   {
                     required: true,
