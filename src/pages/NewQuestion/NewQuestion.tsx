@@ -6,38 +6,28 @@ import {
   Col,
   Form,
   Input,
+  message,
   Row,
   Select,
+  Space,
   Typography,
 } from "antd";
 import React, { useState } from "react";
 import ThemeItem from "../Themes/components/ThemeItem/ThemeItem";
 import { List } from "../Themes/styled";
-// import { users } from "../../mockData/users";
 import { Container } from "./styled";
 import axios from "axios";
 import { QuestionType } from "../../types/QuestionType";
 import { URL } from "../../constants/API";
 import Auth from "../../store/auth";
 
-const test = {
-  id: "string",
-  createdAt: "2021-10-03T02:34:20.735Z",
-  updatedAt: "2021-10-03T02:34:20.735Z",
-  title: "string",
-  description: "string",
-  theme: {},
-  subTheme: {},
-  cost: 0,
-  status: 0,
-  time: 0,
-  urgently: true,
-};
-
 const NewQuestion = () => {
   const [form] = Form.useForm();
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
   const onFinish = (values: any) => {
+    setLoading(true);
     axios
       .request<QuestionType>({
         method: "post",
@@ -45,11 +35,18 @@ const NewQuestion = () => {
         headers: {
           Authorization: `Bearer ${Auth.token.accessToken}`,
         },
-        data: test as unknown as QuestionType,
+        data: values,
       })
-      .then(() => {
-        alert("ok");
-      });
+      .then((response) => {
+        console.log(response);
+        message.success("Вопрос создан");
+      })
+      .catch((e) => {
+        console.log(e);
+        setError(e.message);
+        message.error("Ошибка при создании вопроса");
+      })
+      .finally(() => setLoading(false));
   };
 
   const onFinishFailed = (errorInfo: any) => {
@@ -95,7 +92,7 @@ const NewQuestion = () => {
 
   return (
     <Container>
-      <Card>
+      <Card loading={loading}>
         <Form
           name="basic"
           onFinish={onFinish}
@@ -106,7 +103,12 @@ const NewQuestion = () => {
             urgently: false,
           }}
         >
-          <Typography.Title>Задать вопрос</Typography.Title>
+          <Space>
+            <Typography.Title>Задать вопрос</Typography.Title>
+            {error ? (
+              <Typography.Text type="danger">{error}</Typography.Text>
+            ) : null}
+          </Space>
           <Row align="middle" justify="space-between" gutter={[25, 25]}>
             <Col span={12}>
               <Form.Item
