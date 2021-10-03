@@ -29,7 +29,7 @@ const Answer: FC<OwnProps> = ({ data }) => {
         ) : null}
         <Tooltip title={moment().format("YYYY-MM-DD HH:mm:ss")}>
           <Title>
-            Добавлено <b>{createdAt.fromNow()}</b>
+            Добавлено <b>{createdAt}</b>
           </Title>
         </Tooltip>
         <PublicChat>Чат с участником</PublicChat>
@@ -37,14 +37,15 @@ const Answer: FC<OwnProps> = ({ data }) => {
       <MessageWrap>
         <Message>{message}</Message>
         <Row justify="space-between">
-          <OpenComment>{comments.length} комментария</OpenComment>
+          <OpenComment>{comments && comments.length} комментария</OpenComment>
           <Button shape="circle" icon={<HeartOutlined />} />
         </Row>
         <Input.TextArea placeholder="Комментировать ответ" />
         <div>
-          {comments.map((comment: CommentType) => (
-            <CustomComment key={comment.id} data={comment} />
-          ))}
+          {comments &&
+            comments.map((comment: CommentType) => (
+              <CustomComment key={comment.id} data={comment} />
+            ))}
         </div>
       </MessageWrap>
     </Container>
