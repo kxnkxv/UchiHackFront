@@ -17,7 +17,6 @@ import Chat from "../../pages/Chat";
 const HeaderNav: FC = observer(() => {
   const [isChatOpen, setIsChatOpen] = useState(false);
   const openChatHandler = () => setIsChatOpen(!isChatOpen);
-
   return (
     <>
       <Row

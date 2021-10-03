@@ -1,7 +1,14 @@
-import { action, makeAutoObservable } from "mobx";
+import { makeAutoObservable } from "mobx";
 import axios from "axios";
 import { URL } from "../../constants/API";
 import { UserType } from "../../types/UserType";
+
+interface AuthServer {
+  data: {
+    user: UserType;
+    token: object;
+  };
+}
 
 class Auth {
   isUserAuth = !!window.localStorage.getItem("isUserAuth");
@@ -11,26 +18,27 @@ class Auth {
     makeAutoObservable(this);
   }
 
-  @action setIsUserAuth(status: boolean) {
+  setIsUserAuth(status: boolean) {
     this.isUserAuth = status;
     window.localStorage.setItem("isUserAuth", `${status || ""}`);
   }
 
-  @action setToken = (token: {}) => {
+  setToken = (token: {}) => {
     this.token = token;
   };
 
-  @action authLogin = (email: string, password: string) =>
+  authLogin = (email: string, password: string) =>
     axios.request<UserType>({
       method: "post",
       url: `${URL}/auth/login`,
       data: {
-        email: email,
-        password: password,
+        email,
+        password,
       },
+      headers: {},
     });
 
-  @action authRegister = (
+  authRegister = (
     email: string,
     password: string,
     firstName: string,
@@ -40,10 +48,10 @@ class Auth {
       method: "post",
       url: `${URL}/auth/register`,
       data: {
-        email: email,
-        password: password,
-        firstName: firstName,
-        lastName: lastName,
+        email,
+        password,
+        firstName,
+        lastName,
       },
     });
 }

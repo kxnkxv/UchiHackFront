@@ -1,4 +1,4 @@
-import { action, makeAutoObservable } from "mobx";
+import { makeAutoObservable } from "mobx";
 import { UserType } from "../../types/UserType";
 
 class User {
@@ -9,7 +9,11 @@ class User {
     makeAutoObservable(this);
   }
 
-  @action setUser = (user: UserType) => {
+  getLocaleUserId = () => {
+    return this.user.id;
+  };
+
+  setUser = (user: UserType) => {
     this.user = user;
   };
 }

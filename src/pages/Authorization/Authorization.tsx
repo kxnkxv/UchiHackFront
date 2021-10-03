@@ -22,11 +22,16 @@ const Authorization = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
+  const saveAuth = (response: any) => {
+    User.setUser(response.data.user);
+    Auth.setToken(response.data.token);
+    Auth.setIsUserAuth(true);
+  };
+
   const onFinish = (values: any) => {
     Auth.authLogin(values.email, values.password)
       .then((response) => {
-        User.setUser(response.data);
-        Auth.setIsUserAuth(true);
+        saveAuth(response);
       })
       .catch((error) => {
         setError(error.message);
